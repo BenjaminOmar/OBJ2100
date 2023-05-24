@@ -27,7 +27,7 @@ import java.util.List;
 public class DatabaseHelper implements DatabaseInterface {
 
 	// JDBC driver name and database URL
-    private final String DB_URL = "jdbc:mysql://localhost/demo";
+    private final String DB_URL = "jdbc:mysql://localhost/classicmodels";
     
     //  Database credentials
     private static final String USER = "student";
