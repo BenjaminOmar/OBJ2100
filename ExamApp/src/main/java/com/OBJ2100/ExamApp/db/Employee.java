@@ -1,36 +1,29 @@
 package com.OBJ2100.ExamApp.db;
 
 public class Employee {
-	private int id;
-	private String lastName, firstName, department, email;
-	private double salary;
+	private int employeeNumber, reportsTo;
+	private String lastName, firstName, extension, email, officeCode, jobTitle;
 
 
-	public Employee(String lastName, String firstName, String department, double salary, String email) {
+	public Employee(int employeeNumber, String lastName, String firstName, String extension, String email, String officeCode, int reportsTo, String jobTitle) {
 		super();
+		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
 		this.firstName = firstName;
-		this.department = department;
-		this.salary = salary;
+		this.extension = extension;
 		this.email = email;
+		this.officeCode = officeCode;
+		this.reportsTo = reportsTo;
+		this.jobTitle = jobTitle;
 	}
 
-	public String getDepartment() {
-		return department;
+	public int getEmployeeNumber() {
+		return employeeNumber;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setEmployeeNumber(int employeeNumber) {
+		this.employeeNumber = employeeNumber;
 	}
-
-	public double getSalary() {
-		return salary;
-	}
-
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
-	
 	
 	public String getLastName() {
 		return lastName;
@@ -54,6 +47,38 @@ public class Employee {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getReportsTo() {
+		return reportsTo;
+	}
+
+	public void setReportsTo(int reportsTo) {
+		this.reportsTo = reportsTo;
+	}
+
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+
+	public String getOfficeCode() {
+		return officeCode;
+	}
+
+	public void setOfficeCode(String officeCode) {
+		this.officeCode = officeCode;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 	
 

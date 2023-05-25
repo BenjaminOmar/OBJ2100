@@ -26,12 +26,14 @@ import java.util.List;
 
 public class DatabaseHelper implements DatabaseInterface {
 
+	
 	// JDBC driver name and database URL
     private final String DB_URL = "jdbc:mysql://localhost/classicmodels";
     
     //  Database credentials
     private static final String USER = "student";
     private static final String PASS = "student";
+    
     
     private Connection conn = null;
     private Statement stmt = null;
@@ -62,23 +64,25 @@ public class DatabaseHelper implements DatabaseInterface {
 	    }
 	    
 	    
-	    public List<Employee> getEmployees(double minSalary, String department) throws SQLException{
+	    public List<Employee> getEmployees(String inputtedOfficeCode) throws SQLException{
 	    	ArrayList<Employee> employees = new ArrayList<Employee>();
 	    	this.open();
 	    	try {
-		    	prepStmt = conn.prepareStatement("select * from employees where salary > ? and department=?");
-		    	prepStmt.setDouble(1, minSalary);
-		    	prepStmt.setString(2, department);
+		    	prepStmt = conn.prepareStatement("select * from employees where officeCode = ?");
+		    	prepStmt.setString(1, inputtedOfficeCode);
 
 		    	rSet = prepStmt.executeQuery();
 		    	while (rSet.next()) {
-					String lastName = rSet.getString("last_name");
-					String firstName = rSet.getString("first_name");
+		    		int employeeNumber = rSet.getInt("employeeNumber");
+					String lastName = rSet.getString("lastName");
+					String firstName = rSet.getString("firstName");
+					String extension = rSet.getString("extension");
 					String email = rSet.getString("email");
-					double salary = rSet.getDouble("salary");
-//					String department = rSet.getString("department");
+					String officeCode  = rSet.getString("officeCode");
+					int reportsTo = rSet.getInt("reportsTo");
+					String jobTitle = rSet.getString("jobTitle");
 					
-					Employee newEmployee = new Employee(lastName, firstName, department, salary, email);
+					Employee newEmployee = new Employee(employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle);
 					employees.add(newEmployee);
 				}
 		    	return employees;
@@ -97,14 +101,17 @@ public class DatabaseHelper implements DatabaseInterface {
 		    	rSet = prepStmt.executeQuery();
 
 		    	while (rSet.next()) {
-					String lastName = rSet.getString("last_name");
-					String firstName = rSet.getString("first_name");
+		    		int employeeNumber = rSet.getInt("employeeNumber");
+					String lastName = rSet.getString("lastName");
+					String firstName = rSet.getString("firstName");
+					String extension = rSet.getString("extension");
 					String email = rSet.getString("email");
-					double salary = rSet.getDouble("salary");
-					String department = rSet.getString("department");
+					String officeCode  = rSet.getString("officeCode");
+					int reportsTo = rSet.getInt("reportsTo");
+					String jobTitle = rSet.getString("jobTitle");
 					
-					Employee current= new Employee(lastName, firstName, department, salary, email);
-					employees.add(current);
+					Employee newEmployee = new Employee(employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle);
+					employees.add(newEmployee);
 				}
 		    	return employees;
 			} catch (Exception exc) {
@@ -145,12 +152,13 @@ public class DatabaseHelper implements DatabaseInterface {
 	            // stmt.executeUpdate(sql); // DDL
 	            
 	            //STEP 5: Extract data from result set
+	            
 	            while(rs.next()){
 	                //Display values
 	            	System.out.println(rs.getString("last_name") + ", " + rs.getString("first_name"));
 	            }
 	            //STEP 6: Clean-up environment
-	            rs.close();
+	            
 	        } catch (SQLException ex) {
 	        	ex.printStackTrace();
 	        }
