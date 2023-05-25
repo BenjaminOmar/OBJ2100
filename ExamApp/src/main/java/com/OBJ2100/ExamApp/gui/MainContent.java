@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.OBJ2100.ExamApp.db.Customer;
 import com.OBJ2100.ExamApp.db.DatabaseHelper;
 import com.OBJ2100.ExamApp.db.Employee;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
@@ -106,7 +107,7 @@ public class MainContent extends JPanel implements DocumentsManager{
 					List<Employee> employees = dbHelper.getEmployees();
 	                for (Employee employee : employees) {
 	                    results.append(employee.getFirstName() + ", " + employee.getLastName() + newline);
-	                } 
+	                } 	              
 				} catch (SQLException e1) {
 					displayMessage("Error in fetching employees");
 				}

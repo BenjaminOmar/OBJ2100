@@ -18,6 +18,7 @@ public interface DatabaseInterface {
 	// test connection
 	void test() throws SQLException;
 	
+	// Employee
 	// get list of all employees
 	List<Employee> getEmployees() throws SQLException;
 	
@@ -27,5 +28,7 @@ public interface DatabaseInterface {
 	//add employee with all details
 	void addEmployee(String firtsName, String LastName, String department, String email, double salary) throws SQLException;
 	
+	// Customer
+	List<Customer> getCustomers() throws SQLException;
 	
 }

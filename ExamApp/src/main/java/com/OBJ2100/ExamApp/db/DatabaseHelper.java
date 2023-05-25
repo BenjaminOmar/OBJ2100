@@ -63,6 +63,29 @@ public class DatabaseHelper implements DatabaseInterface {
 	        }
 	    }
 	    
+	    @Override
+	    public void test() throws SQLException{
+	        try {
+	            String sql;
+	            sql = "SELECT * FROM employees";
+	            ResultSet rs = stmt.executeQuery(sql); // DML
+	            // stmt.executeUpdate(sql); // DDL
+	            
+	            //STEP 5: Extract data from result set
+	            /*
+	            while(rs.next()){
+	                //Display values
+	            	System.out.println(rs.getString("lastName") + ", " + rs.getString("firstName"));
+	            }
+	            */
+	            //STEP 6: Clean-up environment
+	            
+	        } catch (SQLException ex) {
+	        	ex.printStackTrace();
+	        }
+	    }
+	    
+	    // Employee
 	    
 	    public List<Employee> getEmployees(String inputtedOfficeCode) throws SQLException{
 	    	ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -143,30 +166,45 @@ public class DatabaseHelper implements DatabaseInterface {
 			}
 	    };
 	    
-	    @Override
-	    public void test() throws SQLException{
-	        try {
-	            String sql;
-	            sql = "SELECT * FROM employees";
-	            ResultSet rs = stmt.executeQuery(sql); // DML
-	            // stmt.executeUpdate(sql); // DDL
-	            
-	            //STEP 5: Extract data from result set
-	            
-	            while(rs.next()){
-	                //Display values
-	            	System.out.println(rs.getString("last_name") + ", " + rs.getString("first_name"));
-	            }
-	            //STEP 6: Clean-up environment
-	            
-	        } catch (SQLException ex) {
-	        	ex.printStackTrace();
-	        }
-	    }
-
 		@Override
 		public void addEmployee(String firtsName, String LastName) throws SQLException {
 			// TODO Auto-generated method stub
 			
+		}
+		
+		// Customer
+
+		@Override
+		public List<Customer> getCustomers() throws SQLException {
+	    	ArrayList<Customer> customers = new ArrayList<Customer>();
+	    	this.open();
+	    	try {
+		    	prepStmt = conn.prepareStatement("select * from customers");
+		    	rSet = prepStmt.executeQuery();
+
+		    	while (rSet.next()) {
+		    		int customerNumber = rSet.getInt("customerNumber");
+					String customerName = rSet.getString("customerName");
+					String contactLastName = rSet.getString("contactLastName");
+					String contactFirstName = rSet.getString("contactFirstName");
+					String phone = rSet.getString("phone");
+					String addressLine1  = rSet.getString("addressLine1");
+					String addressLine2 = rSet.getString("addressLine2");
+					String city = rSet.getString("city");
+					String state = rSet.getString("state");
+					String postalCode = rSet.getString("postalCode");
+					String country = rSet.getString("country");
+					int salesRepEmployeeNumber = rSet.getInt("salesRepEmployeeNumber");
+					double creditLimit = rSet.getDouble("creditLimit");
+					
+					Customer newCustomer = new Customer(customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, 
+							addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
+					customers.add(newCustomer);
+				}
+		    	return customers;
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
+	    	return null;
 		}
 }
