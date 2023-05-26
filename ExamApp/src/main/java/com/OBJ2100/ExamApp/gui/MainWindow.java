@@ -18,10 +18,11 @@ public class MainWindow extends JFrame {
 
 	public MainWindow() {
 		
-		setTitle("Example application");
+		setTitle("Exam application");
 		setSize(1030, 1000);
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout());
+		
 		
 		// add main menu
 		setJMenuBar(appMenu);
@@ -31,6 +32,7 @@ public class MainWindow extends JFrame {
 		
 		setResizable(false);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 

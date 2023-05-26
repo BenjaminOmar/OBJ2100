@@ -129,6 +129,7 @@ public class MainContent extends JPanel implements DocumentsManager{
         
         results.setBounds(10, 300, 1000, 400);
         results.setFont(bigFont);
+        results.setEditable(false);
         add(results);
         
         storeInFile.setBounds(470, 800, 300, 50);
