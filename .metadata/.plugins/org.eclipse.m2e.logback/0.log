@@ -5,3 +5,54 @@
 2023-05-18 11:06:59,691 [Worker-44: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-05-18 11:06:59,691 [Worker-44: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\example application\ExampleApp\src\test\resources
 2023-05-18 11:06:59,693 [Worker-41: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.OBJ2100:ExampleApp:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\example application\ExampleApp\pom.xml.
+2023-05-26 12:23:59,215 [Worker-8: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2023-05-26 12:28:51,140 [Worker-40: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: EksamenOBJ2100:EksamenOBJ2100:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\eksamen2020-løsning\pom.xml.
+2023-05-26 12:28:55,225 [Worker-40: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-26 12:28:55,227 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\eksamen2020-løsning\src\main\resources
+2023-05-26 12:28:55,232 [Worker-40: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-26 12:28:55,234 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\eksamen2020-løsning\src\test\resources
+2023-05-26 12:28:55,564 [Worker-41: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/poi/poi-ooxml-schemas/4.1.2/poi-ooxml-schemas-4.1.2-javadoc.jar
+2023-05-26 12:28:55,625 [Worker-41: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for org.apache.poi:poi-ooxml-schemas:4.1.2
+org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.poi:poi-ooxml-schemas:jar:javadoc:4.1.2
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$6(MavenImpl.java:584)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:394)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:228)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:214)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:553)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:538)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:394)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:275)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:214)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2023-05-26 12:28:58,013 [Worker-40: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.OBJ2100:ExampleApp:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\ExamApp\pom.xml.
+2023-05-26 12:28:59,917 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:28:59,917 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\ExamApp\src\main\resources
+2023-05-26 12:28:59,920 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:28:59,920 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\ExamApp\src\test\resources
+2023-05-26 12:29:00,228 [Worker-40: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.OBJ2100:ExampleApp:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\example application\ExampleApp\pom.xml.
+2023-05-26 12:29:00,296 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:29:00,297 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\example application\ExampleApp\src\main\resources
+2023-05-26 12:29:00,302 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:29:00,302 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\example application\ExampleApp\src\test\resources
+2023-05-26 12:29:04,113 [Worker-40: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.boban:Project08MavenProject:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project08MavenProject\pom.xml.
+2023-05-26 12:29:04,199 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:29:04,199 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project08MavenProject\src\main\resources
+2023-05-26 12:29:04,203 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:29:04,204 [Worker-40: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project08MavenProject\src\test\resources
+2023-05-26 12:29:05,752 [Worker-48: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.boban:Project09Exception:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project09Exception\pom.xml.
+2023-05-26 12:29:05,845 [Worker-48: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-26 12:29:05,849 [Worker-48: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project09Exception\src\main\resources
+2023-05-26 12:29:05,858 [Worker-48: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-26 12:29:05,862 [Worker-48: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project09Exception\src\test\resources
+2023-05-26 12:29:06,945 [Worker-41: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.boban:Project11DB:0.0.1-SNAPSHOT @ C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project11DB\pom.xml.
+2023-05-26 12:29:07,119 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:29:07,119 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project11DB\src\main\resources
+2023-05-26 12:29:07,122 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-26 12:29:07,123 [Worker-41: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project11DB\src\test\resources
