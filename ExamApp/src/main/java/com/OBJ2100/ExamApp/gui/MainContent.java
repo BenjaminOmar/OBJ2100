@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -45,7 +47,8 @@ public class MainContent extends JPanel implements DocumentsManager{
 	private JButton displayEmployees = new JButton("Display employees");
 	private JButton clear = new JButton("Clear results");
 	private JButton storeInFile = new JButton("Store results");
-	private TextArea results = new TextArea();
+	private JTextArea results = new JTextArea();
+	private JScrollPane scroll;
 	
 	private final static String newline = "\n";
 	
@@ -124,12 +127,20 @@ public class MainContent extends JPanel implements DocumentsManager{
 
         	} 
         });
+    	
+        results.setFont(bigFont);
+        results.setEditable(false);
+        
+        scroll = new JScrollPane();
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setBounds(10, 300, 1000, 400);
+        scroll.getViewport().add(results);
+        
+        add(scroll);
+ 
         
 
-        
-        results.setBounds(10, 300, 1000, 400);
-        results.setFont(bigFont);
-        add(results);
+    	
         
         storeInFile.setBounds(470, 800, 300, 50);
         storeInFile.setFont(bigFont);

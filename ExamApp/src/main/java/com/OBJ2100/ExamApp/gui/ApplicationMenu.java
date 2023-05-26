@@ -3,17 +3,26 @@ package com.OBJ2100.ExamApp.gui;
  * Creates main menu of the application
  * */
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.text.JTextComponent;
 
 import com.OBJ2100.ExamApp.db.DatabaseHelper;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
@@ -22,6 +31,9 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenuItem exitItem = null;
 	private JMenu menu_help = null;
 	private JMenuItem option_tip = null;
+	private JMenu menu_options = null;
+	private static JMenuItem darkMode = null;
+	private static boolean darkModeOption = false;
 	
 	private Font bigFont = new Font("Calibri", Font.PLAIN, 28);
 	private Font smallFont = new Font("Calibri", Font.PLAIN, 24);
@@ -59,9 +71,21 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		option_tip = new JMenuItem("About the application");
 		option_tip.addActionListener(this);
 		menu_help.add(option_tip);
+		
+		menu_options = new JMenu("Options");
+		darkMode = new JMenuItem("Dark mode");
+        darkMode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                darkModeOption = !darkModeOption;
+                updateTheme();
+            }
+        });
+		menu_options.add(darkMode);
 
 		this.add(menu_file);
 		this.add(menu_help);
+		this.add(menu_options);
 	}
 	
 	
@@ -95,6 +119,39 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		UIManager.put("OptionPane.buttonFont", bigFont);
 		JOptionPane.showMessageDialog(this, message);
 	}
+	
+	/*
+	private void setDarkMode() {
+		darkMode.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            darkMode = !darkMode;
+	            updateTheme(frame);
+	        }
+	    });
+	}
+	*/
+	
+    private static void updateTheme() {
+        try {
+            if (darkModeOption) {
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+                darkMode.setText("Light mode");
+            } else {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+                darkMode.setText("Dark mode");
+            }
+            
+            for (Window window : Window.getWindows()) {
+                SwingUtilities.updateComponentTreeUI(window);
+            }
+            
+                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
 	
 	
 }
