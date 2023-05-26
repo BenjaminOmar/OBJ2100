@@ -38,10 +38,10 @@ public class FileHandeling {
 		//fileAttributes();
 		//writeToFile(); 
 		//readFromFile(); 
-		writeToEmployeeFile();
-		readEmployeeFile(); 
-		randomAccessTest(); 
-		
+		//writeToEmployeeFile();
+		//readEmployeeFile(); 
+		//randomAccessTest(); 
+		createEmptyEmployeesFile(); 
 	}
 	
 	public static void pathInformation() {
@@ -271,7 +271,14 @@ public class FileHandeling {
 		final int NUMRECS = 1000;
 		
 		try {
-			OutputStream output
+			OutputStream output = new BufferedOutputStream(Files.newOutputStream(file, CREATE)); 
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output)); 
+			
+			for(int count = 0; count < NUMRECS; ++count)
+				writer.write(s, 0, s.length());
+			writer.close();
+		}catch(Exception e) {
+			System.out.println("Error message: " + e);
 		}
 	}
 }
