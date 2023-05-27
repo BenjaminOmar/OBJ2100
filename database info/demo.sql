@@ -30,5 +30,5 @@ INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `s
 INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (11,'Fowler','Mary','mary.fowler@foo.com', 'Engineering', 65000.00);
 INSERT INTO `employees` (`id`,`last_name`,`first_name`,`email`, `department`, `salary`) VALUES (12,'Waters','David','david.waters@foo.com', 'Legal', 90000.00);
 
-CREATE USER 'student'@'student';
-GRANT ALL PRIVILEGES ON demo.* To 'student'@'localhost' IDENTIFIED BY 'student';
+CREATE USER 'student'@'localhost';
+GRANT ALL PRIVILEGES ON demo.* TO 'student'@'localhost';
