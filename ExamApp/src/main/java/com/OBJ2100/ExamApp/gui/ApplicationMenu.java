@@ -26,12 +26,12 @@ import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
-	private JMenu menu_file = null;
+	private JMenu menuFile = null;
 	private JMenuItem dBconnectionItem = null;
 	private JMenuItem exitItem = null;
-	private JMenu menu_help = null;
-	private JMenuItem option_tip = null;
-	private JMenu menu_options = null;
+	private JMenu menuHelp = null;
+	private JMenuItem optionTip = null;
+	private JMenu menuOptions = null;
 	private static JMenuItem darkMode = null;
 	private static boolean darkModeOption = false;
 	
@@ -55,7 +55,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		UIManager.put("Menu.font", bigFont);
 		UIManager.put("MenuItem.font", smallFont);
 
-		menu_file = new JMenu("File");
+		menuFile = new JMenu("File");
 		
 		dBconnectionItem = new JMenuItem("Test database connection");
 		dBconnectionItem.addActionListener(this);
@@ -63,16 +63,16 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		exitItem = new JMenuItem("Exit");
 		exitItem.addActionListener(this);
 		
-		menu_file.add(dBconnectionItem);
-		menu_file.add(exitItem);
+		menuFile.add(dBconnectionItem);
+		menuFile.add(exitItem);
 
-		menu_help = new JMenu("Help");
+		menuHelp = new JMenu("Help");
 		
-		option_tip = new JMenuItem("About the application");
-		option_tip.addActionListener(this);
-		menu_help.add(option_tip);
+		optionTip = new JMenuItem("About the application");
+		optionTip.addActionListener(this);
+		menuHelp.add(optionTip);
 		
-		menu_options = new JMenu("Options");
+		menuOptions = new JMenu("Options");
 		darkMode = new JMenuItem("Dark mode");
         darkMode.addActionListener(new ActionListener() {
             @Override
@@ -81,11 +81,11 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
                 updateTheme();
             }
         });
-		menu_options.add(darkMode);
+		menuOptions.add(darkMode);
 
-		this.add(menu_file);
-		this.add(menu_help);
-		this.add(menu_options);
+		this.add(menuFile);
+		this.add(menuHelp);
+		this.add(menuOptions);
 	}
 	
 	
