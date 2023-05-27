@@ -24,6 +24,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.OBJ2100.ExamApp.db.models.Customer;
+import com.OBJ2100.ExamApp.db.models.Employee;
+
 public class DatabaseHelper implements DatabaseInterface {
 
 	

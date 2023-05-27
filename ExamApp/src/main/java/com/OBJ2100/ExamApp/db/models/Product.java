@@ -1,4 +1,4 @@
-package com.OBJ2100.ExamApp.db;
+package com.OBJ2100.ExamApp.db.models;
 
 public class Product {
 	private int quantityInStock;

@@ -24,9 +24,9 @@ import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.OBJ2100.ExamApp.db.Customer;
 import com.OBJ2100.ExamApp.db.DatabaseHelper;
-import com.OBJ2100.ExamApp.db.Employee;
+import com.OBJ2100.ExamApp.db.models.Customer;
+import com.OBJ2100.ExamApp.db.models.Employee;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
 
 public class MainContent extends JPanel implements DocumentsManager{
