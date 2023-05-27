@@ -1,41 +1,38 @@
 package com.OBJ2100.ExamApp.gui;
 
 import java.awt.Font;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.OBJ2100.ExamApp.db.DatabaseHelper;
-import com.OBJ2100.ExamApp.db.models.Customer;
-import com.OBJ2100.ExamApp.db.models.Employee;
+import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.db.DatabaseType;
+import com.OBJ2100.ExamApp.db.dao.EmployeeDao;
+import com.OBJ2100.ExamApp.db.entities.Employee;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
+
 
 public class MainContent extends JPanel implements DocumentsManager{
 	
-
-
 	private Font bigFont = new Font("Calibri", Font.PLAIN, 40);
 	private Font smallFont = new Font("Calibri", Font.PLAIN, 24);
-	private DatabaseHelper dbHelper = new DatabaseHelper();
 	final JFileChooser fc = new JFileChooser();
 	
 	private JLabel nameLabel = new JLabel("First name:");
@@ -49,6 +46,9 @@ public class MainContent extends JPanel implements DocumentsManager{
 	private JButton storeInFile = new JButton("Store results");
 	private JTextArea results = new JTextArea();
 	private JScrollPane scroll;
+	
+	private static final DataSource source = DataSourceFactory.getDataSource(DatabaseType.MYSQL);
+	private EmployeeDao employeeDao = new EmployeeDao(source);
 	
 	private final static String newline = "\n";
 	
@@ -93,8 +93,12 @@ public class MainContent extends JPanel implements DocumentsManager{
         addEmployeeButton.addActionListener(new ActionListener() { 
       	  public void actionPerformed(ActionEvent e) { 
       		    try {
-					dbHelper.addEmployee(getFirstName(), getLastName(), "HR", "temp@usn.no", 35000);
-					displayMessage("Succesfull update!");
+      		    	Employee employee = new Employee.Builder()
+      		    			.lastName(getLastName())
+      		    			.firstName(getFirstName())
+      		    			.build();
+      		    	employeeDao.add(employee);
+					displayMessage("Updated successfully");
 				} catch (SQLException e1) {
 					displayMessage("Something went wrong!");
 				}
@@ -107,7 +111,7 @@ public class MainContent extends JPanel implements DocumentsManager{
         displayEmployees.addActionListener(new ActionListener() { 
         	public void actionPerformed(ActionEvent e) { 
         		try {
-					List<Employee> employees = dbHelper.getEmployees();
+					List<Employee> employees = employeeDao.getAll();
 	                for (Employee employee : employees) {
 	                    results.append(employee.getFirstName() + ", " + employee.getLastName() + newline);
 	                } 	              
