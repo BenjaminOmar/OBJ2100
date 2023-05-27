@@ -1,4 +1,4 @@
-package com.OBJ2100.ExamApp.db.models;
+package com.OBJ2100.ExamApp.db.entities;
 
 public class Customer {
 	private int customerNumber, salesRepEmployeeNumber;
