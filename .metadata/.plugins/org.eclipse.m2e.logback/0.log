@@ -68,3 +68,28 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.apache.po
 2023-05-26 14:50:30,423 [Worker-94: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/formdev/flatlaf/3.1.1/flatlaf-3.1.1-sources.jar
 2023-05-26 14:50:30,491 [Worker-94: Download sources and javadoc] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/formdev/flatlaf/3.1.1/flatlaf-3.1.1-sources.jar
 2023-05-26 14:50:30,494 [Worker-94: Download sources and javadoc] INFO  o.e.m.j.internal.DownloadSourcesJob - Downloaded sources for com.formdev:flatlaf:3.1.1
+2023-05-27 10:47:31,630 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-05-27 11:41:54,070 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-05-27 11:57:25,184 [Worker-8: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-05-27 11:57:45,153 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-27 11:57:45,159 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\eksamen2020-løsning\src\main\resources
+2023-05-27 11:57:45,170 [Worker-10: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-27 11:57:45,173 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\eksamen2020-løsning\src\test\resources
+2023-05-27 11:57:52,966 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-27 11:57:52,967 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\ExamApp\src\main\resources
+2023-05-27 11:57:52,972 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-27 11:57:52,973 [Worker-33: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\ExamApp\src\test\resources
+2023-05-27 11:57:55,329 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-27 11:57:55,330 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project08MavenProject\src\main\resources
+2023-05-27 11:57:55,337 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-27 11:57:55,339 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project08MavenProject\src\test\resources
+2023-05-27 11:57:55,763 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-27 11:57:55,766 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project09Exception\src\main\resources
+2023-05-27 11:57:55,773 [Worker-12: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2023-05-27 11:57:55,777 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project09Exception\src\test\resources
+2023-05-27 11:57:56,558 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-27 11:57:56,559 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project11DB\src\main\resources
+2023-05-27 11:57:56,562 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-05-27 11:57:56,562 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\ekj\Xampp\htdocs\xampp\OBJ2100\supplementary material\2022-OBJ2100-lectures\Project11DB\src\test\resources
+2023-05-27 12:20:00,487 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-05-27 12:34:07,496 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

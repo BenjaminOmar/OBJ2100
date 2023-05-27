@@ -2,7 +2,6 @@ package Methods;
 
 import java.nio.ByteBuffer;
 import java.nio.file.*;
-import java.io.*; 
 import java.util.Scanner;
 import static java.nio.file.AccessMode.*;
 import java.io.BufferedOutputStream;
@@ -18,7 +17,7 @@ import java.io.BufferedWriter;
 import java.io.BufferedInputStream;
 import java.nio.channels.FileChannel;
 import java.nio.file.StandardOpenOption;
-import java.nio.ByteBuffer;
+
 
 
 public class FileHandeling {
