@@ -15,5 +15,9 @@ public class UserInterface {
 		
 		JFrame aFrame = new JFrame("First Frame");
 	}
+	
+	public static void test() {
+		
+	}
 
 }
