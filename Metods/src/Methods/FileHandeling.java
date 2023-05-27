@@ -18,13 +18,7 @@ import java.io.BufferedWriter;
 import java.io.BufferedInputStream;
 import java.nio.channels.FileChannel;
 import java.nio.file.StandardOpenOption;
-import java.nio.ByteBuffer; 
-
-
-
-
-
-
+import java.nio.ByteBuffer;
 
 
 public class FileHandeling {
@@ -41,7 +35,8 @@ public class FileHandeling {
 		//writeToEmployeeFile();
 		//readEmployeeFile(); 
 		//randomAccessTest(); 
-		createEmptyEmployeesFile(); 
+		//createEmptyEmployeesFile(); 
+		 readEmployeesRandomly(); 
 	}
 	
 	public static void pathInformation() {
@@ -277,9 +272,46 @@ public class FileHandeling {
 			for(int count = 0; count < NUMRECS; ++count)
 				writer.write(s, 0, s.length());
 			writer.close();
+			System.out.println("File created");
 		}catch(Exception e) {
 			System.out.println("Error message: " + e);
 		}
+	}
+	
+	public static void readEmployeesRandomly() {
+		
+		Scanner keyBoard = new Scanner(System.in); 
+		Path file = Paths.get("C:\\Temp\\Test.txt");
+		String s = "000,       ,00.00" + System.getProperty("line.separator"); 
+		final int RECSIZE = s.length(); 
+		byte[] data = s.getBytes(); 
+		ByteBuffer buffer = ByteBuffer.wrap(data); 
+		FileChannel fc = null;
+		String idString;
+		int id; 
+		final String QUIT = "999"; 
+		
+		try {
+			fc = (FileChannel)Files.newByteChannel(file, StandardOpenOption.READ, StandardOpenOption.WRITE); 
+			System.out.println("Enter employee ID number or " + QUIT + " to quit: ");
+			idString = keyBoard.nextLine(); 
+			while (!idString.equals(QUIT)) {
+				id = Integer.parseInt(idString);
+				buffer = ByteBuffer.wrap(data); 
+				fc.position(id * RECSIZE); 
+				fc.read(buffer); 
+				s = new String(data); 
+				System.out.println("ID #" + id + " " + s);
+				System.out.println("Endter employee ID number or " + QUIT + " to quit");
+				idString = keyBoard.nextLine();
+			}
+			fc.close();
+			keyBoard.close();
+		}catch (Exception e) {
+			System.out.println("Error message " + e);
+		}
+		
+		
 	}
 }
 
