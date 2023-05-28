@@ -1,5 +1,7 @@
 package com.OBJ2100.ExamApp.db.entities;
 
+import java.util.StringJoiner;
+
 import com.OBJ2100.ExamApp.db.EntityBuilder;
 
 public class Employee {
@@ -74,7 +76,8 @@ public class Employee {
 		}
 		
 
-		public Employee build() {
+		public Employee build() throws IllegalStateException {
+			validate();
 			return new Employee(this);
 		}
 		
@@ -116,6 +119,42 @@ public class Employee {
 		public Builder jobTitle(String jobTitle) {
 			this.jobTitle = jobTitle;
 			return this;
+		}
+		
+		public void validate() throws IllegalStateException {
+			StringJoiner sj = new StringJoiner(System.getProperty("line.separator"));
+			
+			if (employeeNumber < 0) {
+				sj.add("Employee number cannot be negative.");
+			}
+			
+			if (lastName == null) {
+				sj.add("Last name cannot be null.");
+			}
+			
+			if (firstName == null) {
+				sj.add("First name cannot be null.");
+			}
+			
+			if (extension == null) {
+				sj.add("Extension cannot be null.");
+			}
+			
+			if (email == null) {
+				sj.add("Email cannot be null.");
+			}
+			
+			if (officeCode == null) {
+				sj.add("Office code cannot be null.");
+			}
+			
+			if (jobTitle == null) {
+				sj.add("Job title cannot be null.");
+			}
+			
+			if (sj.length() > 0) {
+				throw new IllegalStateException(sj.toString());
+			}
 		}
 	}
 }
