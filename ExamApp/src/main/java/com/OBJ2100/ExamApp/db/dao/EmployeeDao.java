@@ -19,7 +19,7 @@ public class EmployeeDao extends BaseDao<Employee> {
 	}
 
 	@Override
-	public Employee get(Number employeeId) throws SQLException {
+	public Employee read(Number employeeId) throws SQLException {
 		Employee employee = null;
 		
 		try {
@@ -39,7 +39,7 @@ public class EmployeeDao extends BaseDao<Employee> {
 	}
 	
 	@Override
-	public List<Employee> getAll() throws SQLException {
+	public List<Employee> readAll() throws SQLException {
 		List<Employee> employees = new ArrayList<>();
 		
 		try {
@@ -57,7 +57,7 @@ public class EmployeeDao extends BaseDao<Employee> {
 	}
 	
 	@Override
-	public void add(Employee employee) throws SQLException {
+	public void create(Employee employee) throws SQLException {
 		try {
 			Connection c = source.getConnection();
 			
@@ -72,7 +72,7 @@ public class EmployeeDao extends BaseDao<Employee> {
 			
 			ps = c.prepareStatement(
 					"INSERT INTO employees (employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle)"
-					+ "VALUES (?, ?, ?, ?; ?; ?, ?, ?)");
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setInt(1, lastEmployeeNumber);
 			ps.setString(2, employee.getLastName());
 			ps.setString(3, employee.getFirstName());
@@ -126,6 +126,7 @@ public class EmployeeDao extends BaseDao<Employee> {
 		}
 	}
 	
+	@Override
 	public void delete(Employee employee) throws SQLException {
 		try {
 			Connection c = source.getConnection();

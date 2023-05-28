@@ -8,11 +8,11 @@ import java.sql.SQLException;
  */
 public interface Dao<T> {
 	
-	T get(Number id) throws SQLException;
+	void create(T t) throws SQLException;
 	
-	List<T> getAll() throws SQLException;
+	T read(Number id) throws SQLException;
 	
-	void add(T t) throws SQLException;
+	List<T> readAll() throws SQLException;
 	
 	void update(T t, Object[] params) throws SQLException;
 	
