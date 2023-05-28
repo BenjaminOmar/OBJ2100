@@ -22,8 +22,8 @@ public class EmployeeDao extends BaseDao<Employee> {
 	public Employee read(Number employeeId) throws SQLException {
 		Employee employee = null;
 		
+		Connection c = source.getConnection();
 		try {
-			Connection c = source.getConnection();
 			PreparedStatement ps = c.prepareStatement(
 					"SELECT * FROM employees WHERE employeeNumber = ?");
 			ps.setInt(1, (int) employeeId);
@@ -33,6 +33,8 @@ public class EmployeeDao extends BaseDao<Employee> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		
 		return employee;
@@ -42,8 +44,8 @@ public class EmployeeDao extends BaseDao<Employee> {
 	public List<Employee> readAll() throws SQLException {
 		List<Employee> employees = new ArrayList<>();
 		
+		Connection c = source.getConnection();
 		try {
-			Connection c = source.getConnection();
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM employees");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -51,6 +53,8 @@ public class EmployeeDao extends BaseDao<Employee> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		
 		return employees;
@@ -58,9 +62,8 @@ public class EmployeeDao extends BaseDao<Employee> {
 	
 	@Override
 	public void create(Employee employee) throws SQLException {
-		try {
-			Connection c = source.getConnection();
-			
+		Connection c = source.getConnection();
+		try {			
 			PreparedStatement ps = c.prepareStatement(
 					"SELECT MAX(employeeNumber) AS lastEmployeeNumber FROM employees;");
 			ResultSet rs = ps.executeQuery();
@@ -84,14 +87,15 @@ public class EmployeeDao extends BaseDao<Employee> {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 	}
 	
 	@Override
 	public void update(Employee employee, Object[] params) throws SQLException {
-		try {
-			Connection c = source.getConnection();
-			
+		Connection c = source.getConnection();
+		try {			
 			employee = new Employee.Builder(employee.getEmployeeNumber())
 					.lastName((String) params[0])
 					.firstName((String) params[1])
@@ -123,19 +127,23 @@ public class EmployeeDao extends BaseDao<Employee> {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 	}
 	
 	@Override
 	public void delete(Employee employee) throws SQLException {
+		Connection c = source.getConnection();
 		try {
-			Connection c = source.getConnection();
 			PreparedStatement ps = c.prepareStatement(
 					"DELETE FROM employees WHERE employeeNumber = ?");
 			ps.setInt(1, employee.getEmployeeNumber());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 	}
 	
