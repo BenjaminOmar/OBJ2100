@@ -1,5 +1,5 @@
 package com.OBJ2100.ExamApp.db;
 
-public enum DatabaseType {
+public enum SourceType {
 	MYSQL
 }

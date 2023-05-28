@@ -24,7 +24,7 @@ public class DataSourceFactory {
 		return properties;
 	}
 	
-	public static DataSource getDataSource(DatabaseType type) {
+	public static DataSource getDataSource(SourceType type) {
 		switch (type) {
 			case MYSQL:
 				return getMySqlDataSource(properties);
