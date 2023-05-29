@@ -1,9 +1,4 @@
 package com.OBJ2100.ExamApp.gui;
-/*
- * Main application window
- * 
- * */
-
 
 import java.awt.GridLayout;
 
@@ -13,8 +8,6 @@ public class MainWindow extends JFrame {
 
 	private ApplicationMenu appMenu = new ApplicationMenu();
 	private MainContent content = new MainContent();
-	
-
 
 	public MainWindow() {
 		
@@ -34,6 +27,4 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
-
 }
