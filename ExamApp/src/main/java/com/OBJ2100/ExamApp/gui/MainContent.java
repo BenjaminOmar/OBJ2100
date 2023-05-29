@@ -23,8 +23,8 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
-import com.OBJ2100.ExamApp.db.DatabaseType;
-import com.OBJ2100.ExamApp.db.dao.EmployeeDao;
+import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
+import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.db.entities.Employee;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
 
@@ -47,14 +47,21 @@ public class MainContent extends JPanel implements DocumentsManager{
 	private JTextArea results = new JTextArea();
 	private JScrollPane scroll;
 	
-	private static final DataSource source = DataSourceFactory.getDataSource(DatabaseType.MYSQL);
-	private EmployeeDao employeeDao = new EmployeeDao(source);
+	private DaoFactory daoFactory;
 	
 	private final static String newline = "\n";
 	
 	public MainContent() {
 		super();
 		setLayout(null);
+		
+		// TODO : use a SERVICE instead
+		DataSource source = DataSourceFactory.getMySqlDataSource();
+		try {
+			daoFactory = new JdbcDaoFactory(source.getConnection());			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
         // Creating JLabel
         
@@ -92,17 +99,12 @@ public class MainContent extends JPanel implements DocumentsManager{
         
         addEmployeeButton.addActionListener(new ActionListener() { 
       	  public void actionPerformed(ActionEvent e) { 
-      		    try {
-      		    	Employee employee = new Employee.Builder()
-      		    			.lastName(getLastName())
-      		    			.firstName(getFirstName())
-      		    			.build();
-      		    	employeeDao.add(employee);
-					displayMessage("Updated successfully");
-				} catch (SQLException e1) {
-					displayMessage("Something went wrong!");
-				}
-      	  } 
+      		    Employee employee = new Employee.Builder()
+  		    			.lastName(getLastName())
+  		    			.firstName(getFirstName())
+  		    			.build();
+  		    	daoFactory.getEmployeeDao().create(employee);
+      	  }
         });
         
         displayEmployees.setBounds(330, 200, 360, 50);
@@ -110,16 +112,11 @@ public class MainContent extends JPanel implements DocumentsManager{
         add(displayEmployees);
         displayEmployees.addActionListener(new ActionListener() { 
         	public void actionPerformed(ActionEvent e) { 
-        		try {
-					List<Employee> employees = employeeDao.getAll();
-	                for (Employee employee : employees) {
-	                    results.append(employee.getFirstName() + ", " + employee.getLastName() + newline);
-	                } 	              
-				} catch (SQLException e1) {
-					displayMessage("Error in fetching employees");
-				}
-
-        	} 
+        		List<Employee> employees = daoFactory.getEmployeeDao().getAll();
+                for (Employee employee : employees) {
+                    results.append(employee.getFirstName() + ", " + employee.getLastName() + newline);
+                }
+        	}
         });
         
         clear.setBounds(700, 200, 300, 50);
@@ -141,10 +138,6 @@ public class MainContent extends JPanel implements DocumentsManager{
         scroll.getViewport().add(results);
         
         add(scroll);
- 
-        
-
-    	
         
         storeInFile.setBounds(470, 800, 300, 50);
         storeInFile.setFont(bigFont);
