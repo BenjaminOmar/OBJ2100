@@ -4,7 +4,13 @@ import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+<<<<<<< HEAD
+=======
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+>>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -35,14 +41,9 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	}
 	
 	/**
-     * Display of the menu bar:
-     * 		Menu
-     *			Test database connection
-     * 			Exit
-     *`		Help
-     *			About the application
-     */
-	
+	 * Added a options menu to the menu bar. Added the dark mode button to the options menu
+	 * @author 7132
+	 */
 	protected void displayMenuBar() {
 		UIManager.put("Menu.font", bigFont);
 		UIManager.put("MenuItem.font", smallFont);
@@ -66,6 +67,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		
 		menuOptions = new JMenu("Options");
 		darkMode = new JMenuItem("Dark mode");
+<<<<<<< HEAD
         darkMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,14 +76,21 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
             }
         });
 		menuOptions.add(darkMode);
+=======
+        darkMode.addActionListener(this);
+		menu_options.add(darkMode);
+>>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
 
 		this.add(menuFile);
 		this.add(menuHelp);
 		this.add(menuOptions);
 	}
 	
-	
-	// Actions that are performed upon the clicks on the main menu by the user
+	/**
+	 * Actions that are performed upon the clicks on the main menu by the user.
+	 * Added the action of switching between light/dark mode on click event.
+	 * @author 7132
+	 */
 	public void actionPerformed(ActionEvent event) {
 		String arg = event.getActionCommand();
 		if (arg.equals("Test database connection")) {
@@ -99,6 +108,12 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 			helptext.setOpaque(false);
 			helptext.setFont(bigFont);
 			JOptionPane.showMessageDialog(this, helptext, "About the application", JOptionPane.INFORMATION_MESSAGE);
+		} else if (arg.equals("Dark mode")) {
+            darkModeOption = !darkModeOption;
+            updateTheme();
+		} else if (arg.equals("Light mode")) {
+            darkModeOption = !darkModeOption;
+            updateTheme();
 		}
 	}
 
@@ -109,6 +124,13 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		JOptionPane.showMessageDialog(this, message);
 	}
 	
+<<<<<<< HEAD
+=======
+	/**
+	 * this method updates the background of the windows to dark/light mode
+	 * @author 7132
+	 */
+>>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
     private static void updateTheme() {
         try {
             if (darkModeOption) {
@@ -121,9 +143,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
             
             for (Window window : Window.getWindows()) {
                 SwingUtilities.updateComponentTreeUI(window);
-            }
-            
-                
+            }      
         } catch (Exception e) {
             e.printStackTrace();
         }
