@@ -3,7 +3,7 @@ package com.OBJ2100.ExamApp.db.dao;
 import java.util.List;
 import java.util.Optional;
 
-import com.OBJ2100.ExamApp.db.entities.Employee;
+import com.OBJ2100.ExamApp.entities.Employee;
 
 public interface EmployeeDao {
 	Optional<Employee> getByEmployeeNumber(int employeeNumber);

@@ -1,14 +1,14 @@
-package com.OBJ2100.ExamApp.db.dao.implementations;
+package com.OBJ2100.ExamApp.db.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class DaoImpl<T> {
+public abstract class JdbcDao<T> {
 	
 	protected Connection connection;
 	
-	protected DaoImpl(Connection connection) {
+	protected JdbcDao(Connection connection) {
 		this.connection = connection;
 	}
 	

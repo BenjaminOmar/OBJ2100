@@ -1,4 +1,4 @@
-package com.OBJ2100.ExamApp.db.dao.implementations;
+package com.OBJ2100.ExamApp.db.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.OBJ2100.ExamApp.db.dao.EmployeeDao;
-import com.OBJ2100.ExamApp.db.entities.Employee;
+import com.OBJ2100.ExamApp.entities.Employee;
 
-public class EmployeeDaoImpl extends DaoImpl<Employee> implements EmployeeDao {
+public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 
-	public EmployeeDaoImpl(Connection connection) {
+	public JdbcEmployeeDao(Connection connection) {
 		super(connection);
 	}
 

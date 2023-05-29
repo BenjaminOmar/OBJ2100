@@ -1,8 +1,6 @@
-package com.OBJ2100.ExamApp.db.entities;
+package com.OBJ2100.ExamApp.entities;
 
 import java.util.StringJoiner;
-
-import com.OBJ2100.ExamApp.db.EntityBuilder;
 
 public class Customer {
 	private int customerNumber;

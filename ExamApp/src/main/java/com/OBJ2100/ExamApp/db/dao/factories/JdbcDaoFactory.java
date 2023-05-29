@@ -2,21 +2,21 @@ package com.OBJ2100.ExamApp.db.dao.factories;
 
 import java.sql.Connection;
 
-import com.OBJ2100.ExamApp.db.dao.implementations.*;
 import com.OBJ2100.ExamApp.db.dao.*;
+import com.OBJ2100.ExamApp.db.dao.jdbc.*;
 
 public class JdbcDaoFactory implements DaoFactory {
 
 	private Connection connection;
 	
-	private EmployeeDaoImpl employeeDao;
-	private CustomerDaoImpl customerDao;
-	private OfficeDaoImpl officeDao;
-	private OrderDetailsDaoImpl orderDetailsDao;
-	private OrderDaoImpl orderDao;
-	private PaymentDaoImpl paymentDao;
-	private ProductLineDaoImpl productLineDao;
-	private ProductDaoImpl productDao;
+	private JdbcEmployeeDao employeeDao;
+	private JdbcCustomerDao customerDao;
+	private JdbcOfficeDao officeDao;
+	private JdbcOrderDetailsDao orderDetailsDao;
+	private JdbcOrderDao orderDao;
+	private JdbcPaymentDao paymentDao;
+	private JdbcProductLineDao productLineDao;
+	private JdbcProductDao productDao;
 	
 	public JdbcDaoFactory(Connection connection) {
 		this.connection = connection; 
@@ -25,7 +25,7 @@ public class JdbcDaoFactory implements DaoFactory {
 	@Override
 	public EmployeeDao getEmployeeDao() {
 		if (employeeDao == null) {
-			employeeDao = new EmployeeDaoImpl(connection);
+			employeeDao = new JdbcEmployeeDao(connection);
 		}
 		return employeeDao;
 	}
