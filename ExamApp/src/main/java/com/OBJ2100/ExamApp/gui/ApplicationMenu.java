@@ -1,15 +1,10 @@
 package com.OBJ2100.ExamApp.gui;
-/*
- * Creates main menu of the application
- * */
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -17,12 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.text.JTextComponent;
 
-import com.OBJ2100.ExamApp.db.DatabaseHelper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
@@ -94,10 +86,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		String arg = event.getActionCommand();
 		if (arg.equals("Test database connection")) {
 			try {
-				DatabaseHelper db = new DatabaseHelper();
-				db.open();
-				db.test();
-				db.close();
+				// FIXME : missing connection test
 				displayMessage("Connection tested succesfully!");
 			} catch (Exception e) {
 				displayMessage("Error with the connection!");
@@ -119,18 +108,6 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		UIManager.put("OptionPane.buttonFont", bigFont);
 		JOptionPane.showMessageDialog(this, message);
 	}
-	
-	/*
-	private void setDarkMode() {
-		darkMode.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            darkMode = !darkMode;
-	            updateTheme(frame);
-	        }
-	    });
-	}
-	*/
 	
     private static void updateTheme() {
         try {
