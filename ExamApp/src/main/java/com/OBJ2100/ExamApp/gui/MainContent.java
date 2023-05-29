@@ -1,41 +1,38 @@
 package com.OBJ2100.ExamApp.gui;
 
 import java.awt.Font;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.OBJ2100.ExamApp.db.Customer;
-import com.OBJ2100.ExamApp.db.DatabaseHelper;
-import com.OBJ2100.ExamApp.db.Employee;
+import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
+import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
+import com.OBJ2100.ExamApp.db.entities.Employee;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
+
 
 public class MainContent extends JPanel implements DocumentsManager{
 	
-
-
 	private Font bigFont = new Font("Calibri", Font.PLAIN, 40);
 	private Font smallFont = new Font("Calibri", Font.PLAIN, 24);
-	private DatabaseHelper dbHelper = new DatabaseHelper();
 	final JFileChooser fc = new JFileChooser();
 	
 	private JLabel nameLabel = new JLabel("First name:");
@@ -50,11 +47,21 @@ public class MainContent extends JPanel implements DocumentsManager{
 	private JTextArea results = new JTextArea();
 	private JScrollPane scroll;
 	
+	private DaoFactory daoFactory;
+	
 	private final static String newline = "\n";
 	
 	public MainContent() {
 		super();
 		setLayout(null);
+		
+		// TODO : use a SERVICE instead
+		DataSource source = DataSourceFactory.getMySqlDataSource();
+		try {
+			daoFactory = new JdbcDaoFactory(source.getConnection());			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
         // Creating JLabel
         
@@ -92,13 +99,12 @@ public class MainContent extends JPanel implements DocumentsManager{
         
         addEmployeeButton.addActionListener(new ActionListener() { 
       	  public void actionPerformed(ActionEvent e) { 
-      		    try {
-					dbHelper.addEmployee(getFirstName(), getLastName(), "HR", "temp@usn.no", 35000);
-					displayMessage("Succesfull update!");
-				} catch (SQLException e1) {
-					displayMessage("Something went wrong!");
-				}
-      	  } 
+      		    Employee employee = new Employee.Builder()
+  		    			.lastName(getLastName())
+  		    			.firstName(getFirstName())
+  		    			.build();
+  		    	daoFactory.getEmployeeDao().create(employee);
+      	  }
         });
         
         displayEmployees.setBounds(330, 200, 360, 50);
@@ -106,16 +112,11 @@ public class MainContent extends JPanel implements DocumentsManager{
         add(displayEmployees);
         displayEmployees.addActionListener(new ActionListener() { 
         	public void actionPerformed(ActionEvent e) { 
-        		try {
-					List<Employee> employees = dbHelper.getEmployees();
-	                for (Employee employee : employees) {
-	                    results.append(employee.getFirstName() + ", " + employee.getLastName() + newline);
-	                } 	              
-				} catch (SQLException e1) {
-					displayMessage("Error in fetching employees");
-				}
-
-        	} 
+        		List<Employee> employees = daoFactory.getEmployeeDao().getAll();
+                for (Employee employee : employees) {
+                    results.append(employee.getFirstName() + ", " + employee.getLastName() + newline);
+                }
+        	}
         });
         
         clear.setBounds(700, 200, 300, 50);
@@ -137,10 +138,6 @@ public class MainContent extends JPanel implements DocumentsManager{
         scroll.getViewport().add(results);
         
         add(scroll);
- 
-        
-
-    	
         
         storeInFile.setBounds(470, 800, 300, 50);
         storeInFile.setFont(bigFont);

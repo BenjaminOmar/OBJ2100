@@ -1,17 +1,16 @@
 package com.OBJ2100.ExamApp.gui;
-/*
- * Creates main menu of the application
- * */
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+>>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -19,21 +18,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.text.JTextComponent;
 
-import com.OBJ2100.ExamApp.db.DatabaseHelper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
-	private JMenu menu_file = null;
+	private JMenu menuFile = null;
 	private JMenuItem dBconnectionItem = null;
 	private JMenuItem exitItem = null;
-	private JMenu menu_help = null;
-	private JMenuItem option_tip = null;
-	private JMenu menu_options = null;
+	private JMenu menuHelp = null;
+	private JMenuItem optionTip = null;
+	private JMenu menuOptions = null;
 	private static JMenuItem darkMode = null;
 	private static boolean darkModeOption = false;
 	
@@ -52,7 +48,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		UIManager.put("Menu.font", bigFont);
 		UIManager.put("MenuItem.font", smallFont);
 
-		menu_file = new JMenu("File");
+		menuFile = new JMenu("File");
 		
 		dBconnectionItem = new JMenuItem("Test database connection");
 		dBconnectionItem.addActionListener(this);
@@ -60,23 +56,34 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		exitItem = new JMenuItem("Exit");
 		exitItem.addActionListener(this);
 		
-		menu_file.add(dBconnectionItem);
-		menu_file.add(exitItem);
+		menuFile.add(dBconnectionItem);
+		menuFile.add(exitItem);
 
-		menu_help = new JMenu("Help");
+		menuHelp = new JMenu("Help");
 		
-		option_tip = new JMenuItem("About the application");
-		option_tip.addActionListener(this);
-		menu_help.add(option_tip);
+		optionTip = new JMenuItem("About the application");
+		optionTip.addActionListener(this);
+		menuHelp.add(optionTip);
 		
-		menu_options = new JMenu("Options");
+		menuOptions = new JMenu("Options");
 		darkMode = new JMenuItem("Dark mode");
+<<<<<<< HEAD
+        darkMode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                darkModeOption = !darkModeOption;
+                updateTheme();
+            }
+        });
+		menuOptions.add(darkMode);
+=======
         darkMode.addActionListener(this);
 		menu_options.add(darkMode);
+>>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
 
-		this.add(menu_file);
-		this.add(menu_help);
-		this.add(menu_options);
+		this.add(menuFile);
+		this.add(menuHelp);
+		this.add(menuOptions);
 	}
 	
 	/**
@@ -88,10 +95,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		String arg = event.getActionCommand();
 		if (arg.equals("Test database connection")) {
 			try {
-				DatabaseHelper db = new DatabaseHelper();
-				db.open();
-				db.test();
-				db.close();
+				// FIXME : missing connection test
 				displayMessage("Connection tested succesfully!");
 			} catch (Exception e) {
 				displayMessage("Error with the connection!");
@@ -120,10 +124,13 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		JOptionPane.showMessageDialog(this, message);
 	}
 	
+<<<<<<< HEAD
+=======
 	/**
 	 * this method updates the background of the windows to dark/light mode
 	 * @author 7132
 	 */
+>>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
     private static void updateTheme() {
         try {
             if (darkModeOption) {
