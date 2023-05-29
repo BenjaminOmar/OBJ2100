@@ -25,7 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
-import com.OBJ2100.ExamApp.db.entities.Employee;
+import com.OBJ2100.ExamApp.entities.Employee;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
 
 

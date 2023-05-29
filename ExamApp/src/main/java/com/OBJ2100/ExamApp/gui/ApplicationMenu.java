@@ -4,13 +4,6 @@ import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
-<<<<<<< HEAD
-=======
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
->>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -67,19 +60,9 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		
 		menuOptions = new JMenu("Options");
 		darkMode = new JMenuItem("Dark mode");
-<<<<<<< HEAD
-        darkMode.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                darkModeOption = !darkModeOption;
-                updateTheme();
-            }
-        });
 		menuOptions.add(darkMode);
-=======
         darkMode.addActionListener(this);
-		menu_options.add(darkMode);
->>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
+		menuOptions.add(darkMode);
 
 		this.add(menuFile);
 		this.add(menuHelp);
@@ -124,13 +107,10 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		JOptionPane.showMessageDialog(this, message);
 	}
 	
-<<<<<<< HEAD
-=======
 	/**
 	 * this method updates the background of the windows to dark/light mode
 	 * @author 7132
 	 */
->>>>>>> 39fb871ec0d0a06ecdb13099c881bc24c66c9cbd
     private static void updateTheme() {
         try {
             if (darkModeOption) {
