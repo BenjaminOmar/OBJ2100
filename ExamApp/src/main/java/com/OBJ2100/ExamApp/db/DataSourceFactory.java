@@ -9,36 +9,54 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 
 public class DataSourceFactory {
-	private static final String propertiesFilepath = "db.properties";
-	private static final Properties properties = readProperties();
-	
-	private static Properties readProperties() {
+	private static DataSource source;
+
+	/**
+	 * Retrieves a data source configured using a configuration file whose path is given.  
+	 * 
+	 * @param	configFilepath path of the configuration file 
+	 * @return 	a data source configured through the specified file
+	 */
+	private static DataSource getDataSource(String configFilepath) {
 		Properties properties = new Properties();
 		
-		try {			
-			properties.load(new FileInputStream(propertiesFilepath));
+		try {
+			FileInputStream stream = new FileInputStream(configFilepath);
+			properties.load(stream);
+			stream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return properties;
+		return fromProperties(properties);
 	}
-	
-	public static DataSource getDataSource(SourceType type) {
-		switch (type) {
-			case MYSQL:
-				return getMySqlDataSource(properties);
-			default:
-				throw new UnsupportedOperationException(String.format("No implementation for type '%s'.", type));
-		}
-	}
-	
-	private static BasicDataSource getMySqlDataSource(Properties properties) {
+
+	/**
+	 * Configures and returns a data source from specific properties
+	 * 
+	 * @param	properties
+	 * @return 	the configured data source
+	 */
+	private static DataSource fromProperties(Properties properties) {
 		BasicDataSource source = new BasicDataSource();
-		source.setDriverClassName(properties.getProperty("MYSQL_DB_DRIVER_CLASS"));
-		source.setUrl(properties.getProperty("MYSQL_DB_URL"));
-		source.setUsername(properties.getProperty("MYSQL_DB_USERNAME"));
-		source.setPassword(properties.getProperty("MYSQL_DB_PASSWORD"));
+		source.setDriverClassName(properties.getProperty("DRIVER_CLASS"));
+		source.setUrl(properties.getProperty("URL"));
+		source.setUsername(properties.getProperty("USERNAME"));
+		source.setPassword(properties.getProperty("PASSWORD"));
+		return source;
+	}
+	
+	/**
+	 * Returns a data source configured for MySQL
+	 * 
+	 * @return the configured MySQL data source
+	 */
+	public static DataSource getMySqlDataSource() {
+		if (source == null) {
+			synchronized (DataSourceFactory.class) {
+				source = getDataSource("db.mysql.properties");
+			}
+		}
 		return source;
 	}
 }
