@@ -39,7 +39,7 @@ public class DataSourceFactory {
 	 */
 	private static DataSource fromProperties(Properties properties) {
 		BasicDataSource source = new BasicDataSource();
-		source.setDriverClassName(properties.getProperty("DRIVER_CLASS"));
+		source.setDriverClassName(properties.getProperty("DRIVER"));
 		source.setUrl(properties.getProperty("URL"));
 		source.setUsername(properties.getProperty("USERNAME"));
 		source.setPassword(properties.getProperty("PASSWORD"));
