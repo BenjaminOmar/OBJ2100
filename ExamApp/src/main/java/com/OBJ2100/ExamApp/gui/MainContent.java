@@ -26,10 +26,10 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.entities.Employee;
-import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.documents.IDocumentsManager;
 
 
-public class MainContent extends JPanel implements DocumentsManager{
+public class MainContent extends JPanel implements IDocumentsManager{
 	
 	private Font bigFont = new Font("Calibri", Font.PLAIN, 40);
 	private Font smallFont = new Font("Calibri", Font.PLAIN, 24);
