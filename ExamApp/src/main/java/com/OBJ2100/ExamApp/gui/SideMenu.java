@@ -30,7 +30,7 @@ public class SideMenu extends JPanel{
 		  }
 	
 	
-	protected void displaySideMenu() {
+	private void displaySideMenu() {
 		add(testDbCon);
 		testDbCon.addActionListener(new TestDbConnectionListener());
 		
