@@ -1,16 +1,15 @@
 package com.OBJ2100.ExamApp.gui;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ExecSqlQueryListener;
 import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
 import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener; 
 
-public class SideMenu extends JPanel implements ActionListener{
+public class SideMenu extends JPanel{
 	
 	private JButton testDbCon = new JButton("Test database connection");
 	private JButton ExecSqlQuery = new JButton("Execute SQL query");
@@ -24,6 +23,7 @@ public class SideMenu extends JPanel implements ActionListener{
 	  public static void main(String[] args) {
 		    JFrame frame = new JFrame("test");
 		    frame.getContentPane().add(new SideMenu());
+			frame.setLocationRelativeTo(null);
 		    frame.pack();
 		    frame.setVisible(true);
 		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,17 +35,12 @@ public class SideMenu extends JPanel implements ActionListener{
 		testDbCon.addActionListener(new TestDbConnectionListener());
 		
 		add(ExecSqlQuery);
+		ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
 		
 		add(about);
 		about.addActionListener(new AboutAppListener());
 		
 		add(Exit);
 		Exit.addActionListener(new ExitListener());
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }
