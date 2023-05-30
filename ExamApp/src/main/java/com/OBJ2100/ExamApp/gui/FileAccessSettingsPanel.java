@@ -1,48 +1,51 @@
 package com.OBJ2100.ExamApp.gui;
 
 import javax.swing.JFrame;
-
-import java.awt.BorderLayout;
-import java.awt.LayoutManager;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.file.FileSystem;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout; 
+import javax.swing.JLabel;
 
-
+import com.OBJ2100.ExamApp.documents.FolderManager;
 public class FileAccessSettingsPanel extends JPanel  {
 	
 	private final JButton changeFolderBtn; 
-	private final JTextField folderPath; 
-	
-	
-	
-	public FileAccessSettingsPanel() {
-		setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+	private final JLabel folderPath; 
 		
+	public FileAccessSettingsPanel() {
+
+		//her må det legges til en metode som viser "..." når filbanen blir lengre enn 
+		// bredden på JLabel. Det er det enklest å gjøre der man kaller på komponentet og man har bredden på elementet. 
+		setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+		setPreferredSize(new Dimension(600, 75));
+		setBorder(BorderFactory.createTitledBorder("File Access Settings"));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "File Access Settings"));
+	
+		int paddingSize = 5;
+        setBorder(BorderFactory.createCompoundBorder(
+                getBorder(),
+                BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize)
+		));
 		changeFolderBtn = new JButton("Change Folder");	
 		changeFolderBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub			
+				String selectedFolder = FolderManager.chooseFolder();
+				if (selectedFolder != null){
+					folderPath.setText("  Current folder: " + selectedFolder);
+				}						
 			}		
 		});
 		add(changeFolderBtn);
 		
-		folderPath = new JTextField("C://Temp");  		
-		folderPath.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub				
-			}						
-		});
+		folderPath = new JLabel("  No folder is selected");	
 		add(folderPath); 	
 	}
+
 	
 	public static void main(String[] args) { 
 		
@@ -52,40 +55,5 @@ public class FileAccessSettingsPanel extends JPanel  {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		//JPanel panel = new FileAccessSettingsPanel();
-		
-		
-		//frame.add(panel); 
-		//frame.setVisible(true);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				
-		//frame.setBounds(100, 100, 100, 100);
-		//frame.setLayout(new BorderLayout(100,100));
-		
 	}
-}
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//JButton ChangeFolder = new JButton();  
-	
-	
-	
-	//JLabel fileLabel = new JLabel();  
-	
-	
-	
-	
-	
-
-}
+}	
