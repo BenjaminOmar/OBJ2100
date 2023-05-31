@@ -58,6 +58,9 @@ public class MessageHelper {
         UIManager.put("OptionPane.messageFont", chosenFont);
         UIManager.put("OptionPane.buttonFont", chosenFont);
 
-        JOptionPane.showMessageDialog(null, panel, "Error", JOptionPane.PLAIN_MESSAGE);
+		jOptionPane = new JOptionPane(scroll);
+		dialog = jOptionPane.createDialog((JFrame)null, "error!");
+		dialog.setAlwaysOnTop(true);
+		dialog.setVisible(true);
 	}
 }

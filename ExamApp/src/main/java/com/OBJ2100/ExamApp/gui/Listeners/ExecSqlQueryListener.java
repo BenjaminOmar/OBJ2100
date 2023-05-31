@@ -140,7 +140,6 @@ public class ExecSqlQueryListener implements ActionListener{
 		try {
 			File csvFile = new File(generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
-			System.out.println(text);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
