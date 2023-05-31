@@ -5,12 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 
+
 import com.OBJ2100.ExamApp.gui.Listeners.CityRadioButtonListener;
 import com.OBJ2100.ExamApp.gui.Listeners.StateRadioButtonListener;
 import com.OBJ2100.ExamApp.gui.Listeners.CityDropDownListener;
-import com.OBJ2100.ExamApp.gui.Listeners.StateDropdownListener;
+//import com.OBJ2100.ExamApp.gui.Listeners.StateDropdownListener;
 
-import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
+//import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
 
 public class ListCustomersPanel extends JPanel {
 
@@ -22,6 +23,9 @@ public class ListCustomersPanel extends JPanel {
     private final JComboBox<String> dropdownState;
     private final JButton writeToFileButton;
     private final ButtonGroup radioButtonGroup;
+    private final CityDropDownListener cityDropDownListener;
+    //private final StateDropdownListener stateDropdownListener;
+
 
     /**
      * A panel for listing customers and selecting search criteria.
@@ -48,7 +52,6 @@ public class ListCustomersPanel extends JPanel {
         gbc.gridx = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-
         dropdownCity = new JComboBox<>();
         dropdownCity.addItem("Select City");
         dropdownCity.setEnabled(false);
@@ -93,11 +96,12 @@ public class ListCustomersPanel extends JPanel {
         byCityRadioButton.addActionListener(cityListener);
         byStateRadioButton.addActionListener(stateListener);
 
-        StateDropdownListener stateDropDownListener = new StateDropDownListener(this);
-        CityDropDownListener cityDropDownListener = new CityDropDownListener(this);
-
-        writeToFileButton.addActionListener((ActionListener) new WriteToFileListener());
-
+        cityDropDownListener = new CityDropDownListener(dropdownCity);
+        // stateDropdownListener = new StateDropdownListener(this);
+        dropdownCity.addActionListener(cityDropDownListener);
+        // dropdownState.addActionListener(stateDropdownListener);
+       
+        writeToFileButton.addActionListener((ActionListener) this );
     }
 
     public JComboBox<String> getDropdownCity() {
@@ -107,6 +111,8 @@ public class ListCustomersPanel extends JPanel {
     public JComboBox<String> getDropdownState() {
         return dropdownState;
     }
+
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("List Customers Panel");
