@@ -56,23 +56,10 @@ public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 
 	@Override
 	public void create(Employee employee) {
-		int lastEmployeeNumber = 0;
-		String query;
-		
-		query = "SELECT MAX(employeeNumber) AS lastEmployeeNumber FROM employees;";
-		try (PreparedStatement ps = connection.prepareStatement(query)) {
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				lastEmployeeNumber = rs.getInt("lastEmployeeNumber");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		query = "INSERT INTO employees (employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle)"
+		String query = "INSERT INTO employees (employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement ps = connection.prepareStatement(query)){
-			ps.setInt(1, lastEmployeeNumber);
+			ps.setInt(1, employee.getEmployeeNumber());
 			ps.setString(2, employee.getLastName());
 			ps.setString(3, employee.getFirstName());
 			ps.setString(4, employee.getExtension());
