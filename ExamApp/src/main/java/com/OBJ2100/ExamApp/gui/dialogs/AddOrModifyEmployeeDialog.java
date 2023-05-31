@@ -66,24 +66,11 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		}
 	};
 	
-	private static final String[] DETAILS = {
-		"Employee #",
-		"Last Name",
-		"First Name",
-		"Extension",
-		"Email",
-		"Office Code",
-		"Reports To",
-		"Job Title"
-	};
-	
 	private List<Employee> employees;
 	private Map<EmployeeDetail, JTextField> fieldByEmployeeDetail = new HashMap<>();
 	
 	private JComboBox<String> employeeNumberComboBox;
-	private JTextField[] fields = new JTextField[DETAILS.length];
 	private JCheckBox isNewCheckbox;
-	private JButton saveButton;
 	
 	public AddOrModifyEmployeeDialog() {
 		new SwingWorker<Void, Void>() {
@@ -166,9 +153,8 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 						CardLayout layout = (CardLayout) employeeNumberPane.getLayout();
 						layout.show(employeeNumberPane, operation.name());
 						
-						for (JTextField field : fields) {
-							if (field != null)
-								field.setText(null);
+						for (JTextField field : fieldByEmployeeDetail.values()) {
+							field.setText(null);
 						}
 					}
 				});
@@ -195,10 +181,10 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 			formPanel.add(label);
 			formPanel.add(fieldPane);
 		}
-		SpringUtilities.makeCompactGrid(formPanel, DETAILS.length, 2, 6, 6, 6, 6);
+		SpringUtilities.makeCompactGrid(formPanel, EmployeeDetail.values().length, 2, 6, 6, 6, 6);
 		panel.add(formPanel, BorderLayout.CENTER);
 		
-		saveButton = new JButton("Save");
+		JButton saveButton = new JButton("Save");
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
