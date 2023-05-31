@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
@@ -21,6 +23,8 @@ public class MessageHelper {
 	private static JScrollPane scroll;
 	private static JTextArea textArea;
 	private static JPanel panel;
+	private static JOptionPane jOptionPane;
+	private static JDialog dialog;
 	
 	/**
 	 * Display a JOptionPane with the information from the parameter
@@ -29,7 +33,10 @@ public class MessageHelper {
 	public static void displayMessage(String message, String header) {
 		UIManager.put("OptionPane.messageFont", chosenFont);
 		UIManager.put("OptionPane.buttonFont", chosenFont);
-		JOptionPane.showMessageDialog( null, message, header, JOptionPane.INFORMATION_MESSAGE);
+		jOptionPane = new JOptionPane(message);
+		dialog = jOptionPane.createDialog((JFrame)null, header);
+		dialog.setAlwaysOnTop(true);
+		dialog.setVisible(true);
 	}
 	
 	/**
