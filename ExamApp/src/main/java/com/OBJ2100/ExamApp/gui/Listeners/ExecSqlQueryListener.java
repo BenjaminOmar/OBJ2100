@@ -41,7 +41,6 @@ public class ExecSqlQueryListener implements ActionListener{
     JDialog dialog = new JDialog();
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     JButton button = new JButton("Execute");
-    private String query;
 	
     @Override
 	public void actionPerformed(ActionEvent e) {
@@ -65,11 +64,11 @@ public class ExecSqlQueryListener implements ActionListener{
 
 	    button.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            query = textArea.getText().trim();
+	            String query = textArea.getText().trim();
 	           
 	            executeSQLQuery(query);
 	    		
-	            dialog.dispose(); // Close the dialog
+	            dialog.dispose();
 	        }
 	    });
 	}
@@ -82,8 +81,12 @@ public class ExecSqlQueryListener implements ActionListener{
 			if (query.contains("SELECT")) {
 				ResultSet rs = statement.executeQuery(query);	    				
 				
+				
 				String asCsv = extractWithCsvFormat(rs);
 				exportResultsToCsvFile(asCsv);
+				
+				MessageHelper.displayMessage("Sql statement executed successfully! "
+						+ "\n\n the result is exported to CSV");
 				
 				statement.close();
 			} else {
@@ -98,17 +101,18 @@ public class ExecSqlQueryListener implements ActionListener{
 		}
 	}
 	
-	private String extractWithCsvFormat(ResultSet rs) {
+	private String extractWithCsvFormat(ResultSet rs) throws SQLException {
 		ResultSetMetaData metadata = rs.getMetaData();
 		StringJoiner lineJoiner = new StringJoiner(
 				System.getProperty("line.separator"));
 		while (rs.next()) {
-			StringJoiner columnJoiner = new StringJoiner(";");
+			StringJoiner columnJoiner = new StringJoiner(",");
 			for (int i = 1; i < metadata.getColumnCount() + 1; i++) {
-				columnJoiner.add((String) rs.getObject(i));
+				columnJoiner.add(rs.getObject(i).toString());
 			}
-			lineJoiner.add(columnJoiner.toString());
+			lineJoiner.add((String) columnJoiner.toString());
 		}
+		return lineJoiner.toString();
 	}
 	
 	private void exportResultsToCsvFile(String text) {
