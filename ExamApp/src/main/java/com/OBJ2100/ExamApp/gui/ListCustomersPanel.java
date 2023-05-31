@@ -2,8 +2,15 @@ package com.OBJ2100.ExamApp.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
+
+import com.OBJ2100.ExamApp.gui.Listeners.CityRadioButtonListener;
+import com.OBJ2100.ExamApp.gui.Listeners.StateRadioButtonListener;
+import com.OBJ2100.ExamApp.gui.Listeners.CityDropDownListener;
+import com.OBJ2100.ExamApp.gui.Listeners.StateDropdownListener;
+
+import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
 
 public class ListCustomersPanel extends JPanel {
 
@@ -14,7 +21,13 @@ public class ListCustomersPanel extends JPanel {
     private final JLabel byStateLabel;
     private final JComboBox<String> dropdownState;
     private final JButton writeToFileButton;
+    private final ButtonGroup radioButtonGroup;
 
+    /**
+     * A panel for listing customers and selecting search criteria.
+     * 
+     * @author 7162
+     */
     public ListCustomersPanel() {
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "List Customers"));
         setLayout(new GridBagLayout());
@@ -22,8 +35,8 @@ public class ListCustomersPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 0, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
 
         byCityRadioButton = new JRadioButton("City");
         add(byCityRadioButton, gbc);
@@ -35,12 +48,16 @@ public class ListCustomersPanel extends JPanel {
         gbc.gridx = 2;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
         dropdownCity = new JComboBox<>();
+        dropdownCity.addItem("Select City");
+        dropdownCity.setEnabled(false);
         add(dropdownCity, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0.0;
+
         gbc.fill = GridBagConstraints.NONE;
         byStateRadioButton = new JRadioButton("State");
         add(byStateRadioButton, gbc);
@@ -53,6 +70,8 @@ public class ListCustomersPanel extends JPanel {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         dropdownState = new JComboBox<>();
+        dropdownState.setEnabled(false);
+        dropdownState.addItem("Select State");
         add(dropdownState, gbc);
 
         gbc.gridx = 0;
@@ -64,13 +83,29 @@ public class ListCustomersPanel extends JPanel {
         writeToFileButton = new JButton("Write customers list that match selected criteria into file...");
         add(writeToFileButton, gbc);
 
-        // Set up action listener for the button
-        writeToFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle button click event
-            }
-        });
+        radioButtonGroup = new ButtonGroup();
+        radioButtonGroup.add(byCityRadioButton);
+        radioButtonGroup.add(byStateRadioButton);
+
+        // Set up action listener for the buttons/dropdown menu
+        CityRadioButtonListener cityListener = new CityRadioButtonListener(this);
+        StateRadioButtonListener stateListener = new StateRadioButtonListener(this);
+        byCityRadioButton.addActionListener(cityListener);
+        byStateRadioButton.addActionListener(stateListener);
+
+        StateDropdownListener stateDropDownListener = new StateDropDownListener(this);
+        CityDropDownListener cityDropDownListener = new CityDropDownListener(this);
+
+        writeToFileButton.addActionListener((ActionListener) new WriteToFileListener());
+
+    }
+
+    public JComboBox<String> getDropdownCity() {
+        return dropdownCity;
+    }
+
+    public JComboBox<String> getDropdownState() {
+        return dropdownState;
     }
 
     public static void main(String[] args) {
