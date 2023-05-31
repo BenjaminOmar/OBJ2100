@@ -7,14 +7,15 @@ import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
+import java.io.File;
 
 import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
 
 /**
  * A panel that displays file access settings.
+ * 
  * @author 7162
  */
-
 
 public class FileAccessSettingsPanel extends JPanel {
 
@@ -38,7 +39,7 @@ public class FileAccessSettingsPanel extends JPanel {
 		changeFolderBtn.addActionListener(new ChangeFolderListener(this));
 		add(changeFolderBtn);
 
-		folderPath = new JLabel("  No folder is selected");
+		folderPath = new JLabel("Current folder: " + getDefaultFolderPath());
 		add(folderPath);
 	}
 
@@ -66,6 +67,17 @@ public class FileAccessSettingsPanel extends JPanel {
 			String truncatedText = text.substring(0, maxLength - 3) + "...";
 			folderPath.setText(truncatedText);
 		}
+	}
+
+	/**
+	 * Returns the default folder path based on the user's home directory.
+	 *
+	 * @return the default folder path
+	 */
+	public String getDefaultFolderPath() {
+		String userHome = System.getProperty("user.home");
+		String defaultFolderPath = userHome + File.separator + "Temp";
+		return defaultFolderPath;
 	}
 
 	public static void main(String[] args) {

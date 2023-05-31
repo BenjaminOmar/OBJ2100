@@ -1,6 +1,7 @@
 package com.OBJ2100.ExamApp.db.dao.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -63,5 +64,39 @@ public class JdbcCustomerDao extends JdbcDao<Customer> implements CustomerDao {
 				.creditLimit(creditLimit)
 				.build();
 	}
+
+	@Override
+	public List<Customer> getByCity(String city){
+		List<Customer> customers = new ArrayList<>();
+
+		try(PreparedStatement s = connection.prepareStatement("SELECT * FROM customers WHERE city = ?")){
+			s.setString(1, city);
+			ResultSet rs = s.executeQuery();
+			while (rs.next()){
+				customers.add(extractEntity(rs));
+			}
+			s.close();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return customers; 
+	}
+
+	@Override //TO DO endre. 
+	public List<Customer> getByState(String state) {
+        List<Customer> customers = new ArrayList<>();
+
+        try (Statement s = connection.createStatement()) {
+            ResultSet rs = s.executeQuery("SELECT * FROM customers WHERE state = '" + state + "'");
+            while (rs.next()) {
+                customers.add(extractEntity(rs));
+            }
+            s.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return customers;
+    }
 }
 

@@ -1,4 +1,4 @@
-package com.OBJ2100.ExamApp.gui.listeners;
+package com.OBJ2100.ExamApp.gui.Listeners;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.CustomerDao;
@@ -43,9 +43,9 @@ public class CityDropDownListener implements ActionListener {
             List<String> cities = new ArrayList<>();
 
             for (Customer customer : customers){
-                String state = customer.getState();
-                 if (!cities.contains(state)){
-                    cities.add(state); 
+                String city = customer.getCity();
+                 if (!cities.contains(city)){
+                    cities.add(city); 
                 }
              }
 
