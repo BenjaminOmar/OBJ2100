@@ -1,6 +1,9 @@
-package com.OBJ2100.ExamApp.gui.Listeners;
+package com.OBJ2100.ExamApp.gui.listeners;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.db.dao.CustomerDao;
+import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
+import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcCustomerDao;
 import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcDao;
 import com.OBJ2100.ExamApp.entities.Customer;
@@ -16,38 +19,45 @@ import java.util.List;
 
 public class CityDropDownListener implements ActionListener {
     private JComboBox<String> dropdownCity;
+    private List<String> cities;
 
     public CityDropDownListener(JComboBox<String> dropdownCity) {
         this.dropdownCity = dropdownCity;
+        this.cities = null;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        DataSource source = DataSourceFactory.getMySqlDataSource();
+    	if (cities != null) return;
+        populateCityDropdown();       
+    }
+    
+    private void populateCityDropdown() {
+    	DataSource source = DataSourceFactory.getMySqlDataSource();
 		try (Connection connection = source.getConnection()) {
-			 JdbcCustomerDao customerDao = new JdbcCustomerDao(connection);
-             List<Customer> customers = customerDao.getAll();
-
+			DaoFactory daoFactory = new JdbcDaoFactory(connection);
+			CustomerDao customerDao = daoFactory.getCustomerDao();
+			
+			List<Customer> customers = customerDao.getAll();
             
             List<String> cities = new ArrayList<>();
 
             for (Customer customer : customers){
-                String city = customer.getCity();
-                 if (!cities.contains(city)){
-                    cities.add(city); 
+                String state = customer.getState();
+                 if (!cities.contains(state)){
+                    cities.add(state); 
                 }
              }
 
-            //dropdownCity.removeAllItems();
-            
-            for (String city : cities){
-                 dropdownCity.addItem(city);
+            dropdownCity.removeAllItems();
+            for (String city : cities) {;
+				dropdownCity.addItem(city);
             }
 
 		} catch (SQLException err) {
 			err.printStackTrace();			
-		}	        
-    }   
+		}
+    }
 
      public static void main(String[] args) {
         // Opprett en JComboBox for testing

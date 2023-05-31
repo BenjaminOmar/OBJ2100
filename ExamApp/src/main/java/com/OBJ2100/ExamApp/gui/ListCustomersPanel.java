@@ -1,15 +1,23 @@
 package com.OBJ2100.ExamApp.gui;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
-
-import com.OBJ2100.ExamApp.gui.Listeners.CityRadioButtonListener;
-import com.OBJ2100.ExamApp.gui.Listeners.StateRadioButtonListener;
-import com.OBJ2100.ExamApp.gui.Listeners.CityDropDownListener;
+import com.OBJ2100.ExamApp.gui.listeners.CityDropDownListener;
 //import com.OBJ2100.ExamApp.gui.Listeners.StateDropdownListener;
+import com.OBJ2100.ExamApp.gui.listeners.CityRadioButtonListener;
+import com.OBJ2100.ExamApp.gui.listeners.StateDropdownListener;
+import com.OBJ2100.ExamApp.gui.listeners.StateRadioButtonListener;
 
 //import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
 
@@ -23,8 +31,6 @@ public class ListCustomersPanel extends JPanel {
     private final JComboBox<String> dropdownState;
     private final JButton writeToFileButton;
     private final ButtonGroup radioButtonGroup;
-    private final CityDropDownListener cityDropDownListener;
-    //private final StateDropdownListener stateDropdownListener;
 
 
     /**
@@ -92,13 +98,16 @@ public class ListCustomersPanel extends JPanel {
 
         // Set up action listener for the buttons/dropdown menu
         CityRadioButtonListener cityListener = new CityRadioButtonListener(this);
-        StateRadioButtonListener stateListener = new StateRadioButtonListener(this);
         byCityRadioButton.addActionListener(cityListener);
+        byCityRadioButton.addActionListener(new CityDropDownListener(dropdownCity));
+        
+        StateRadioButtonListener stateListener = new StateRadioButtonListener(this);
         byStateRadioButton.addActionListener(stateListener);
+        byStateRadioButton.addActionListener(new StateDropdownListener(dropdownState));
 
-        cityDropDownListener = new CityDropDownListener(dropdownCity);
+        // TODO cityDropDownListener = new CityDropDownListener(dropdownCity);
         // stateDropdownListener = new StateDropdownListener(this);
-        dropdownCity.addActionListener(cityDropDownListener);
+        // TODO dropdownCity.addActionListener(cityDropDownListener);
         // dropdownState.addActionListener(stateDropdownListener);
        
         //writeToFileButton.addActionListener((ActionListener) this );

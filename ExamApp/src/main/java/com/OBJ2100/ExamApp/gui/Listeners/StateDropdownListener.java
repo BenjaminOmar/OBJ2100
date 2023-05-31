@@ -1,38 +1,60 @@
-package com.OBJ2100.ExamApp.gui.Listeners;
-
-import com.OBJ2100.ExamApp.db.dao.CustomerDao;
-import com.OBJ2100.ExamApp.entities.Customer;
-import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
+package com.OBJ2100.ExamApp.gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+import javax.swing.JComboBox;
+
+import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.db.dao.CustomerDao;
+import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
+import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
+import com.OBJ2100.ExamApp.entities.Customer;
+
 public class StateDropdownListener implements ActionListener {
-
-    private final CustomerDao customerDao;
-    private final ListCustomersPanel panel;
-
-    public StateDropdownListener(CustomerDao customerDao, ListCustomersPanel panel) {
-        this.customerDao = customerDao;
-        this.panel = panel;
-    }
+	private JComboBox<String> dropdownState;
+	private List<String> states;
+	
+	public StateDropdownListener(JComboBox<String> dropdownSate) {
+        this.dropdownState = dropdownSate;
+        this.states = null;
+    };
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        panel.getDropdownState().removeAllItems();
-        panel.getDropdownState().addItem("Select State");
+    	if (states != null) return;
+    	populateStateDropdown();
+    }
+    
+    private void populateStateDropdown() {
+    	DataSource source = DataSourceFactory.getMySqlDataSource();
+		try (Connection connection = source.getConnection()) {
+			DaoFactory daoFactory = new JdbcDaoFactory(connection);
+			CustomerDao customerDao = daoFactory.getCustomerDao();
+			
+			List<Customer> customers = customerDao.getAll();
+            
+            List<String> states = new ArrayList<>();
 
-        List<Customer> customers = customerDao.getAll();
+            for (Customer customer : customers){
+                String state = customer.getState();
+                 if (!states.contains(state)){
+                    states.add(state); 
+                }
+             }
 
-        for (Customer customer : customers) {
-            String state = customer.getState();
-            if (!state.equals(panel.getDropdownState().getSelectedItem())) {
-                panel.getDropdownState().addItem(state);
+            dropdownState.removeAllItems();
+            for (String state : states) {;
+				dropdownState.addItem(state);
             }
-        }
 
-        panel.getDropdownState().setEnabled(true);
-        panel.getDropdownCity().setEnabled(false);
+		} catch (SQLException err) {
+			err.printStackTrace();			
+		}
     }
 }
