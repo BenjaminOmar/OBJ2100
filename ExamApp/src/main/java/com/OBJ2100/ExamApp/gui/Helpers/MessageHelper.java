@@ -23,15 +23,19 @@ public class MessageHelper {
 	private static JPanel panel;
 	
 	/**
-	 * 
+	 * Display a JOptionPane with the information from the parameter
 	 * @param message A String message that will be presented in the JOptionPane 
 	 */
-	public static void displayMessage(String message) {
+	public static void displayMessage(String message, String header) {
 		UIManager.put("OptionPane.messageFont", chosenFont);
 		UIManager.put("OptionPane.buttonFont", chosenFont);
-		JOptionPane.showMessageDialog( null, message, "Database connection", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog( null, message, header, JOptionPane.INFORMATION_MESSAGE);
 	}
-
+	
+	/**
+	 * Display a JOptionPane with the error massage from the stackTrace
+	 * @param printStackTrace The message stackTrace
+	 */
 	public static void displayMessageError(Object printStackTrace) {
         textArea = new JTextArea(String.valueOf(printStackTrace));
         textArea.setLineWrap(true);

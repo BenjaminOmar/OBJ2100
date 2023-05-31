@@ -8,7 +8,7 @@ import javax.swing.JTextArea;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
- * Created a custom ActionListener. This will be used in the sidemenu
+ * Created an ActionListener. This will be used in the sidemenu
  * and the application menu.
  * The actionPerformed method Overrides the method in the ActionListener Interface.
  * @author 7132
@@ -30,7 +30,7 @@ public class AboutAppListener implements ActionListener{
 				+ "The application also consist of a multitude of different features!");
 		helptext.setEditable(false);
 		helptext.setOpaque(false);
-		MessageHelper.displayMessage(helptext.getText());
+		MessageHelper.displayMessage(helptext.getText(), "About the application");
 	}
 
 }

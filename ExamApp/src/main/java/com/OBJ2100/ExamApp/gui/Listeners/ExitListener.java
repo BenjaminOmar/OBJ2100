@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created a custom ActionListener. This will be used in the sidemenu
+ * Created an ActionListener. This will be used in the sidemenu
  * and the application menu.
  * The actionPerformed method Overrides the method in the ActionListener Interface.
  * @author 7132

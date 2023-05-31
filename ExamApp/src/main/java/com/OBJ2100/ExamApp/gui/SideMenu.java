@@ -17,7 +17,6 @@ import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener;
  */
 public class SideMenu extends JPanel{
 	
-	// instanciating the different swing buttons
 	private JButton testDbCon = new JButton("Test database connection");
 	private JButton ExecSqlQuery = new JButton("Execute SQL query");
 	private JButton about = new JButton("About the app");

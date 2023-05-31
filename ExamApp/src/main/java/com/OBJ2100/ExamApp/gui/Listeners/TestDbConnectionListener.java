@@ -12,7 +12,7 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
- * Created a custom ActionListener. This will be used in the sidemenu
+ * Created an ActionListener. This will be used in the sidemenu
  * and the application menu.
  * The actionPerformed method Overrides the method in the ActionListener Interface.
  * @author 7132
@@ -32,10 +32,10 @@ public class TestDbConnectionListener implements ActionListener{
 			Statement statement = connection.createStatement();
 			statement.executeQuery("SELECT * FROM customers");
 			
-			MessageHelper.displayMessage("Succesfull connection to database!");
+			MessageHelper.displayMessage("Succesfull connection to database!", "Database");
 		} catch (SQLException err) {
 			err.printStackTrace();
-			MessageHelper.displayMessage("Error connecting to database");
+			MessageHelper.displayMessage("Error connecting to database", "Database");
 		}	
 	}
 }
