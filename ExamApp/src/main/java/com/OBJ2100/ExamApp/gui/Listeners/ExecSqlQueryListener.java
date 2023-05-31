@@ -103,7 +103,6 @@ public class ExecSqlQueryListener implements ActionListener{
 			}
 		} catch (SQLException err) {
 			MessageHelper.displayMessageError(err);
-			
 		}
 	}
 	
