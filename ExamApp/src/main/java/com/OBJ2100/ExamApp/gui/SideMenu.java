@@ -2,6 +2,8 @@ package com.OBJ2100.ExamApp.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,18 +32,25 @@ public class SideMenu extends JPanel implements ActionListener{
 		  }
 	
 	
-	protected void displaySideMenu() {
-		add(testDbCon);
-		testDbCon.addActionListener(new TestDbConnectionListener());
-		
-		add(ExecSqlQuery);
-		
-		add(about);
-		about.addActionListener(new AboutAppListener());
-		
-		add(Exit);
-		Exit.addActionListener(new ExitListener());
-	}
+	  protected void displaySideMenu() {
+	        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+	        add(testDbCon);
+	        add(Box.createVerticalStrut(15));
+	        testDbCon.addActionListener(new TestDbConnectionListener());
+
+	        add(ExecSqlQuery);
+	        add(Box.createVerticalStrut(15));
+
+	        add(about);
+	        add(Box.createVerticalStrut(270));
+	        about.addActionListener(new AboutAppListener());
+
+	        add(Exit);
+	        Exit.addActionListener(new ExitListener());
+
+	    }
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
