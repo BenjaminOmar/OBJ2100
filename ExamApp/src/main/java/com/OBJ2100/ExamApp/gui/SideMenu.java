@@ -17,8 +17,8 @@ public class SideMenu extends JPanel implements ActionListener{
 	private JButton about = new JButton("About the app");
 	private JButton Exit = new JButton("Exit application");
 	
-	protected SideMenu() {		
-		displaySideMenu();
+	protected SideMenu() {
+	    displaySideMenu();
 	}
 	
 	  public static void main(String[] args) {

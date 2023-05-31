@@ -12,6 +12,9 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
+import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -21,15 +24,15 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenuItem selectfolderItem = new JMenuItem("Select folder");
 	private JMenuItem writecustomerItem = new JMenuItem("Write customers into file");
 	private JMenuItem bulkimportItem = new JMenuItem("Bulk import of orders");
-	private JMenuItem exitItem = new JMenuItem("Exit application");
+	private JMenuItem Exit = new JMenuItem("Exit application");
 	private JMenu menuDatabase = new JMenu("Database");
 	private JMenuItem executeItem = new JMenuItem("Execute SQL Query");
 	private JMenuItem employeeItem = new JMenuItem("Add or modify employee");
 	private JMenuItem listallItem = new JMenuItem("List all products");
 	private JMenuItem officeItem = new JMenuItem("Filter and present offices from a country");
-	private JMenuItem dBconnectionItem = new JMenuItem("Test database connection");
+	private JMenuItem testDbCon = new JMenuItem("Test database connection");
 	private JMenu menuHelp = new JMenu("Help");
-	private JMenuItem optionTip = new JMenuItem("About");
+	private JMenuItem about = new JMenuItem("About");
 	private JMenu menuOptions = new JMenu("Options");
 	private static JMenuItem darkMode = new JMenuItem("Darkmode");
 	private static boolean darkModeOption = false;
@@ -66,22 +69,11 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		    }
 		});
 		
-        add(exitItem);
-		exitItem.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        System.exit(0);
-		    }
-		});
-		
-		 dBconnectionItem.addActionListener(new ActionListener() {
-		        public void actionPerformed(ActionEvent e) {
-		            try {
-		                displayMessage("Connection tested successfully!");
-		            } catch (Exception ex) {
-		                displayMessage("Error with the connection!");
-		            }
-		        }
-		    });
+		add(Exit);
+		Exit.addActionListener(new ExitListener());
+		 
+		 add(testDbCon);
+			testDbCon.addActionListener(new TestDbConnectionListener());
 		 
 		 executeItem.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
@@ -103,15 +95,9 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 			    }
 			});
 		 
-		 optionTip.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			        JTextArea helptext = new JTextArea("This is our application for the exam!\n\n- It provides the display of basic functionality\n- :)\n-¯\\_(ツ)_/¯");
-			        helptext.setEditable(false);
-			        helptext.setOpaque(false);
-			        helptext.setFont(smallFont);
-			        JOptionPane.showMessageDialog(ApplicationMenu.this, helptext, "About the application", JOptionPane.INFORMATION_MESSAGE);
-			    }
-			});
+		 add(about);
+			about.addActionListener(new AboutAppListener());
+			
 		 
 		 darkMode.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
@@ -123,16 +109,16 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		menuFile.add(selectfolderItem);
 		menuFile.add(writecustomerItem);
 		menuFile.add(bulkimportItem);
-		menuFile.add(exitItem);
+		menuFile.add(Exit);
 		
-		menuDatabase.add(dBconnectionItem);
+		menuDatabase.add(testDbCon);
 		menuDatabase.add(executeItem);
 		menuDatabase.add(employeeItem);
 		menuDatabase.add(listallItem);
 		menuDatabase.add(officeItem);
 		
 		menuOptions.add(darkMode);
-		menuHelp.add(optionTip);
+		menuHelp.add(about);
 
 		this.add(menuFile);
 		this.add(menuDatabase);
@@ -146,10 +132,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	 * @author 7132
 	 */
 	public void actionPerformed(ActionEvent event) {
-	    String arg = event.getActionCommand();
-	    if (arg.equals("Exit application")) {
-	        System.exit(0);		
-	    }
+	  
 	}
 
 
