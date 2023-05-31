@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ExecSqlQueryListener;
 import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
 import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -30,7 +31,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenuItem bulkimportItem = new JMenuItem("Bulk import of orders");
 	private JMenuItem Exit = new JMenuItem("Exit application");
 	private JMenu menuDatabase = new JMenu("Database");
-	private JMenuItem executeItem = new JMenuItem("Execute SQL Query");
+	private JMenuItem ExecSqlQuery = new JMenuItem("Execute SQL Query");
 	private JMenuItem employeeItem = new JMenuItem("Add or modify employee");
 	private JMenuItem listallItem = new JMenuItem("List all products");
 	private JMenuItem officeItem = new JMenuItem("Filter and present offices from a country");
@@ -69,13 +70,11 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		add(Exit);
 		Exit.addActionListener(new ExitListener());
 		 
-		 add(testDbCon);
+		add(testDbCon);
 			testDbCon.addActionListener(new TestDbConnectionListener());
 		 
-		 executeItem.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			    }
-			});
+		add(ExecSqlQuery);
+			ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
 		 
 		 employeeItem.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
@@ -112,7 +111,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		menuFile.add(Exit);
 		
 		menuDatabase.add(testDbCon);
-		menuDatabase.add(executeItem);
+		menuDatabase.add(ExecSqlQuery);
 		menuDatabase.add(employeeItem);
 		menuDatabase.add(listallItem);
 		menuDatabase.add(officeItem);
