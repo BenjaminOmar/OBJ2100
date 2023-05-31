@@ -10,6 +10,11 @@ import javax.swing.JTextArea;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+/**
+ * This is a helper class for message popups available trough the program
+ * created for maximum reusability.
+ * @author 7132
+ */
 public class MessageHelper {
 	
 	private static Font chosenFont = new Font("Calibri", Font.PLAIN, 15);
@@ -17,7 +22,10 @@ public class MessageHelper {
 	private static JTextArea textArea;
 	private static JPanel panel;
 	
-	
+	/**
+	 * 
+	 * @param message A String message that will be presented in the JOptionPane 
+	 */
 	public static void displayMessage(String message) {
 		UIManager.put("OptionPane.messageFont", chosenFont);
 		UIManager.put("OptionPane.buttonFont", chosenFont);

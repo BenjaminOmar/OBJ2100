@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.sql.DataSource;
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
@@ -28,6 +29,9 @@ public class TestDbConnectionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
   		DataSource source = DataSourceFactory.getMySqlDataSource();
 		try (Connection connection = source.getConnection()) {
+			Statement statement = connection.createStatement();
+			statement.executeQuery("SELECT * FROM customers");
+			
 			MessageHelper.displayMessage("Succesfull connection to database!");
 		} catch (SQLException err) {
 			err.printStackTrace();
