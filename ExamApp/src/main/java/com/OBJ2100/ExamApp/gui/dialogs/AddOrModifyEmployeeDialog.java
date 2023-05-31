@@ -2,31 +2,23 @@ package com.OBJ2100.ExamApp.gui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.sql.DataSource;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -34,17 +26,15 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingWorker;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
-import com.OBJ2100.ExamApp.db.dao.EmployeeDao;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
-import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcEmployeeDao;
 import com.OBJ2100.ExamApp.entities.Employee;
-import com.OBJ2100.ExamApp.gui.listeners.AddOrModifyEmployeeListener;
+import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 import com.OBJ2100.ExamApp.gui.utilities.SpringUtilities;
 
 public class AddOrModifyEmployeeDialog extends JDialog {
 	
-	private static enum EmployeeOperation {
+	private enum EmployeeOperation {
 		ADDING,
 		UPDATING
 	}
@@ -71,18 +61,15 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 	
 	private JComboBox<String> employeeNumberComboBox;
 	private JCheckBox isNewCheckbox;
+	private JComboBox<Integer> reportsToComboBox;
+	private JCheckBox notReportingCheckbox;
+	private JButton saveButton;
 	
 	public AddOrModifyEmployeeDialog() {
 		new SwingWorker<Void, Void>() {
 			@Override
-			protected Void doInBackground() throws SQLException {
-				DataSource source = DataSourceFactory.getMySqlDataSource();
-				try (Connection connection = source.getConnection()) {
-					DaoFactory daoFactory = new JdbcDaoFactory(connection);
-					employees = daoFactory.getEmployeeDao().getAll();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			protected Void doInBackground() {
+				fetchEmployees();
 				return null;
 			}
 			
@@ -93,6 +80,16 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 				populateFieldsWithSelected();
 			}
 		}.execute();
+	}
+	
+	private void fetchEmployees() {
+		DataSource source = DataSourceFactory.getMySqlDataSource();
+		try (Connection connection = source.getConnection()) {
+			DaoFactory daoFactory = new JdbcDaoFactory(connection);
+			employees = daoFactory.getEmployeeDao().getAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void populateFieldsWithSelected() {
@@ -111,8 +108,16 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		fieldByEmployeeDetail.get(EmployeeDetail.EXTENSION).setText(employee.getExtension());
 		fieldByEmployeeDetail.get(EmployeeDetail.EMAIL).setText(employee.getEmail());
 		fieldByEmployeeDetail.get(EmployeeDetail.OFFICE_CODE).setText(employee.getOfficeCode());
-		fieldByEmployeeDetail.get(EmployeeDetail.REPORTS_TO).setText(String.valueOf(employee.getReportsTo()));
 		fieldByEmployeeDetail.get(EmployeeDetail.JOB_TITLE).setText(employee.getJobTitle());
+		
+		Integer reportsTo = employee.getReportsTo();
+		if (reportsTo == null) {
+			notReportingCheckbox.setSelected(true);
+		} else {
+			if (notReportingCheckbox.isSelected())
+				notReportingCheckbox.setSelected(false); 
+			reportsToComboBox.setSelectedItem(employee.getReportsTo());
+		}
 	}
 	
 	public void initComponents() {		
@@ -128,12 +133,7 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 						.map(e -> String.valueOf(e.getEmployeeNumber()))
 						.toArray(String[]::new);
 				employeeNumberComboBox = new JComboBox<>(allEmployeeNumbers);
-				employeeNumberComboBox.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						populateFieldsWithSelected();
-					}
-				});
+				employeeNumberComboBox.addActionListener(l -> populateFieldsWithSelected());
 				whenUpdatingEmployee.add(employeeNumberComboBox);
 				
 				JPanel whenAddingNewEmployee = new JPanel();
@@ -148,13 +148,20 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 				isNewCheckbox.addItemListener(new ItemListener() {
 					@Override
 					public void itemStateChanged(ItemEvent e) {
-						EmployeeOperation operation = isNewCheckbox.isSelected() ?
-								EmployeeOperation.ADDING : EmployeeOperation.UPDATING;
+						EmployeeOperation operation = getCurrentOperation();
 						CardLayout layout = (CardLayout) employeeNumberPane.getLayout();
 						layout.show(employeeNumberPane, operation.name());
 						
-						for (JTextField field : fieldByEmployeeDetail.values()) {
-							field.setText(null);
+						if (operation.equals(EmployeeOperation.UPDATING)) {
+							populateFieldsWithSelected();
+						} else {
+							fieldByEmployeeDetail.values().forEach(f -> f.setText(null));
+							
+							int highestEmployeeNumber = employees.stream()
+									.mapToInt(Employee::getEmployeeNumber)
+									.max().orElseThrow(NoSuchElementException::new);
+							fieldByEmployeeDetail.get(EmployeeDetail.NUMBER).setText(
+									String.valueOf(highestEmployeeNumber + 1));
 						}
 					}
 				});
@@ -163,6 +170,30 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 				fieldPane.add(isNewCheckbox);
 				
 				fieldByEmployeeDetail.put(detail, employeeNumberField);
+			} else if (detail.equals(EmployeeDetail.REPORTS_TO)) {
+				Integer[] otherEmployeeNumbers = employees.stream()
+						.map(Employee::getEmployeeNumber)
+						.filter(n -> n != employeeNumberComboBox.getSelectedItem())
+						.toArray(Integer[]::new);
+				reportsToComboBox = new JComboBox<>(otherEmployeeNumbers);
+				
+				notReportingCheckbox = new JCheckBox("Nobody");
+				notReportingCheckbox.addItemListener(new ItemListener() {
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						if (notReportingCheckbox.isSelected()) {
+							reportsToComboBox.setEnabled(false);
+						} else {
+							reportsToComboBox.setEnabled(true);
+						}
+					}
+				});
+				
+				JPanel reportsToPane = new JPanel();
+				reportsToPane.add(reportsToComboBox);
+				reportsToPane.add(notReportingCheckbox);
+				
+				fieldPane.add(reportsToPane);
 			} else {
 				JTextField field = new JTextField(20);
 				fieldPane.add(field);
@@ -184,34 +215,8 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		SpringUtilities.makeCompactGrid(formPanel, EmployeeDetail.values().length, 2, 6, 6, 6, 6);
 		panel.add(formPanel, BorderLayout.CENTER);
 		
-		JButton saveButton = new JButton("Save");
-		saveButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				DataSource source = DataSourceFactory.getMySqlDataSource();
-				try (Connection connection = source.getConnection()) {
-					Map<EmployeeDetail, String> byDetail = fieldByEmployeeDetail.entrySet()
-							.stream()
-							.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
-					
-					Employee savedEmployee = new Employee.Builder()
-							.employeeNumber(Integer.valueOf(byDetail.get(EmployeeDetail.NUMBER)))
-							.lastName(byDetail.get(EmployeeDetail.LAST_NAME))
-							.firstName(byDetail.get(EmployeeDetail.FIRST_NAME))
-							.extension(byDetail.get(EmployeeDetail.EXTENSION))
-							.email(byDetail.get(EmployeeDetail.EMAIL))
-							.officeCode(byDetail.get(EmployeeDetail.OFFICE_CODE))
-							.reportsTo(Integer.valueOf(byDetail.get(EmployeeDetail.REPORTS_TO)))
-							.jobTitle(byDetail.get(EmployeeDetail.JOB_TITLE))
-							.build();
-					
-					DaoFactory daoFactory = new JdbcDaoFactory(connection);
-					daoFactory.getEmployeeDao().create(savedEmployee);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		saveButton = new JButton("Save");
+		saveButton.addActionListener(l -> saveCurrentEmployee());
 		panel.add(saveButton, BorderLayout.PAGE_END);
 		
 		add(panel);
@@ -223,5 +228,59 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		setResizable(false);
 		
 		setVisible(true);
+	}
+	
+	private EmployeeOperation getCurrentOperation() {
+		return isNewCheckbox.isSelected() ?
+				EmployeeOperation.ADDING : EmployeeOperation.UPDATING;
+	}
+	
+	private void saveCurrentEmployee() {
+		new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() {
+				saveButton.setEnabled(false);
+				
+				DataSource source = DataSourceFactory.getMySqlDataSource();
+				try (Connection connection = source.getConnection()) {
+					Map<EmployeeDetail, String> byDetail = fieldByEmployeeDetail.entrySet()
+							.stream()
+							.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
+					
+					EmployeeOperation operation = getCurrentOperation();
+					int employeeNumber = (operation.equals(EmployeeOperation.ADDING)) ?
+						(int) employeeNumberComboBox.getSelectedItem() : Integer.valueOf(byDetail.get(EmployeeDetail.NUMBER));
+					
+					Integer reportsTo = notReportingCheckbox.isSelected() ? 
+							null : (int) reportsToComboBox.getSelectedItem();
+					
+					Employee savedEmployee = new Employee.Builder()
+							.employeeNumber(employeeNumber)
+							.lastName(byDetail.get(EmployeeDetail.LAST_NAME))
+							.firstName(byDetail.get(EmployeeDetail.FIRST_NAME))
+							.extension(byDetail.get(EmployeeDetail.EXTENSION))
+							.email(byDetail.get(EmployeeDetail.EMAIL))
+							.officeCode(byDetail.get(EmployeeDetail.OFFICE_CODE))
+							.reportsTo(reportsTo)
+							.jobTitle(byDetail.get(EmployeeDetail.JOB_TITLE))
+							.build();
+					
+					DaoFactory daoFactory = new JdbcDaoFactory(connection);
+					daoFactory.getEmployeeDao().create(savedEmployee);
+					
+					// TODO fetchEmployees();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+			
+			@Override
+			protected void done() {
+				saveButton.setEnabled(true);
+				MessageHelper.displayMessage("Update", "Employee updated successfully!");
+			}
+		}.execute();
 	}
 }
