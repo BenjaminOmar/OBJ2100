@@ -28,17 +28,7 @@ public class SideMenu extends JPanel{
 	protected SideMenu() {		
 		displaySideMenu();
 	}
-	
-	// for testing
-    public static void main(String[] args) {
-	    JFrame frame = new JFrame("test");
-	    frame.getContentPane().add(new SideMenu());
-		frame.setLocationRelativeTo(null);
-	    frame.pack();
-	    frame.setVisible(true);
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	  }
-	
+		
 	/**
 	 * This method adds the different buttons, and creates custom actionListeners
 	 * for each.
