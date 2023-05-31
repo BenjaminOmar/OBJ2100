@@ -122,7 +122,8 @@ public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 		String extension = rs.getString("extension");
 		String email = rs.getString("email");
 		String officeCode = rs.getString("officeCode");
-		int reportsTo = rs.getInt("reportsTo");
+		Integer reportsTo = rs.getInt("reportsTo");
+		if (rs.wasNull()) reportsTo = null;
 		String jobTitle = rs.getString("jobTitle");
 		return new Employee.Builder(employeeNumber).lastName(lastName).firstName(firstName).extension(extension)
 				.email(email).officeCode(officeCode).reportsTo(reportsTo).jobTitle(jobTitle).build();

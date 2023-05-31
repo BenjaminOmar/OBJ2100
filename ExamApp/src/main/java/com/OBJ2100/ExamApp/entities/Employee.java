@@ -9,7 +9,7 @@ public class Employee {
 	private String extension;
 	private String email;
 	private String officeCode;
-	private int reportsTo;
+	private Integer reportsTo;
 	private String jobTitle;
 
 	private Employee(Builder builder) {
@@ -39,7 +39,7 @@ public class Employee {
 		return email;
 	}
 
-	public int getReportsTo() {
+	public Integer getReportsTo() {
 		return reportsTo;
 	}
 
@@ -62,7 +62,7 @@ public class Employee {
 		private String extension;
 		private String email;
 		private String officeCode;
-		private int reportsTo;
+		private Integer reportsTo;
 		private String jobTitle;
 		
 		public Builder() {
@@ -109,7 +109,7 @@ public class Employee {
 			return this;
 		}
 		
-		public Builder reportsTo(int reportsTo) {
+		public Builder reportsTo(Integer reportsTo) {
 			this.reportsTo = reportsTo;
 			return this;
 		}
