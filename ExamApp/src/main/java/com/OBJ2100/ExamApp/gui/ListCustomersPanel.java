@@ -46,7 +46,7 @@ public class ListCustomersPanel extends JPanel {
         add(byCityRadioButton, gbc);
 
         gbc.gridx = 1;
-        byCityLabel = new JLabel("Label City:");
+        byCityLabel = new JLabel("By City:");
         add(byCityLabel, gbc);
 
         gbc.gridx = 2;
@@ -66,7 +66,7 @@ public class ListCustomersPanel extends JPanel {
         add(byStateRadioButton, gbc);
 
         gbc.gridx = 1;
-        byStateLabel = new JLabel("Label State:");
+        byStateLabel = new JLabel("By State:");
         add(byStateLabel, gbc);
 
         gbc.gridx = 2;
@@ -101,7 +101,7 @@ public class ListCustomersPanel extends JPanel {
         dropdownCity.addActionListener(cityDropDownListener);
         // dropdownState.addActionListener(stateDropdownListener);
        
-        writeToFileButton.addActionListener((ActionListener) this );
+        //writeToFileButton.addActionListener((ActionListener) this );
     }
 
     public JComboBox<String> getDropdownCity() {
@@ -111,8 +111,6 @@ public class ListCustomersPanel extends JPanel {
     public JComboBox<String> getDropdownState() {
         return dropdownState;
     }
-
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("List Customers Panel");
