@@ -16,6 +16,12 @@ import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
+/**
+ * The ApplicationMenu class contains the menu bar for a GUI application.
+ * It contains various menus and menu items with their associated actions.
+ * @author 7131
+ */
+
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
 	private JMenu menuFile = new JMenu("File");
@@ -40,6 +46,9 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	}
 	
 	
+	/**
+	 * Displays the menu bar with its menus and menu items.
+	 */
 	protected void displayMenuBar() {
 				
 		selectfolderItem.addActionListener(new ActionListener() {

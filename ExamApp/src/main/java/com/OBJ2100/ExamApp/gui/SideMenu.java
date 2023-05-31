@@ -36,14 +36,20 @@ public class SideMenu extends JPanel{
 	 * for each.
 	 */
 	private void displaySideMenu() {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		add(Box.createVerticalStrut(10));
+		
 		add(testDbCon);
 		testDbCon.addActionListener(new TestDbConnectionListener());
+		add(Box.createVerticalStrut(15));
 		
 		add(ExecSqlQuery);
 		ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
-		
+		add(Box.createVerticalStrut(15));
+
 		add(about);
 		about.addActionListener(new AboutAppListener());
+		add(Box.createVerticalStrut(275));
 		
 		add(Exit);
 		Exit.addActionListener(new ExitListener());
