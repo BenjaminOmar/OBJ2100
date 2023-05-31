@@ -72,29 +72,29 @@ public class MainContent extends JPanel implements IDocumentsManager{
          * and height of the component.
          */
         nameLabel.setBounds(10,20,200,50);
-        nameLabel.setFont(bigFont);
+        nameLabel.setFont(smallFont);
         add(nameLabel);
 
         /* Creating text field where user is supposed to
          * enter user name.
          */
         nameTextField.setBounds(200,20,400,50);
-        nameTextField.setFont(bigFont);
+        nameTextField.setFont(smallFont);
         add(nameTextField);
 
         // Same process for password label and text field.
         
         lastnameLabel.setBounds(10,100,200,50);
-        lastnameLabel.setFont(bigFont);
+        lastnameLabel.setFont(smallFont);
         add(lastnameLabel);
 
         lastnameTextField.setBounds(200,100,400,50);
-        lastnameTextField.setFont(bigFont);
+        lastnameTextField.setFont(smallFont);
         add(lastnameTextField);
 
         // Creating login button
         addEmployeeButton.setBounds(10, 200, 300, 50);
-        addEmployeeButton.setFont(bigFont);
+        addEmployeeButton.setFont(smallFont);
         add(addEmployeeButton);
         
         addEmployeeButton.addActionListener(new ActionListener() { 
@@ -108,7 +108,7 @@ public class MainContent extends JPanel implements IDocumentsManager{
         });
         
         displayEmployees.setBounds(330, 200, 360, 50);
-        displayEmployees.setFont(bigFont);
+        displayEmployees.setFont(smallFont);
         add(displayEmployees);
         displayEmployees.addActionListener(new ActionListener() { 
         	public void actionPerformed(ActionEvent e) { 
@@ -120,7 +120,7 @@ public class MainContent extends JPanel implements IDocumentsManager{
         });
         
         clear.setBounds(700, 200, 300, 50);
-        clear.setFont(bigFont);
+        clear.setFont(smallFont);
         add(clear);
         clear.addActionListener(new ActionListener() { 
         	public void actionPerformed(ActionEvent e) { 
@@ -129,7 +129,7 @@ public class MainContent extends JPanel implements IDocumentsManager{
         	} 
         });
     	
-        results.setFont(bigFont);
+        results.setFont(smallFont);
         results.setEditable(false);
         
         scroll = new JScrollPane();

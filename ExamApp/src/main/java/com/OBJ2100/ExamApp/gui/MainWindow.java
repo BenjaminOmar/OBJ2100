@@ -12,7 +12,7 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		
 		setTitle("Exam application");
-		setSize(1030, 1000);
+		setSize(1030, 500);
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout());
 		

@@ -65,7 +65,8 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		    public void actionPerformed(ActionEvent e) {
 		    }
 		});
-
+		
+        add(exitItem);
 		exitItem.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        System.exit(0);
@@ -81,6 +82,26 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		            }
 		        }
 		    });
+		 
+		 executeItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
+		 
+		 employeeItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
+		 
+		 listallItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
+		 
+		 officeItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
 		 
 		 optionTip.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
@@ -109,7 +130,6 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		menuDatabase.add(employeeItem);
 		menuDatabase.add(listallItem);
 		menuDatabase.add(officeItem);
-		
 		
 		menuOptions.add(darkMode);
 		menuHelp.add(optionTip);
