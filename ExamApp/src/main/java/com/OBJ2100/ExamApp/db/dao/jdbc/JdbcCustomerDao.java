@@ -82,12 +82,13 @@ public class JdbcCustomerDao extends JdbcDao<Customer> implements CustomerDao {
 		return customers; 
 	}
 
-	@Override //TO DO endre. 
+	@Override  
 	public List<Customer> getByState(String state) {
         List<Customer> customers = new ArrayList<>();
 
-        try (Statement s = connection.createStatement()) {
-            ResultSet rs = s.executeQuery("SELECT * FROM customers WHERE state = '" + state + "'");
+        try (PreparedStatement s = connection.prepareStatement("SELECT * FROM customers WHERE state = ?")) {
+        	s.setString(1, state);
+            ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 customers.add(extractEntity(rs));
             }

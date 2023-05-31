@@ -14,12 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import com.OBJ2100.ExamApp.gui.Listeners.CityDropDownListener;
-//import com.OBJ2100.ExamApp.gui.Listeners.StateDropdownListener;
 import com.OBJ2100.ExamApp.gui.Listeners.CityRadioButtonListener;
 import com.OBJ2100.ExamApp.gui.Listeners.StateDropdownListener;
 import com.OBJ2100.ExamApp.gui.Listeners.StateRadioButtonListener;
+import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
 
-//import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
+
 
 public class ListCustomersPanel extends JPanel {
 
@@ -31,6 +31,7 @@ public class ListCustomersPanel extends JPanel {
     private final JComboBox<String> dropdownState;
     private final JButton writeToFileButton;
     private final ButtonGroup radioButtonGroup;
+    private WriteToFileListener writeToFileListener;
 
 
     /**
@@ -96,7 +97,6 @@ public class ListCustomersPanel extends JPanel {
         radioButtonGroup.add(byCityRadioButton);
         radioButtonGroup.add(byStateRadioButton);
 
-        // Set up action listener for the buttons/dropdown menu
         CityRadioButtonListener cityListener = new CityRadioButtonListener(this);
         byCityRadioButton.addActionListener(cityListener);
         byCityRadioButton.addActionListener(new CityDropDownListener(dropdownCity));
@@ -104,10 +104,11 @@ public class ListCustomersPanel extends JPanel {
         StateRadioButtonListener stateListener = new StateRadioButtonListener(this);
         byStateRadioButton.addActionListener(stateListener);
         byStateRadioButton.addActionListener(new StateDropdownListener(dropdownState));
-
         
+        writeToFileListener = new WriteToFileListener(dropdownCity, dropdownState);
+        writeToFileButton.addActionListener(writeToFileListener);        
        
-        //writeToFileButton.addActionListener((ActionListener) this );
+       
     }
 
     public JComboBox<String> getDropdownCity() {

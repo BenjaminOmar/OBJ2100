@@ -39,17 +39,39 @@ public class WriteToFileListener implements ActionListener {
         if (matchingCustomers.isEmpty()){
             JOptionPane.showMessageDialog(null, "No matching customers found");
         }else{
+        	StringBuilder sb = new StringBuilder();
+        	sb.append("Customer Number, Customer Name, Contact Lastname, Contact firstname, Phone, Addressline 1, Addressline 2"
+        			+ "City, State, PostalCode, Country, SalesREP Employee Number, Credit limit\n");
+        		
+        	for (Customer customer : matchingCustomers) {
+                   sb.append(customer.getCustomerNumber()).append(",")
+                     .append(customer.getCustomerName()).append(",")
+                     .append(customer.getContactLastName()).append(",")
+                     .append(customer.getContactFirstName()).append(",")
+                     .append(customer.getPhone()).append(",")
+                     .append(customer.getAddressLine1()).append(",")
+                     .append(customer.getAddressLine2()).append(",")
+                     .append(customer.getCity()).append(",")
+                     .append(customer.getState()).append(",")
+                     .append(customer.getPostalCode()).append(",")
+                     .append(customer.getCountry()).append(",")
+                     .append(customer.getSalesRepEmployeeNumber()).append(",")
+                     .append(customer.getCreditLimit()).append("\n");
+            }
+        	String customersData = sb.toString();
+        	
             IDocumentsManager documentsManager = new DocumentsManager();
-            File file = new File("customers.txt");
-            try{
-                documentsManager.writeToFile(matchingCustomers.toString(), file);
+            String timestamp = Long.toString(System.currentTimeMillis()); 
+            File file = new File("C:/Temp/customers_" + timestamp + ".csv");
+            
+            try {
+                documentsManager.writeToFile(customersData, file);
                 JOptionPane.showMessageDialog(null, "Customer list written to file.");
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null,"Error Writing to file");
+                JOptionPane.showMessageDialog(null, "Error writing to file");
             }
         }
-
     }
 
     private List<Customer> getMatchingCustomers(String city, String state) {
