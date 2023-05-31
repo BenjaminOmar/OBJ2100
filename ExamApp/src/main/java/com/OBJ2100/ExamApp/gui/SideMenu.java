@@ -1,6 +1,4 @@
 package com.OBJ2100.ExamApp.gui;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -9,52 +7,45 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ExecSqlQueryListener;
 import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
 import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener; 
 
-public class SideMenu extends JPanel implements ActionListener{
+/**
+ * This class holds the side menu for different operations for
+ * the program.
+ * @author 7132
+ *
+ */
+public class SideMenu extends JPanel{
 	
 	private JButton testDbCon = new JButton("Test database connection");
 	private JButton ExecSqlQuery = new JButton("Execute SQL query");
 	private JButton about = new JButton("About the app");
 	private JButton Exit = new JButton("Exit application");
 	
-	protected SideMenu() {
-	    displaySideMenu();
+	/**
+	 * This menu is instanciated in the MainWindow class.
+	 */
+	protected SideMenu() {		
+		displaySideMenu();
 	}
-	
-	  public static void main(String[] args) {
-		    JFrame frame = new JFrame("test");
-		    frame.getContentPane().add(new SideMenu());
-		    frame.pack();
-		    frame.setVisible(true);
-		    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  }
-	
-	
-	  protected void displaySideMenu() {
-	        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-	        add(testDbCon);
-	        add(Box.createVerticalStrut(15));
-	        testDbCon.addActionListener(new TestDbConnectionListener());
-
-	        add(ExecSqlQuery);
-	        add(Box.createVerticalStrut(15));
-
-	        add(about);
-	        add(Box.createVerticalStrut(270));
-	        about.addActionListener(new AboutAppListener());
-
-	        add(Exit);
-	        Exit.addActionListener(new ExitListener());
-
-	    }
-	
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
+	/**
+	 * This method adds the different buttons, and creates custom actionListeners
+	 * for each.
+	 */
+	private void displaySideMenu() {
+		add(testDbCon);
+		testDbCon.addActionListener(new TestDbConnectionListener());
+		
+		add(ExecSqlQuery);
+		ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
+		
+		add(about);
+		about.addActionListener(new AboutAppListener());
+		
+		add(Exit);
+		Exit.addActionListener(new ExitListener());
 	}
 }
