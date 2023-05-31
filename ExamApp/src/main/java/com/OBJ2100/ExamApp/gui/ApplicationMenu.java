@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -36,24 +34,14 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenu menuOptions = new JMenu("Options");
 	private static JMenuItem darkMode = new JMenuItem("Darkmode");
 	private static boolean darkModeOption = false;
-	
-	private Font bigFont = new Font("Calibri", Font.PLAIN, 28);
-	private Font smallFont = new Font("Calibri", Font.PLAIN, 14);
-	
+		
 	protected ApplicationMenu() {
 		displayMenuBar();
 	}
 	
-	/**
-	 * Added a options menu to the menu bar. Added the dark mode button to the options menu
-	 * @author 7132
-	 */
+	
 	protected void displayMenuBar() {
-		UIManager.put("Menu.font", bigFont);
-		UIManager.put("MenuItem.font", smallFont);
-		
-		
-		
+				
 		selectfolderItem.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    }
@@ -98,7 +86,10 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		 add(about);
 			about.addActionListener(new AboutAppListener());
 			
-		 
+		/**
+		 * Added the action of switching between light/dark mode on click event.
+		 * @author 7132
+		 */
 		 darkMode.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
 			        darkModeOption = !darkModeOption;
@@ -125,24 +116,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		this.add(menuOptions);
 		this.add(menuHelp);
 	}
-	
-	/**
-	 * Actions that are performed upon the clicks on the main menu by the user.
-	 * Added the action of switching between light/dark mode on click event.
-	 * @author 7132
-	 */
-	public void actionPerformed(ActionEvent event) {
-	  
-	}
-
-
-	// simple method that display option pane with the provided message
-	private void displayMessage(String message) {
-		UIManager.put("OptionPane.messageFont", smallFont);
-		UIManager.put("OptionPane.buttonFont", smallFont);
-		JOptionPane.showMessageDialog(this, message);
-	}
-	
+		
 	/**
 	 * this method updates the background of the windows to dark/light mode
 	 * @author 7132
@@ -164,6 +138,11 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
 	
 	
 	
