@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.OBJ2100.ExamApp.gui.listeners.AddOrModifyEmployeeListener;
+import com.OBJ2100.ExamApp.gui.dialogs.AddOrModifyEmployeeDialog;
 
 public class ReportsAndUpdatesPanel extends JPanel {
 	
@@ -23,7 +23,7 @@ public class ReportsAndUpdatesPanel extends JPanel {
 		setBorder(BorderFactory.createTitledBorder("Reports and updates"));
 		
 		addOrModifyEmployee = new JButton("Add or modify employee");
-		addOrModifyEmployee.addActionListener(new AddOrModifyEmployeeListener());
+		addOrModifyEmployee.addActionListener(l -> new AddOrModifyEmployeeDialog());
 		add(addOrModifyEmployee);
 		
 		listAllProducts = new JButton("List all products");
