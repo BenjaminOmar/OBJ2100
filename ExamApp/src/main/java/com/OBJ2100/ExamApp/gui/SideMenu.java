@@ -1,5 +1,7 @@
 package com.OBJ2100.ExamApp.gui;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
