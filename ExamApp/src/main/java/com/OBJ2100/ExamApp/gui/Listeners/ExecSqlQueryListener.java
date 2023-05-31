@@ -6,16 +6,21 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Console;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.StringJoiner;
 
 import javax.swing.JTextArea;
 
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.documents.DocumentsManager;
 import com.OBJ2100.ExamApp.gui.SideMenu;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 import com.mysql.cj.protocol.Resultset;
@@ -77,13 +82,8 @@ public class ExecSqlQueryListener implements ActionListener{
 			if (query.contains("SELECT")) {
 				ResultSet rs = statement.executeQuery(query);	    				
 				
-				ResultSetMetaData Metadata = rs.getMetaData();
-				
-				while (rs.next()) {
-					for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
-			              System.out.print(rs.getObject(i) + ",");
-					}
-				}
+				String asCsv = extractWithCsvFormat(rs);
+				exportResultsToCsvFile(asCsv);
 				
 				statement.close();
 			} else {
@@ -98,6 +98,30 @@ public class ExecSqlQueryListener implements ActionListener{
 		}
 	}
 	
+	private String extractWithCsvFormat(ResultSet rs) {
+		ResultSetMetaData metadata = rs.getMetaData();
+		StringJoiner lineJoiner = new StringJoiner(
+				System.getProperty("line.separator"));
+		while (rs.next()) {
+			StringJoiner columnJoiner = new StringJoiner(";");
+			for (int i = 1; i < metadata.getColumnCount() + 1; i++) {
+				columnJoiner.add((String) rs.getObject(i));
+			}
+			lineJoiner.add(columnJoiner.toString());
+		}
+	}
 	
+	private void exportResultsToCsvFile(String text) {
+		try {
+			File csvFile = new File(generateFilename());		
+			new DocumentsManager().writeToFile(text, csvFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static String generateFilename() {
+		return String.format("query-%s", LocalDate.now());
+	}
 
 }
