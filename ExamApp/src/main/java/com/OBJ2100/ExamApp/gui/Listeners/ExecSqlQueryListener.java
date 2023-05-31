@@ -17,13 +17,9 @@ import java.util.StringJoiner;
 
 import javax.swing.JTextArea;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
-import com.OBJ2100.ExamApp.gui.SideMenu;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
-import com.mysql.cj.protocol.Resultset;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -89,21 +85,15 @@ public class ExecSqlQueryListener implements ActionListener{
 	 * @param The inputted query string from the user
 	 */
 	private void executeSQLQuery(String query) {
-  		DataSource source = DataSourceFactory.getMySqlDataSource();
-		
+  		DataSource source = DataSourceFactory.getMySqlDataSource();		
   		try (Connection connection = source.getConnection()) {
-  			Statement statement = connection.createStatement();
-			
+  			Statement statement = connection.createStatement();			
 			if (query.contains("SELECT")) {
-				ResultSet rs = statement.executeQuery(query);	    				
-				
-				
+				ResultSet rs = statement.executeQuery(query);	    												
 				String asCsv = extractWithCsvFormat(rs);
-				exportResultsToCsvFile(asCsv);
-				
+				exportResultsToCsvFile(asCsv);				
 				MessageHelper.displayMessage("Sql statement executed successfully! "
 						+ "\n\n the result is exported to CSV", "Sql statement");
-				
 				statement.close();
 			} else {
 				int totalOfRows =  statement.executeUpdate(query);
@@ -129,11 +119,16 @@ public class ExecSqlQueryListener implements ActionListener{
 		StringJoiner lineJoiner = new StringJoiner(
 				System.getProperty("line.separator"));
 		while (rs.next()) {
-			StringJoiner columnJoiner = new StringJoiner(",");
+			StringJoiner columnJoiner = new StringJoiner(";");
 			for (int i = 1; i < metadata.getColumnCount() + 1; i++) {
-				columnJoiner.add(rs.getObject(i).toString());
+				Object object = rs.getObject(i);
+				if (object == null) {
+					columnJoiner.add("null");
+				} else {
+					columnJoiner.add(rs.getObject(i).toString());
+				}
 			}
-			lineJoiner.add((String) columnJoiner.toString());
+			lineJoiner.add(columnJoiner.toString());
 		}
 		return lineJoiner.toString();
 	}
@@ -146,6 +141,7 @@ public class ExecSqlQueryListener implements ActionListener{
 		try {
 			File csvFile = new File(generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
+			System.out.println(text);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
