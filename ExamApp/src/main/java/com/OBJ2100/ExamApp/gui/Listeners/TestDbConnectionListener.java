@@ -22,7 +22,7 @@ public class TestDbConnectionListener implements ActionListener{
 	 * This method checks if there is a connection to the database.
 	 * If there is a valid connection, the user gets a Success message
 	 * with the help of the displayMessage method. If there is an error,
-	 * the user gets notified with an error message. 
+	 * the user gets notified with an error popup message. 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
