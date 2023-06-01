@@ -8,9 +8,9 @@ import javax.swing.JTextArea;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
- * Created an ActionListener. This will be used in the sidemenu
+ * Created an ActionListener. This will be used in the side menu
  * and the application menu.
- * The actionPerformed method Overrides the method in the ActionListener Interface.
+ * It displays a message popup with information about the application
  * @author 7132
  */
 public class AboutAppListener implements ActionListener{
@@ -27,7 +27,8 @@ public class AboutAppListener implements ActionListener{
 				+ "- Mini Sql workbench(Executy SQL query) \n"
 				+ "- List customers by City or State \n"
 				+ "- Bulk import orders \n"
-				+ "The application also consist of a multitude of different features!");
+				+ "- Dark mode \n"
+				+ "And a multitute of other features!");
 		helptext.setEditable(false);
 		helptext.setOpaque(false);
 		MessageHelper.displayMessage(helptext.getText(), "About the application");

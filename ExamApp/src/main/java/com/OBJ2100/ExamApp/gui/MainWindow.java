@@ -2,6 +2,7 @@ package com.OBJ2100.ExamApp.gui;
 
 import java.awt.BorderLayout;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         setTitle("Exam application");
-        setSize(850, 400);
+        setSize(800, 400);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -33,9 +34,13 @@ public class MainWindow extends JFrame {
         // Create a panel for the file access settings and list customers panel
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(Box.createVerticalStrut(10));
         panel.add(fileAccessSettings);
+        panel.add(Box.createVerticalStrut(10));
         panel.add(listCustomersPanel);
+        panel.add(Box.createVerticalStrut(10));
         panel.add(reportsAndUpdatesPanel);
+        panel.add(Box.createVerticalStrut(10));
 
         // Add the panel to the main window
         add(panel, BorderLayout.EAST);

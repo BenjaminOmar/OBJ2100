@@ -15,6 +15,7 @@ import javax.swing.JRadioButton;
 
 import com.OBJ2100.ExamApp.gui.listeners.CityDropDownListener;
 import com.OBJ2100.ExamApp.gui.listeners.CityRadioButtonListener;
+import com.OBJ2100.ExamApp.gui.listeners.ShowCustomerListener;
 import com.OBJ2100.ExamApp.gui.listeners.StateDropdownListener;
 import com.OBJ2100.ExamApp.gui.listeners.StateRadioButtonListener;
 import com.OBJ2100.ExamApp.gui.listeners.WriteToFileListener;
@@ -119,13 +120,15 @@ public class ListCustomersPanel extends JPanel {
         byCityRadioButton.addActionListener(cityListener);
         byCityRadioButton.addActionListener(new CityDropDownListener(dropdownCity));
         
+        
         StateRadioButtonListener stateListener = new StateRadioButtonListener(this);
         byStateRadioButton.addActionListener(stateListener);
         byStateRadioButton.addActionListener(new StateDropdownListener(dropdownState));
+       
         
         writeToFileListener = new WriteToFileListener(this);
         writeToFileButton.addActionListener(writeToFileListener);        
-       
+        writeToFileButton.addActionListener(new ShowCustomerListener(this));
        
     }
 

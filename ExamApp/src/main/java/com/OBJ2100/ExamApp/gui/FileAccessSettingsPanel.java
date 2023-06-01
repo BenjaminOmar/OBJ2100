@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.io.File;
 
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
 
 /**
@@ -46,7 +47,7 @@ public class FileAccessSettingsPanel extends JPanel {
 		changeFolderBtn.addActionListener(new ChangeFolderListener(this));
 		add(changeFolderBtn);
 
-		folderPathLabel = new JLabel("Current folder: " + DocumentsManager.getFolderPath());
+		folderPathLabel = new JLabel("Current folder: " + FolderManager.getFolderPath());
 		add(folderPathLabel);
 	}
 

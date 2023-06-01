@@ -1,20 +1,21 @@
 package com.OBJ2100.ExamApp.gui;
 
-import java.awt.Font;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import java.awt.BorderLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.OBJ2100.ExamApp.gui.dialogs.AddOrModifyEmployeeDialog;
 import com.OBJ2100.ExamApp.gui.dialogs.ExecSqlQueryDialog;
+import com.OBJ2100.ExamApp.gui.dialogs.ListAllOfficesTableDialog;
 import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
 import com.OBJ2100.ExamApp.gui.listeners.AboutAppListener;
 import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
@@ -28,26 +29,30 @@ import com.formdev.flatlaf.FlatLightLaf;
  * The ApplicationMenu class contains the menu bar for a GUI application.
  * It contains various menus and menu items with their associated actions.
  * @author 7131
+ * 
  */
 
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
 	private JMenu menuFile = new JMenu("File");
-	private JMenuItem selectfolderItem = new JMenuItem("Select folder");
-	private JMenuItem writecustomerItem = new JMenuItem("Write customers into file");
+	private JMenuItem selectFolder = new JMenuItem("Select folder");
 	private JMenuItem bulkImportOrders = new JMenuItem("Bulk import of orders");
-	private JMenuItem Exit = new JMenuItem("Exit application");
+	private JMenuItem exit = new JMenuItem("Exit application");
 	private JMenu menuDatabase = new JMenu("Database");
 	private JMenuItem ExecSqlQuery = new JMenuItem("Execute SQL Query");
 	private JMenuItem addOrModifyEmployee = new JMenuItem("Add or modify employee");
 	private JMenuItem listAllProducts = new JMenuItem("List all products");
-	private JMenuItem officeItem = new JMenuItem("Filter and present offices from a country");
+	private JMenuItem listAllOffices = new JMenuItem("Filter and present offices from a country");
 	private JMenuItem testDbCon = new JMenuItem("Test database connection");
 	private JMenu menuHelp = new JMenu("Help");
 	private JMenuItem about = new JMenuItem("About");
 	private JMenu menuOptions = new JMenu("Options");
 	private static JMenuItem darkMode = new JMenuItem("Darkmode");
 	private static boolean darkModeOption = false;
+	private JMenuItem ListCustomers = new JMenuItem("Write customers into file");
+	private JDialog dialog = new JDialog();
+	JPanel panel = new JPanel(new BorderLayout());
+	JPanel listCustomersPanel = new ListCustomersPanel();
 		
 	protected ApplicationMenu() {
 		displayMenuBar();
@@ -59,24 +64,15 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	 */
 	protected void displayMenuBar() {
 				
-	    add(selectfolderItem);
+	    add(selectFolder);
 		FileAccessSettingsPanel folderPanel = new FileAccessSettingsPanel();
-		selectfolderItem.addActionListener(new ChangeFolderListener(folderPanel));
-
-		ListCustomersPanel panel = new ListCustomersPanel();  // Create an instance of ListCustomersPanel
-	    add(writecustomerItem);
-	    writecustomerItem.addActionListener(new WriteToFileListener(panel));
+		selectFolder.addActionListener(new ChangeFolderListener(folderPanel));
 
 		add(bulkImportOrders);
-		bulkImportOrders.addActionListener(new ActionListener() { 
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-			}
-		});
 
 		
-		add(Exit);
-		Exit.addActionListener(new ExitListener());
+		add(exit);
+		exit.addActionListener(new ExitListener());
 		 
 		add(testDbCon);
 			testDbCon.addActionListener(new TestDbConnectionListener());
@@ -90,12 +86,10 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		add(listAllProducts);
 		    listAllProducts.addActionListener(l -> new ListAllProductsTableDialog());
 			
-		 officeItem.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			    }
-			});
-		 
-		 add(about);
+		add(listAllOffices);
+			listAllOffices.addActionListener(l -> new ListAllOfficesTableDialog());
+	
+		add(about);
 			about.addActionListener(new AboutAppListener());
 			
 		/**
@@ -108,17 +102,35 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 			        updateTheme();
 			    }
 			});
+		
+		/**
+		 * this actionListener creates a new popup with the ListCustomerPanel
+		 * @author 7132
+		 */
+		ListCustomers.addActionListener(new ActionListener() {
 
-		menuFile.add(selectfolderItem);
-		menuFile.add(writecustomerItem);
+		    public void actionPerformed(ActionEvent e)
+		    {
+				panel.add(listCustomersPanel);
+			    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			    dialog.setSize(400, 200);
+			    dialog.setContentPane(panel);
+			    dialog.setLocationRelativeTo(null);
+			    dialog.setVisible(true);
+			    dialog.setAlwaysOnTop(false);
+		    }
+		});
+		 
+		menuFile.add(selectFolder);
+		menuFile.add(ListCustomers);
 		menuFile.add(bulkImportOrders);
-		menuFile.add(Exit);
+		menuFile.add(exit);
 		
 		menuDatabase.add(testDbCon);
 		menuDatabase.add(ExecSqlQuery);
 		menuDatabase.add(addOrModifyEmployee);
 		menuDatabase.add(listAllProducts);
-		menuDatabase.add(officeItem);
+		menuDatabase.add(listAllOffices);
 		
 		menuOptions.add(darkMode);
 		menuHelp.add(about);
