@@ -137,11 +137,4 @@ public class ListCustomersPanel extends JPanel {
         return dropdownState;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("List Customers Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new ListCustomersPanel());
-        frame.pack();
-        frame.setVisible(true);
-    }
 }
