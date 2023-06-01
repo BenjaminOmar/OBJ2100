@@ -6,4 +6,6 @@ import com.OBJ2100.ExamApp.entities.Office;
 
 public interface OfficeDao {
 	List<Office> getAll();
+	List<Office> getCustomerByCountry(String country);
 }
+
