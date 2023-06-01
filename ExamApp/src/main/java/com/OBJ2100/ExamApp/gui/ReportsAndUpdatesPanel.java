@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import com.OBJ2100.ExamApp.gui.dialogs.AddOrModifyEmployeeDialog;
 import com.OBJ2100.ExamApp.gui.dialogs.ListAllOfficesTableDialog;
 import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
+import com.OBJ2100.ExamApp.gui.listeners.ImportCsvListener;
 
 public class ReportsAndUpdatesPanel extends JPanel {
 	
@@ -37,12 +38,7 @@ public class ReportsAndUpdatesPanel extends JPanel {
 		add(listAllOffices);
 		
 		bulkImportOrders = new JButton("Bulk import of orders");
-		bulkImportOrders.addActionListener(new ActionListener() { 
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				
-			}
-		});
+		bulkImportOrders.addActionListener(new ImportCsvListener());
 		add(bulkImportOrders);
 	}
 	

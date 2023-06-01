@@ -3,73 +3,104 @@ package com.OBJ2100.ExamApp.entities;
 import java.util.Date;
 
 public class Order implements Entity {
-	private int orderNumber, customerNumber;
+	private Integer orderNumber, customerNumber;
 	private String status, comments;
 	private Date orderDate, requiredDate, shippedDate;
 	
-	public Order(int orderNumber, Date orderDate, Date requiredDate, Date shippedDate, String status, String comments, int customerNumber) {
-		this.orderNumber = orderNumber;
-		this.orderDate = orderDate;
-		this.requiredDate = requiredDate;
-		this.shippedDate = shippedDate;
-		this.status = status;
-		this.comments = comments;
-		this.customerNumber = customerNumber;
+	private Order(Builder builder) {
+		this.orderNumber = builder.orderNumber;
+		this.orderDate = builder.orderDate;
+		this.requiredDate = builder.requiredDate;
+		this.shippedDate = builder.shippedDate;
+		this.status = builder.status;
+		this.comments = builder.comments;
+		this.customerNumber = builder.customerNumber;
 	}
 
-	public int getOrderNumber() {
+	public Integer getOrderNumber() {
 		return orderNumber;
-	}
-
-	public void setOrderNumber(int orderNumber) {
-		this.orderNumber = orderNumber;
 	}
 
 	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
-
 	public Date getRequiredDate() {
 		return requiredDate;
-	}
-
-	public void setRequiredDate(Date requiredDate) {
-		this.requiredDate = requiredDate;
 	}
 
 	public Date getShippedDate() {
 		return shippedDate;
 	}
 
-	public void setShippedDate(Date shippedDate) {
-		this.shippedDate = shippedDate;
-	}
-
 	public String getStatus() {
 		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public String getComments() {
 		return comments;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public int getCustomerNumber() {
+	public Integer getCustomerNumber() {
 		return customerNumber;
 	}
+	
+	public static class Builder implements EntityBuilder<Order> {
+		private Integer orderNumber, customerNumber;
+		private String status, comments;
+		private Date orderDate, requiredDate, shippedDate;
+		
+		public Builder() {
+			
+		}
+		
+		public Builder(Integer orderNumber) {
+			this.orderNumber = orderNumber;
+		}
+		
+		public Order build() throws IllegalStateException {
+			validate();
+			return new Order(this);
+		}
+		
+		public Builder orderNumber(Integer orderNumber) {
+			this.orderNumber = orderNumber;
+			return this;
+		}
+		
+		public Builder orderDate(Date orderDate) {
+			this.orderDate = orderDate;
+			return this;
+		}
+		
+		public Builder requiredDate(Date requiredDate) {
+			this.requiredDate = requiredDate;
+			return this;
+		}
+		
+		public Builder shippedDate(Date shippedDate) {
+			this.shippedDate = shippedDate;
+			return this;
+		}
+		
+		public Builder status(String status) {
+			this.status = status;
+			return this;
+		}
+		
+		public Builder comments(String comments) {
+			this.comments = comments;
+			return this;
+		}
+		
+		public Builder customerNumber(Integer customerNumber) {
+			this.customerNumber = customerNumber;
+			return this;
+		}
 
-	public void setCustomerNumber(int customerNumber) {
-		this.customerNumber = customerNumber;
-	};
+		@Override
+		public void validate() throws IllegalStateException {
+			// TODO
+		}
+	}
 }
