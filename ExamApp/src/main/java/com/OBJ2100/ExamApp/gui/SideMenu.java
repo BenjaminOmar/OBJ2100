@@ -40,7 +40,7 @@ public class SideMenu extends JPanel{
 	 */
 	private void displaySideMenu() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		add(Box.createVerticalStrut(10));
+		add(Box.createVerticalStrut(15));
 		add(Box.createHorizontalStrut(15));
 		
 		 // Setting maximum width size for the buttons
@@ -60,10 +60,10 @@ public class SideMenu extends JPanel{
 
 		add(about);
 		about.addActionListener(new AboutAppListener());
-		add(Box.createVerticalStrut(220));
+		add(Box.createVerticalStrut(200));
 		
 		add(Exit);
 		Exit.addActionListener(new ExitListener());
-		add(Box.createVerticalStrut(10));
+		add(Box.createVerticalStrut(35));
 	}
 }
