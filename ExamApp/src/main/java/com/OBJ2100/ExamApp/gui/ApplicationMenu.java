@@ -1,11 +1,15 @@
 package com.OBJ2100.ExamApp.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -32,7 +36,6 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
 	private JMenu menuFile = new JMenu("File");
 	private JMenuItem selectFolder = new JMenuItem("Select folder");
-	private JMenuItem writeCustomersIntoFile = new JMenuItem("Write customers into file");
 	private JMenuItem bulkImportOrders = new JMenuItem("Bulk import of orders");
 	private JMenuItem exit = new JMenuItem("Exit application");
 	private JMenu menuDatabase = new JMenu("Database");
@@ -44,8 +47,12 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenu menuHelp = new JMenu("Help");
 	private JMenuItem about = new JMenuItem("About");
 	private JMenu menuOptions = new JMenu("Options");
-	private static JMenuItem darkMode = new JMenuItem("Darkmode");
-	private static boolean darkModeOption = false;
+	private JMenuItem darkMode = new JMenuItem("Darkmode");
+	private boolean darkModeOption = false;
+	private JMenuItem ListCustomers = new JMenuItem("Write customers into file");
+	private JDialog dialog = new JDialog();
+	private JPanel panel = new JPanel(new BorderLayout());
+	private JPanel listCustomersPanel = new ListCustomersPanel();
 		
 	protected ApplicationMenu() {
 		displayMenuBar();
@@ -60,10 +67,6 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	    add(selectFolder);
 		FileAccessSettingsPanel folderPanel = new FileAccessSettingsPanel();
 		selectFolder.addActionListener(new ChangeFolderListener(folderPanel));
-
-		ListCustomersPanel panel = new ListCustomersPanel();  // Create an instance of ListCustomersPanel
-	    add(writeCustomersIntoFile);
-	    writeCustomersIntoFile.addActionListener(new WriteToFileListener(panel));
 
 		add(bulkImportOrders);
 
@@ -99,9 +102,27 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 			        updateTheme();
 			    }
 			});
+		
+		/**
+		 * this actionListener creates a new popup with the ListCustomerPanel
+		 * @author 7132
+		 */
+		ListCustomers.addActionListener(new ActionListener() {
 
+		    public void actionPerformed(ActionEvent e)
+		    {
+				panel.add(listCustomersPanel);
+			    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			    dialog.setSize(400, 200);
+			    dialog.setContentPane(panel);
+			    dialog.setLocationRelativeTo(null);
+			    dialog.setVisible(true);
+			    dialog.setAlwaysOnTop(false);
+		    }
+		});
+		 
 		menuFile.add(selectFolder);
-		menuFile.add(writeCustomersIntoFile);
+		menuFile.add(ListCustomers);
 		menuFile.add(bulkImportOrders);
 		menuFile.add(exit);
 		
@@ -124,7 +145,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	 * this method updates the background of the windows to dark/light mode
 	 * @author 7132
 	 */
-    private static void updateTheme() {
+    private void updateTheme() {
         try {
             if (darkModeOption) {
                 UIManager.setLookAndFeel(new FlatDarkLaf());

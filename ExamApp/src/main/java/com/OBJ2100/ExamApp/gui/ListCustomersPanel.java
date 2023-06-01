@@ -32,14 +32,14 @@ import com.OBJ2100.ExamApp.gui.listeners.WriteToFileListener;
 
 public class ListCustomersPanel extends JPanel {
 
-    private final JRadioButton byCityRadioButton;
-    private final JLabel byCityLabel;
-    private final JComboBox<String> dropdownCity;
-    private final JRadioButton byStateRadioButton;
-	private final JLabel byStateLabel;
-    private final JComboBox<String> dropdownState;
-    private final JButton writeToFileButton;
-    private final ButtonGroup radioButtonGroup;
+    private JRadioButton byCityRadioButton;
+    private JLabel byCityLabel;
+    private JComboBox<String> dropdownCity;
+    private JRadioButton byStateRadioButton;
+	private JLabel byStateLabel;
+    private JComboBox<String> dropdownState;
+    private JButton writeToFileButton;
+    private ButtonGroup radioButtonGroup;
     private WriteToFileListener writeToFileListener;
 
     /**

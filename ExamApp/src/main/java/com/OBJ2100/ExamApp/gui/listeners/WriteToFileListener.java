@@ -23,6 +23,7 @@ import com.OBJ2100.ExamApp.documents.DocumentsManager;
 import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.entities.Customer;
 import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
+import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
  * ActionListener for writing customer data according to the
@@ -88,10 +89,10 @@ public class WriteToFileListener implements ActionListener {
               	DocumentsManager manager = new DocumentsManager();
               	// Write the customer data to the file
                   manager.writeToFile(customersData, file);
-                  JOptionPane.showMessageDialog(null, "Customer list written to file.");
+                  MessageHelper.displayMessage("Customer list written to file.", "Succsess!");
               } catch (IOException ex) {
                   ex.printStackTrace();
-                  JOptionPane.showMessageDialog(null, "Error writing to file");
+                  MessageHelper.displayMessage("Error writing to file", "Error!");
               }
           }
         } catch (SQLException e1) {

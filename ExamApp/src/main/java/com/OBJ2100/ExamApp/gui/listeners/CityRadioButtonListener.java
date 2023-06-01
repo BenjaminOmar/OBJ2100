@@ -14,7 +14,7 @@ import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
  */
 public class CityRadioButtonListener implements ActionListener{
 
-    private final ListCustomersPanel panel; 
+    private ListCustomersPanel panel; 
 
     /**
      * Constructs a CityRadioButtonListener with the specified ListCustomersPanel.

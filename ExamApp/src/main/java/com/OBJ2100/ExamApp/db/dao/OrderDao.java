@@ -1,5 +1,9 @@
 package com.OBJ2100.ExamApp.db.dao;
 
-public interface OrderDao {
+import java.util.List;
 
+import com.OBJ2100.ExamApp.entities.Order;
+
+public interface OrderDao {
+	void createMany(List<Order> orders);
 }

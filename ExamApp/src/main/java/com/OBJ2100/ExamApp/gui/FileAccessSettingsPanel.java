@@ -23,8 +23,8 @@ import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
 
 public class FileAccessSettingsPanel extends JPanel {
 
-	private final JButton changeFolderBtn; // Button to change the folder
-	private final JLabel folderPathLabel; // Label to display the selected folder path
+	private JButton changeFolderBtn; // Button to change the folder
+	private JLabel folderPathLabel; // Label to display the selected folder path
 
 	/**
 	 * Constructs a FileAccessSettingsPanel.
