@@ -35,6 +35,8 @@ public class StateRadioButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e){
         panel.getDropdownState().setEnabled(true);
         panel.getDropdownCity().setEnabled(false);
+        panel.getDropdownCity().setSelectedItem(null);
+        
     }
     
 }
