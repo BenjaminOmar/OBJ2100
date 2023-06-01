@@ -40,7 +40,7 @@ public class FilterAndPresentOfficesPanel extends JPanel {
         dropdownCountry = new JComboBox<>();
         dropdownCountry.addItem("Select country");
         // Disable the dropdown initially
-        dropdownCountry.setEnabled(false);
+        dropdownCountry.setEnabled(true);
         add(dropdownCountry, gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
