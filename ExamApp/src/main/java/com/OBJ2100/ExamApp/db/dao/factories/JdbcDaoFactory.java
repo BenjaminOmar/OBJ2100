@@ -70,8 +70,10 @@ public class JdbcDaoFactory implements DaoFactory {
 
 	@Override
 	public ProductDao getProductDao() {
-		// TODO Auto-generated method stub
-		return null;
+		if (productDao == null) {
+			productDao = new JdbcProductDao(connection);
+		}
+		return productDao;
 	}
 	
 }

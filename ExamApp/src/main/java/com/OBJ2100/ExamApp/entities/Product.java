@@ -1,93 +1,125 @@
 package com.OBJ2100.ExamApp.entities;
 
-public class Product {
-	private int quantityInStock;
+public class Product implements Entity {
+	private Integer quantityInStock;
 	private String productCode, productName, productLine, productScale, productVendor, productDescription;
-	private double buyPrice, msrp;
+	private Double buyPrice, msrp;
 	
-	public Product(String productCode, String productName, String productLine, String productScale, 
-			String productVendor, String productDescription, int quantityInStock, double buyPrice, double msrp) {
-		super();
-		this.productCode = productCode;
-		this.productName = productName;
-		this.productLine = productLine;
-		this.productScale = productScale;
-		this.productVendor = productVendor;
-		this.productDescription = productDescription;
-		this.quantityInStock = quantityInStock;
-		this.buyPrice = buyPrice;
-		this.msrp = msrp;
+	private Product(Builder builder) {
+		this.productCode = builder.productCode;
+		this.productName = builder.productName;
+		this.productLine = builder.productLine;
+		this.productScale = builder.productScale;
+		this.productVendor = builder.productVendor;
+		this.productDescription = builder.productDescription;
+		this.quantityInStock = builder.quantityInStock;
+		this.buyPrice = builder.buyPrice;
+		this.msrp = builder.msrp;
 	}
 	
 	public String getProductCode() {
 		return productCode;
 	}
 
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
-
 	public String getProductName() {
 		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 
 	public String getProductLine() {
 		return productLine;
 	}
 
-	public void setProductLine(String productLine) {
-		this.productLine = productLine;
-	}
-
 	public String getProductScale() {
 		return productScale;
-	}
-
-	public void setProductScale(String productScale) {
-		this.productScale = productScale;
 	}
 
 	public String getProductVendor() {
 		return productVendor;
 	}
 
-	public void setProductVendor(String productVendor) {
-		this.productVendor = productVendor;
-	}
-
 	public String getProductDescription() {
 		return productDescription;
 	}
 
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
-	}
-
-	public int getQuantityInStock() {
+	public Integer getQuantityInStock() {
 		return quantityInStock;
 	}
 
-	public void setQuantityInStock(int quantityInStock) {
-		this.quantityInStock = quantityInStock;
-	}
-
-	public double getBuyPrice() {
+	public Double getBuyPrice() {
 		return buyPrice;
 	}
 
-	public void setBuyPrice(double buyPrice) {
-		this.buyPrice = buyPrice;
-	}
-
-	public double getMsrp() {
+	public Double getMsrp() {
 		return msrp;
 	}
 
-	public void setMsrp(double msrp) {
-		this.msrp = msrp;
+	public static class Builder implements EntityBuilder<Product> {
+		private Integer quantityInStock;
+		private String productCode, productName, productLine, productScale, productVendor, productDescription;
+		private Double buyPrice, msrp;
+		
+		public Builder() {
+			
+		}
+		
+		public Builder(String productCode) {
+			this.productCode = productCode;
+		}
+		
+		public Product build() throws IllegalStateException {
+			validate();
+			return new Product(this);
+		}
+		
+		public Builder productCode(String productCode) {
+			this.productCode = productCode;
+			return this;
+		}
+		
+		public Builder productName(String productName) {
+			this.productName = productName;
+			return this;
+		}
+		
+		public Builder productLine(String productLine) {
+			this.productLine = productLine;
+			return this;
+		}
+		
+		public Builder productScale(String productScale) {
+			this.productScale = productScale;
+			return this;
+		}
+		
+		public Builder productVendor(String productVendor) {
+			this.productVendor = productVendor;
+			return this;
+		}
+		
+		public Builder productDescription(String productDescription) {
+			this.productDescription = productDescription;
+			return this;
+		}
+		
+		public Builder quantityInStock(Integer quantityInStock) {
+			this.quantityInStock = quantityInStock;
+			return this;
+		}
+		
+		public Builder buyPrice(Double buyPrice) {
+			this.buyPrice = buyPrice;
+			return this;
+		}
+		
+		public Builder msrp(Double mrsp) {
+			this.msrp = mrsp;
+			return this;
+		}
+
+		@Override
+		public void validate() throws IllegalStateException {
+			// TODO
+		}
+
 	}
 }

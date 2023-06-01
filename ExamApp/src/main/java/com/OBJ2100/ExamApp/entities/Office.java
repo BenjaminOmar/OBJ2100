@@ -1,5 +1,5 @@
 package com.OBJ2100.ExamApp.entities;
 
-public class Office {
+public class Office implements Entity {
 
 }

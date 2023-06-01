@@ -2,7 +2,7 @@ package com.OBJ2100.ExamApp.entities;
 
 import java.util.StringJoiner;
 
-public class Employee {
+public class Employee implements Entity {
 	private int employeeNumber;
 	private String lastName;
 	private String firstName;

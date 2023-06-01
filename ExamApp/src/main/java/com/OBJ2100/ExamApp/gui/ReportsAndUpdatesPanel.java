@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.OBJ2100.ExamApp.gui.dialogs.AddOrModifyEmployeeDialog;
+import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
 
 public class ReportsAndUpdatesPanel extends JPanel {
 	
@@ -27,12 +28,7 @@ public class ReportsAndUpdatesPanel extends JPanel {
 		add(addOrModifyEmployee);
 		
 		listAllProducts = new JButton("List all products");
-		listAllProducts.addActionListener(new ActionListener() { 
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				
-			}
-		});
+		listAllProducts.addActionListener(l -> new ListAllProductsTableDialog());
 		add(listAllProducts);
 		
 		listAllOffices = new JButton("List all offices");

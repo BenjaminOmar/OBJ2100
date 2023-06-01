@@ -2,7 +2,7 @@ package com.OBJ2100.ExamApp.entities;
 
 import java.util.Date;
 
-public class Order {
+public class Order implements Entity {
 	private int orderNumber, customerNumber;
 	private String status, comments;
 	private Date orderDate, requiredDate, shippedDate;
