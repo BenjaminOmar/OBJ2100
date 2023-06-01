@@ -80,12 +80,7 @@ public class WriteToFileListener implements ActionListener {
             }
         	String customersData = sb.toString();
         	
-<<<<<<< HEAD
-        	// Generate the file name and create a File object
-            File file = new File(DocumentsManager.getFolderPath(), generateFilename());
-=======
             File file = new File(FolderManager.getFolderPath(), generateFilename());
->>>>>>> c1ecd5e4aae810e4c160ac4be217fd9cf3eec0de
             
             try {
             	DocumentsManager manager = new DocumentsManager();
