@@ -1,5 +1,7 @@
 package com.OBJ2100.ExamApp.gui;
 
+import java.awt.Dimension;
+
 import javax.swing.Box;
 
 import javax.swing.BoxLayout;
@@ -26,7 +28,7 @@ public class SideMenu extends JPanel{
 	private JButton Exit = new JButton("Exit application");
 	
 	/**
-	 * This menu is instanciated in the MainWindow class.
+	 * This menu is instantiated in the MainWindow class.
 	 */
 	protected SideMenu() {		
 		displaySideMenu();
@@ -40,6 +42,13 @@ public class SideMenu extends JPanel{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(Box.createVerticalStrut(10));
 		add(Box.createHorizontalStrut(15));
+		
+		 // Setting maximum width size for the buttons
+	    Dimension buttonSize = new Dimension(Integer.MAX_VALUE, testDbCon.getPreferredSize().height);
+	    testDbCon.setMaximumSize(buttonSize);
+	    ExecSqlQuery.setMaximumSize(buttonSize);
+	    about.setMaximumSize(buttonSize);
+	    Exit.setMaximumSize(buttonSize);
 		
 		add(testDbCon);
 		testDbCon.addActionListener(new TestDbConnectionListener());
