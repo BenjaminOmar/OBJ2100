@@ -138,7 +138,7 @@ public class ExecSqlQueryListener implements ActionListener{
 	 */
 	private void exportResultsToCsvFile(String text) {
 		try {
-			File csvFile = new File("../customers_" + generateFilename());		
+			File csvFile = new File(DocumentsManager.getFolderPath() + generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
 		} catch (IOException e) {
 			e.printStackTrace();
