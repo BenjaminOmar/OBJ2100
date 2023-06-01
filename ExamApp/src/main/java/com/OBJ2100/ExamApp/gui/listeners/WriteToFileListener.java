@@ -50,48 +50,52 @@ public class WriteToFileListener implements ActionListener {
     	// Get the selected city and state from the GUI
         String selectedCity = (String) panel.getDropdownCity().getSelectedItem();
         String selectedState = (String) panel.getDropdownState().getSelectedItem();
-        JdbcCustomerDao customerDao = new JdbcCustomerDao(null);
-        // Retrieve the matching customers from the database
-        List<Customer> matchingCustomers = customerDao.getMatchingCustomers(selectedCity, selectedState);
-
-        if (matchingCustomers.isEmpty()){
-        	// If no matching customers found, display a message
-            JOptionPane.showMessageDialog(null, "No matching customers found");
-        }else{
-        	// Create a StringBuilder to construct the customer data string
-        	StringBuilder sb = new StringBuilder();
-        	sb.append("Customer Number, Customer Name, Contact Lastname, Contact firstname, Phone, Addressline 1, Addressline 2"
-        			+ "City, State, PostalCode, Country, SalesREP Employee Number, Credit limit\n");
-        	
-        	// Iterate over the matching customers and append their data to the StringBuilder
-        	for (Customer customer : matchingCustomers) {
-                   sb.append(customer.getCustomerNumber()).append(",")
-                     .append(customer.getCustomerName()).append(",")
-                     .append(customer.getContactLastName()).append(",")
-                     .append(customer.getContactFirstName()).append(",")
-                     .append(customer.getPhone()).append(",")
-                     .append(customer.getAddressLine1()).append(",")
-                     .append(customer.getAddressLine2()).append(",")
-                     .append(customer.getCity()).append(",")
-                     .append(customer.getState()).append(",")
-                     .append(customer.getPostalCode()).append(",")
-                     .append(customer.getCountry()).append(",")
-                     .append(customer.getSalesRepEmployeeNumber()).append(",")
-                     .append(customer.getCreditLimit()).append("\n");
-            }
-        	String customersData = sb.toString();
-        	
-            File file = new File(FolderManager.getFolderPath(), generateFilename());
-            
-            try {
-            	DocumentsManager manager = new DocumentsManager();
-            	// Write the customer data to the file
-                manager.writeToFile(customersData, file);
-                JOptionPane.showMessageDialog(null, "Customer list written to file.");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error writing to file");
-            }
+        DataSource source = DataSourceFactory.getMySqlDataSource();
+        try (Connection connection = source.getConnection()) {
+          DaoFactory daoFactory = new JdbcDaoFactory(connection);
+          CustomerDao customerDao = daoFactory.getCustomerDao();
+          List<Customer> matchingCustomers = customerDao.getMatchingCustomers(selectedCity, selectedState);
+          if (matchingCustomers.isEmpty()){
+          	// If no matching customers found, display a message
+              JOptionPane.showMessageDialog(null, "No matching customers found");
+          }else{
+          	// Create a StringBuilder to construct the customer data string
+          	StringBuilder sb = new StringBuilder();
+          	sb.append("Customer Number, Customer Name, Contact Lastname, Contact firstname, Phone, Addressline 1, Addressline 2"
+          			+ "City, State, PostalCode, Country, SalesREP Employee Number, Credit limit\n");
+          	
+          	// Iterate over the matching customers and append their data to the StringBuilder
+          	for (Customer customer : matchingCustomers) {
+                     sb.append(customer.getCustomerNumber()).append(",")
+                       .append(customer.getCustomerName()).append(",")
+                       .append(customer.getContactLastName()).append(",")
+                       .append(customer.getContactFirstName()).append(",")
+                       .append(customer.getPhone()).append(",")
+                       .append(customer.getAddressLine1()).append(",")
+                       .append(customer.getAddressLine2()).append(",")
+                       .append(customer.getCity()).append(",")
+                       .append(customer.getState()).append(",")
+                       .append(customer.getPostalCode()).append(",")
+                       .append(customer.getCountry()).append(",")
+                       .append(customer.getSalesRepEmployeeNumber()).append(",")
+                       .append(customer.getCreditLimit()).append("\n");
+              }
+          	String customersData = sb.toString();
+          	
+              File file = new File(FolderManager.getFolderPath(), generateFilename());
+              
+              try {
+              	DocumentsManager manager = new DocumentsManager();
+              	// Write the customer data to the file
+                  manager.writeToFile(customersData, file);
+                  JOptionPane.showMessageDialog(null, "Customer list written to file.");
+              } catch (IOException ex) {
+                  ex.printStackTrace();
+                  JOptionPane.showMessageDialog(null, "Error writing to file");
+              }
+          }
+        } catch (SQLException e1) {
+          e1.printStackTrace();
         }
     }
     
