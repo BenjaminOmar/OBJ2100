@@ -1,4 +1,4 @@
-package com.OBJ2100.ExamApp.gui.listeners;
+package com.OBJ2100.ExamApp.gui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -25,15 +25,18 @@ import javax.swing.JTextArea;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
- * Created an ActionListener. This will be used in the sidemenu
- * and the application menu.
- * The actionPerformed method Overrides the method in the ActionListener Interface.
+ * This class creates a dialog box where a user can input SQL queries.
+ * If the user does a SELECT statement, a csv file with the result will be 
+ * created and stored in the application-chosen folder. If the SQL statement
+ * does any other operation, it will be executed and the user will get a
+ * response from a message popup.
  * @author 7132
  */
-public class ExecSqlQueryListener implements ActionListener{
+public class ExecSqlQueryDialog extends JDialog {
 	JLabel headerLabel = new JLabel("Write your SQL statement:");
     JPanel panel = new JPanel(new BorderLayout());
     JTextArea textArea = new JTextArea();
@@ -41,15 +44,11 @@ public class ExecSqlQueryListener implements ActionListener{
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     JButton button = new JButton("Execute");
 	
-    @Override
-	public void actionPerformed(ActionEvent e) {
-		SQLPopup();	
-	}
-	
     /**
-     * Creates the popup where a user can input their sql query.
+     * This constructor creates the dialog window and calls for the
+     * executeSQLQuery method on button click.
      */
-	private void SQLPopup() {
+	public ExecSqlQueryDialog() {
 		panel.add(headerLabel, BorderLayout.NORTH);
 		headerLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    buttonPanel.add(button);
@@ -74,6 +73,7 @@ public class ExecSqlQueryListener implements ActionListener{
 	        }
 	    });
 	}
+	
 	/**
 	 * This method executes the sql query based on the users input.
 	 * If the query is a SELECT statement, the infomation gets extraced and
@@ -134,11 +134,11 @@ public class ExecSqlQueryListener implements ActionListener{
 	
 	/**
 	 * Creates a new document with a generated filename.
-	 * @param text Takes the formatted Cvs String.
+	 * @param text Takes in the formatted Csv String.
 	 */
 	private void exportResultsToCsvFile(String text) {
 		try {
-			File csvFile = new File(DocumentsManager.getFolderPath(), generateFilename());		
+			File csvFile = new File(FolderManager.getFolderPath(), generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -147,10 +147,11 @@ public class ExecSqlQueryListener implements ActionListener{
 	
 	/**
 	 * This method generates a filename.
-	 * @return Generated filename.
+	 * @return Generated filename with a timestamp at the end.
 	 */
 	private static String generateFilename() {
-		String timestamp = LocalDateTime.now().format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
+		String timestamp = LocalDateTime.now()
+				.format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
 		return String.format("query-%s.csv", timestamp);
 	}
 

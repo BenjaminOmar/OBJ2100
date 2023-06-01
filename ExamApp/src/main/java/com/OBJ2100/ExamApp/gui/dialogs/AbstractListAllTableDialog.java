@@ -56,7 +56,7 @@ public abstract class AbstractListAllTableDialog<T> extends JDialog {
 	
 	private void initComponents() {
 		Dimension dimension = new Dimension(840, 600);
-		if (entities.size() > 0) {
+		if (entities != null && entities.size() > 0) {
 			Object[][] data = toTableData();
 			table = new JTable(data, columns);
 			table.setFillsViewportHeight(true);
@@ -75,6 +75,7 @@ public abstract class AbstractListAllTableDialog<T> extends JDialog {
 		Object[][] data = entities.stream()
 				.map(this::extractOne)
 				.toArray(Object[][]::new);
+		
 		return data;
 	}
 	

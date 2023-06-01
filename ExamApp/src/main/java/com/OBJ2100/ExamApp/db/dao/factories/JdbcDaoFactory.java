@@ -40,8 +40,10 @@ public class JdbcDaoFactory implements DaoFactory {
 
 	@Override
 	public OfficeDao getOfficeDao() {
-		// TODO Auto-generated method stub
-		return null;
+		if (officeDao == null) {
+			officeDao = new JdbcOfficeDao(connection);
+		}
+		return officeDao;
 	}
 
 	@Override

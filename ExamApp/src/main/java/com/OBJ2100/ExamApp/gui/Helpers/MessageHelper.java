@@ -14,7 +14,8 @@ import javax.swing.JScrollPane;
 
 /**
  * This is a helper class for message popups available trough the program
- * created for maximum reusability.
+ * created for maximum reusability. The two methods in this class display
+ * Messages to the user of the application.
  * @author 7132
  */
 public class MessageHelper {
@@ -27,8 +28,9 @@ public class MessageHelper {
 	private static JDialog dialog;
 	
 	/**
-	 * Display a JOptionPane with the information from the parameter
-	 * @param message A String message that will be presented in the JOptionPane 
+	 * Display a JOptionPane with the information from the parameters
+	 * @param message A String message that will be presented in the JOptionPane
+	 * @param header A String that will be in the header of the popup 
 	 */
 	public static void displayMessage(String message, String header) {
 		UIManager.put("OptionPane.messageFont", chosenFont);
