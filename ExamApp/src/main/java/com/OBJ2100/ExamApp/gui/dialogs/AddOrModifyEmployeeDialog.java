@@ -113,6 +113,7 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		Integer reportsTo = employee.getReportsTo();
 		if (reportsTo == null) {
 			notReportingCheckbox.setSelected(true);
+			reportsToComboBox.setSelectedItem(Integer.valueOf(employeeNumber));
 		} else {
 			if (notReportingCheckbox.isSelected())
 				notReportingCheckbox.setSelected(false); 
@@ -171,11 +172,10 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 				
 				fieldByEmployeeDetail.put(detail, employeeNumberField);
 			} else if (detail.equals(EmployeeDetail.REPORTS_TO)) {
-				Integer[] otherEmployeeNumbers = employees.stream()
+				Integer[] employeeNumbers = employees.stream()
 						.map(Employee::getEmployeeNumber)
-						.filter(n -> n != employeeNumberComboBox.getSelectedItem())
 						.toArray(Integer[]::new);
-				reportsToComboBox = new JComboBox<>(otherEmployeeNumbers);
+				reportsToComboBox = new JComboBox<>(employeeNumbers);
 				
 				notReportingCheckbox = new JCheckBox("Nobody");
 				notReportingCheckbox.addItemListener(new ItemListener() {
