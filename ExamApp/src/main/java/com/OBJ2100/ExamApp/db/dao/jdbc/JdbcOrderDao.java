@@ -11,7 +11,7 @@ import com.OBJ2100.ExamApp.db.dao.OrderDao;
 import com.OBJ2100.ExamApp.entities.Order;
 
 /**
- * DAO manager for a orders.
+ * DAO implementation for a orders.
  * 
  * @author 7154, 7138
  *
