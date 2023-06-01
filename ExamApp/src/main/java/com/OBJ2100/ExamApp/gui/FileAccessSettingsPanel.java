@@ -85,13 +85,5 @@ public class FileAccessSettingsPanel extends JPanel {
 		return defaultFolderPath;
 	}
 
-	public static void main(String[] args) {
-		com.formdev.flatlaf.FlatLightLaf.setup();
-		JFrame frame = new JFrame();
-		frame.getContentPane().add(new FileAccessSettingsPanel());
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 
-	}
 }
