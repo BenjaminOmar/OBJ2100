@@ -1,6 +1,7 @@
 package com.OBJ2100.ExamApp.gui;
 
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,7 +11,7 @@ import java.awt.FlowLayout;
 import java.io.File;
 
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
-import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
+import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
 
 /**
  * The FileAccessSettingsPanel class extends JPanel and represents a 

@@ -1,15 +1,16 @@
 package com.OBJ2100.ExamApp.gui;
 
 import javax.swing.Box;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
-import com.OBJ2100.ExamApp.gui.Listeners.ExecSqlQueryListener;
-import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
-import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener; 
+import com.OBJ2100.ExamApp.gui.listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.listeners.ExecSqlQueryListener;
+import com.OBJ2100.ExamApp.gui.listeners.ExitListener;
+import com.OBJ2100.ExamApp.gui.listeners.TestDbConnectionListener; 
 
 /**
  * This class holds the side menu for different operations for
@@ -49,7 +50,7 @@ public class SideMenu extends JPanel{
 
 		add(about);
 		about.addActionListener(new AboutAppListener());
-		add(Box.createVerticalStrut(275));
+		add(Box.createVerticalStrut(225));
 		
 		add(Exit);
 		Exit.addActionListener(new ExitListener());

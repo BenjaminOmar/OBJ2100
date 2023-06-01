@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
 public class DocumentsManager implements IDocumentsManager {
@@ -70,10 +71,11 @@ public class DocumentsManager implements IDocumentsManager {
 		}
 	}
 
+	
+
 	@Override
 	public String readFromFile(File file) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+				return null;
 	}
 
 }
