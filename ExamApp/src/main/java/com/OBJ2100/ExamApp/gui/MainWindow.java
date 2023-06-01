@@ -34,11 +34,13 @@ public class MainWindow extends JFrame {
         // Create a panel for the file access settings and list customers panel
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(Box.createVerticalStrut(10));
         panel.add(fileAccessSettings);
         panel.add(Box.createVerticalStrut(20));
         panel.add(listCustomersPanel);
         panel.add(Box.createVerticalStrut(20));
         panel.add(reportsAndUpdatesPanel);
+        panel.add(Box.createVerticalStrut(10));
 
         // Add the panel to the main window
         add(panel, BorderLayout.EAST);
