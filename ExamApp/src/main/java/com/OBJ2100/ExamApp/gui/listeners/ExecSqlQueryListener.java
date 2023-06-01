@@ -1,33 +1,31 @@
 package com.OBJ2100.ExamApp.gui.Listeners;
 
 import java.awt.BorderLayout;
-import java.sql.ResultSetMetaData;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
-import javax.swing.JTextArea;
-
-import com.OBJ2100.ExamApp.db.DataSourceFactory;
-import com.OBJ2100.ExamApp.documents.DocumentsManager;
-import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.sql.DataSource;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
  * Created an ActionListener. This will be used in the sidemenu
@@ -138,7 +136,7 @@ public class ExecSqlQueryListener implements ActionListener{
 	 */
 	private void exportResultsToCsvFile(String text) {
 		try {
-			File csvFile = new File(DocumentsManager.getFolderPath() + generateFilename());		
+			File csvFile = new File(DocumentsManager.getFolderPath(), generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -150,7 +148,8 @@ public class ExecSqlQueryListener implements ActionListener{
 	 * @return Generated filename.
 	 */
 	private static String generateFilename() {
-		return String.format("query-%s", LocalDate.now() + ".csv");
+		String timestamp = LocalDateTime.now().format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
+		return String.format("query-%s.csv", timestamp);
 	}
 
 }
