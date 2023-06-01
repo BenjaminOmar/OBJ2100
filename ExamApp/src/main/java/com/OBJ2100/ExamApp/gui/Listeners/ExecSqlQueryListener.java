@@ -138,7 +138,7 @@ public class ExecSqlQueryListener implements ActionListener{
 	 */
 	private void exportResultsToCsvFile(String text) {
 		try {
-			File csvFile = new File(generateFilename());		
+			File csvFile = new File("../customers_" + generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -150,7 +150,7 @@ public class ExecSqlQueryListener implements ActionListener{
 	 * @return Generated filename.
 	 */
 	private static String generateFilename() {
-		return String.format("query-%s", LocalDate.now());
+		return String.format("query-%s", LocalDate.now() + ".csv");
 	}
 
 }

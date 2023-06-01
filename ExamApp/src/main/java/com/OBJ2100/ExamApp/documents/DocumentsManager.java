@@ -5,8 +5,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JLabel;
+
 public class DocumentsManager implements IDocumentsManager {
 
+	private static String folderPath = getDefaultFolderPath();
+	
+	public static String getFolderPath() {
+		return folderPath;
+	}
+	
+	public static void setFolderPath(String path) {
+		folderPath = path;
+	}
+	
+	private static String getDefaultFolderPath() {
+		String userHome = System.getProperty("user.home");
+		return userHome + File.separator;
+	}
+	
 	  /**
      * Writes text to a file on local disk.
      *

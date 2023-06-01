@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.io.File;
 
+import com.OBJ2100.ExamApp.documents.DocumentsManager;
 import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
 
 /**
@@ -21,7 +22,7 @@ import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
 public class FileAccessSettingsPanel extends JPanel {
 
 	private final JButton changeFolderBtn; // Button to change the folder
-	private final JLabel folderPath; // Label to display the selected folder path
+	private final JLabel folderPathLabel; // Label to display the selected folder path
 
 	/**
 	 * Constructs a FileAccessSettingsPanel.
@@ -44,8 +45,8 @@ public class FileAccessSettingsPanel extends JPanel {
 		changeFolderBtn.addActionListener(new ChangeFolderListener(this));
 		add(changeFolderBtn);
 
-		folderPath = new JLabel("Current folder: " + getDefaultFolderPath());
-		add(folderPath);
+		folderPathLabel = new JLabel("Current folder: " + DocumentsManager.getFolderPath());
+		add(folderPathLabel);
 	}
 
 	/**
@@ -55,7 +56,7 @@ public class FileAccessSettingsPanel extends JPanel {
 	 */
 
 	public JLabel getFolderPath() {
-		return folderPath;
+		return folderPathLabel;
 	}
 
 	/**
@@ -64,13 +65,13 @@ public class FileAccessSettingsPanel extends JPanel {
 	 * ("...") at the end to indicate that there is more text that is not displayed.
 	 */
 	public void checkTextLength() {
-		String text = folderPath.getText();
+		String text = folderPathLabel.getText();
 		int maxLength = 50; // Maximum number of characters allowed
 		int textLength = text.length();
 
 		if (textLength > maxLength) {
 			String truncatedText = text.substring(0, maxLength - 3) + "...";
-			folderPath.setText(truncatedText);
+			folderPathLabel.setText(truncatedText);
 		}
 	}
 
@@ -79,11 +80,6 @@ public class FileAccessSettingsPanel extends JPanel {
 	 *
 	 * @return the default folder path
 	 */
-	public String getDefaultFolderPath() {
-		String userHome = System.getProperty("user.home");
-		String defaultFolderPath = userHome + File.separator + "Temp";
-		return defaultFolderPath;
-	}
 
 
 }

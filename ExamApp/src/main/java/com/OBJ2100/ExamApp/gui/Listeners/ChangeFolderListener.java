@@ -3,6 +3,7 @@ package com.OBJ2100.ExamApp.gui.Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.OBJ2100.ExamApp.documents.DocumentsManager;
 import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.FileAccessSettingsPanel;
 
@@ -34,7 +35,8 @@ public class ChangeFolderListener implements ActionListener {
         String selectedFolder = FolderManager.chooseFolder();
         if (selectedFolder != null) {
             // Update the folder path label with the selected folder
-            folderPanel.getFolderPath().setText("  Current folder: " + selectedFolder);
+        	DocumentsManager.setFolderPath(selectedFolder);
+            folderPanel.getFolderPath().setText("  Current folder: " + selectedFolder); //??
             // Check if the text needs to be truncated
             folderPanel.checkTextLength();
         }

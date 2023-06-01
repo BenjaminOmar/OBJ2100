@@ -61,7 +61,7 @@ public class WriteToFileListener implements ActionListener {
         	
             IDocumentsManager documentsManager = new DocumentsManager();
             String timestamp = Long.toString(System.currentTimeMillis()); 
-            File file = new File("C:/Temp/customers_" + timestamp + ".csv");
+            File file = new File(DocumentsManager.getFolderPath() + timestamp + ".csv");
             
             try {
                 documentsManager.writeToFile(customersData, file);
