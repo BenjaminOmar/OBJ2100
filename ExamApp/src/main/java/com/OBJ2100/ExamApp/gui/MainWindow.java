@@ -7,12 +7,13 @@ import javax.swing.JFrame;
 public class MainWindow extends JFrame {
 
 	private ApplicationMenu appMenu = new ApplicationMenu();
+	private SideMenu sideMenu = new SideMenu();
 	private MainContent content = new MainContent();
 
 	public MainWindow() {
 		
 		setTitle("Exam application");
-		setSize(1030, 1000);
+		setSize(1030, 450);
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout());
 		
@@ -20,6 +21,8 @@ public class MainWindow extends JFrame {
 		// add main menu
 		setJMenuBar(appMenu);
 
+		//add side menu
+		add(sideMenu);
 		// add content
 		add(content);
 		
