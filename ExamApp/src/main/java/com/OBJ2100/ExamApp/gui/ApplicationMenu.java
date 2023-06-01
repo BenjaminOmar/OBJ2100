@@ -1,6 +1,8 @@
 package com.OBJ2100.ExamApp.gui;
 
 import java.awt.Font;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,8 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.OBJ2100.ExamApp.gui.dialogs.AddOrModifyEmployeeDialog;
+import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
 import com.OBJ2100.ExamApp.gui.listeners.AboutAppListener;
 import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
 import com.OBJ2100.ExamApp.gui.listeners.ExecSqlQueryListener;
@@ -31,12 +35,12 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenu menuFile = new JMenu("File");
 	private JMenuItem selectfolderItem = new JMenuItem("Select folder");
 	private JMenuItem writecustomerItem = new JMenuItem("Write customers into file");
-	private JMenuItem bulkimportItem = new JMenuItem("Bulk import of orders");
+	private JMenuItem bulkImportOrders = new JMenuItem("Bulk import of orders");
 	private JMenuItem Exit = new JMenuItem("Exit application");
 	private JMenu menuDatabase = new JMenu("Database");
 	private JMenuItem ExecSqlQuery = new JMenuItem("Execute SQL Query");
-	private JMenuItem employeeItem = new JMenuItem("Add or modify employee");
-	private JMenuItem listallItem = new JMenuItem("List all products");
+	private JMenuItem addOrModifyEmployee = new JMenuItem("Add or modify employee");
+	private JMenuItem listAllProducts = new JMenuItem("List all products");
 	private JMenuItem officeItem = new JMenuItem("Filter and present offices from a country");
 	private JMenuItem testDbCon = new JMenuItem("Test database connection");
 	private JMenu menuHelp = new JMenu("Help");
@@ -59,13 +63,17 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		FileAccessSettingsPanel folderPanel = new FileAccessSettingsPanel();
 		selectfolderItem.addActionListener(new ChangeFolderListener(folderPanel));
 
-		add(writecustomerItem);
-	    
-		
-		bulkimportItem.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		    }
+		ListCustomersPanel panel = new ListCustomersPanel();  // Create an instance of ListCustomersPanel
+	    add(writecustomerItem);
+	    writecustomerItem.addActionListener(new WriteToFileListener(panel));
+
+		add(bulkImportOrders);
+		bulkImportOrders.addActionListener(new ActionListener() { 
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+			}
 		});
+
 		
 		add(Exit);
 		Exit.addActionListener(new ExitListener());
@@ -75,17 +83,13 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		 
 		add(ExecSqlQuery);
 			ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
-		 
-		 employeeItem.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			    }
-			});
-		 
-		 listallItem.addActionListener(new ActionListener() {
-			    public void actionPerformed(ActionEvent e) {
-			    }
-			});
-		 
+		
+		add(addOrModifyEmployee);
+		    addOrModifyEmployee.addActionListener(l -> new AddOrModifyEmployeeDialog());
+		    
+		add(listAllProducts);
+		    listAllProducts.addActionListener(l -> new ListAllProductsTableDialog());
+			
 		 officeItem.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
 			    }
@@ -107,13 +111,13 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 
 		menuFile.add(selectfolderItem);
 		menuFile.add(writecustomerItem);
-		menuFile.add(bulkimportItem);
+		menuFile.add(bulkImportOrders);
 		menuFile.add(Exit);
 		
 		menuDatabase.add(testDbCon);
 		menuDatabase.add(ExecSqlQuery);
-		menuDatabase.add(employeeItem);
-		menuDatabase.add(listallItem);
+		menuDatabase.add(addOrModifyEmployee);
+		menuDatabase.add(listAllProducts);
 		menuDatabase.add(officeItem);
 		
 		menuOptions.add(darkMode);
