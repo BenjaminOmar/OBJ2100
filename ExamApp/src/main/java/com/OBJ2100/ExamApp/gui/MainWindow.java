@@ -11,8 +11,9 @@ public class MainWindow extends JFrame {
     private ApplicationMenu appMenu = new ApplicationMenu();
     private SideMenu sideMenu = new SideMenu();
     private MainContent content = new MainContent();
-    private FileAccessSettingsPanel fileAccessSettings = new FileAccessSettingsPanel();
-    private ListCustomersPanel listCustomersPanel = new ListCustomersPanel();
+    private JPanel fileAccessSettings = new FileAccessSettingsPanel();
+    private JPanel listCustomersPanel = new ListCustomersPanel();
+    private JPanel reportsAndUpdatesPanel = new ReportsAndUpdatesPanel();
 
     public MainWindow() {
         setTitle("Exam application");
@@ -34,6 +35,7 @@ public class MainWindow extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(fileAccessSettings);
         panel.add(listCustomersPanel);
+        panel.add(reportsAndUpdatesPanel);
 
         // Add the panel to the main window
         add(panel, BorderLayout.EAST);
