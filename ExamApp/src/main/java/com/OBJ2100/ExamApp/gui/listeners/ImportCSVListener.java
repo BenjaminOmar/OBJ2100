@@ -8,9 +8,11 @@ import java.nio.file.Path;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 public class ImportCSVListener implements ActionListener {
 
+    
 
     public void importCSV() {
         JFileChooser fileChooser = new JFileChooser();
@@ -36,6 +38,9 @@ public class ImportCSVListener implements ActionListener {
                         String status = values[4];
                         String comments = values[5];
                         int customerNumber = Integer.parseInt(values[6]);
+
+                        //DAO.insertData(orderNumber, orderDate, requiredDate, shippedDate, status, comments, customerNumber);
+                        JOptionPane.showMessageDialog(null, "CSV data imported successfully");
                     }
                 } catch (IOException e) {
                 	e.printStackTrace();
