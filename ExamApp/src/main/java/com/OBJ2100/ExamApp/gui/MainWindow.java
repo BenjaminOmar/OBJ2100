@@ -10,8 +10,9 @@ import javax.swing.JPanel;
 /**
  * The MainWindow class represents the main window of the GUI application.
  * It extends JFrame and contains the application menu, side menu, and main content.
+ * Creates the main panel with the child panels
+ * @author 7131
  */
-
 public class MainWindow extends JFrame {
 
     private ApplicationMenu appMenu = new ApplicationMenu();

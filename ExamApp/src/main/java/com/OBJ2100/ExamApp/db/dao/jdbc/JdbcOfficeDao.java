@@ -1,6 +1,7 @@
 package com.OBJ2100.ExamApp.db.dao.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,5 +49,36 @@ public class JdbcOfficeDao extends JdbcDao<Office> implements OfficeDao {
 		return new Office.Builder(officeCode).city(city).phone(phone).addressLine1(addressLine1)
 				.addressLine2(addressLine2).state(state).country(country).postalCode(postalCode)
 				.territory(territory).build();
+	}
+	
+	/**
+	 * Retrieves a list of offices based on their country.
+	 *
+	 * @param country, the country to search for.
+	 * @return A list of offices in the specified country.
+	 * @author 7162
+	 */
+	@Override
+	public List<Office> getCustomerByCountry(String country){
+		// Create a new ArrayList to store the offices
+		List<Office> offices = new ArrayList<>();
+		try (PreparedStatement s = connection.prepareStatement("SELECT * FROM offices WHERE country = ?")){
+			// Set the value of the first parameter in the prepared statement as the provided state
+        	s.setString(1, country);
+        	// Execute the query and get the result set
+        	ResultSet rs = s.executeQuery();
+        	// Iterate over each row in the result set
+        	while (rs.next()) {
+            	//Extract customer entity from the result set and add it to the list
+                offices.add(extractEntity(rs));
+            }
+        	// Close the prepared statement
+            s.close();
+		}catch (SQLException e) {
+        	// Print the stack trace if a SQLException occurs
+            e.printStackTrace();
+        }
+     // Return the list of customers
+        return offices;
 	}
 }

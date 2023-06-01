@@ -29,7 +29,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 /**
  * The ApplicationMenu class contains the menu bar for a GUI application.
  * It contains various menus and menu items with their associated actions.
- * @author 7131
+ * @author 7131, 7132
  * 
  */
 

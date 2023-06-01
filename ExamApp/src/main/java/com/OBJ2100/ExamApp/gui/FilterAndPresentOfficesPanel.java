@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import com.OBJ2100.ExamApp.gui.listeners.FilterAndPresentOfficesListener;
+
 public class FilterAndPresentOfficesPanel extends JPanel {
 	
 	private JLabel byCountryLabel;
@@ -49,11 +51,19 @@ public class FilterAndPresentOfficesPanel extends JPanel {
         
         ReadFromDatabaseButton = new JButton("Execute");
         add(ReadFromDatabaseButton, gbc);
+        
+        FilterAndPresentOfficesListener officeListener = new FilterAndPresentOfficesListener(this);
+        ReadFromDatabaseButton.addActionListener(officeListener);
+        ReadFromDatabaseButton.addActionListener(officeListener);
+
+         
 	}
 	
-	/*
+	
     public JComboBox<String> getDropdownCountry() {
         return dropdownCountry;
     }
-    */
+
+
+    
 }
