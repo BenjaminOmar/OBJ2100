@@ -36,15 +36,19 @@ public class SideMenu extends JPanel{
 	/**
 	 * This constructor adds the different buttons, 
 	 * and creates uses ActionListeners and Dialog boxes
-	 * to do the different operations
+	 * to do the different operations.
+	 * The buttons are added vertically using a BoxLayout.
 	 */
 	private void displaySideMenu() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(Box.createVerticalStrut(15));
 		add(Box.createHorizontalStrut(15));
 		
-		 // Setting maximum width size for the buttons
+		// Setting maximum width size for the buttons
+		// Creates a Dimension object with maximum width and the height 
+		// of the testDbCon button
 	    Dimension buttonSize = new Dimension(Integer.MAX_VALUE, testDbCon.getPreferredSize().height);
+	    // Sets the maximum size of the buttons to their buttonSize dimension
 	    testDbCon.setMaximumSize(buttonSize);
 	    ExecSqlQuery.setMaximumSize(buttonSize);
 	    about.setMaximumSize(buttonSize);
@@ -52,6 +56,7 @@ public class SideMenu extends JPanel{
 		
 		add(testDbCon);
 		testDbCon.addActionListener(new TestDbConnectionListener());
+		// This adds vertical spacing of 15 pixels
 		add(Box.createVerticalStrut(15));
 		
 		add(ExecSqlQuery);

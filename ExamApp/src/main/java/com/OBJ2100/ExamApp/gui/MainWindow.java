@@ -7,6 +7,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * The MainWindow class represents the main window of the GUI application.
+ * It extends JFrame and contains the application menu, side menu, and main content.
+ */
+
 public class MainWindow extends JFrame {
 
     private ApplicationMenu appMenu = new ApplicationMenu();
@@ -31,7 +36,8 @@ public class MainWindow extends JFrame {
         // Add content
         add(content, BorderLayout.CENTER);
 
-        // Create a panel for the file access settings and list customers panel
+        // Create a panel for the file access settings, list customers panel and
+        // reports and updates
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalStrut(10));
