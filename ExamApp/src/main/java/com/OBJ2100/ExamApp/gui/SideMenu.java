@@ -39,6 +39,7 @@ public class SideMenu extends JPanel{
 	private void displaySideMenu() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(Box.createVerticalStrut(10));
+		add(Box.createHorizontalStrut(15));
 		
 		add(testDbCon);
 		testDbCon.addActionListener(new TestDbConnectionListener());
@@ -50,9 +51,10 @@ public class SideMenu extends JPanel{
 
 		add(about);
 		about.addActionListener(new AboutAppListener());
-		add(Box.createVerticalStrut(225));
+		add(Box.createVerticalStrut(220));
 		
 		add(Exit);
 		Exit.addActionListener(new ExitListener());
+		add(Box.createVerticalStrut(10));
 	}
 }
