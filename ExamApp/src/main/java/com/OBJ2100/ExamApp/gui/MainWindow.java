@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         setTitle("Exam application");
-        setSize(1030, 450);
+        setSize(850, 400);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
