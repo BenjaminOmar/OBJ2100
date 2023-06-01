@@ -59,6 +59,12 @@ public class Office implements Entity {
 		return territory;
 	}
 	
+	/**
+	 * Implementation of the Builder Pattern for Customer.
+	 * 
+	 * @author 7154, 7131
+	 *
+	 */
 	public static class Builder implements EntityBuilder<Office> {
 		private String officeCode;
 		private String city;

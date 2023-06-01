@@ -53,6 +53,12 @@ public class Product implements Entity {
 		return msrp;
 	}
 
+	/**
+	 * Implementation of the Builder Pattern for Customer.
+	 * 
+	 * @author 7154, 7131
+	 *
+	 */
 	public static class Builder implements EntityBuilder<Product> {
 		private Integer quantityInStock;
 		private String productCode, productName, productLine, productScale, productVendor, productDescription;

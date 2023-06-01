@@ -1,6 +1,12 @@
 package com.OBJ2100.ExamApp.entities;
 
-
+/**
+ * Abstraction for the Builder Pattern implementation.
+ * 
+ * @author 7154
+ *
+ * @param <T>
+ */
 public interface EntityBuilder<T> {
 
 	/**

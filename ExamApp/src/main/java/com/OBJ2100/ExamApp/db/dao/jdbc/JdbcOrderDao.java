@@ -10,6 +10,12 @@ import java.util.List;
 import com.OBJ2100.ExamApp.db.dao.OrderDao;
 import com.OBJ2100.ExamApp.entities.Order;
 
+/**
+ * DAO manager for a orders.
+ * 
+ * @author 7154, 7138
+ *
+ */
 public class JdbcOrderDao extends JdbcDao<Order> implements OrderDao {
 
 	public JdbcOrderDao(Connection connection) {

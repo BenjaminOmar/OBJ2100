@@ -6,6 +6,12 @@ import java.util.List;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.entities.Office;
 
+/**
+ * An implementation of the table dialog for offices.
+ * 
+ * @author 7154
+ *
+ */
 public class ListAllOfficesTableDialog extends AbstractListAllTableDialog<Office> {
 
 	@Override

@@ -85,6 +85,12 @@ public class Customer implements Entity {
 		return creditLimit;
 	}
 
+	/**
+	 * Implementation of the Builder Pattern for Customer.
+	 * 
+	 * @author 7138
+	 *
+	 */
 	public static class Builder implements EntityBuilder<Customer> {
 		private int customerNumber;
 		private String customerName;

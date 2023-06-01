@@ -11,6 +11,14 @@ import com.OBJ2100.ExamApp.gui.dialogs.ListAllOfficesTableDialog;
 import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
 import com.OBJ2100.ExamApp.gui.listeners.ImportCsvListener;
 
+/**
+ * A JPanel containing buttons allowing actions
+ * related to report creation (products, offices)
+ * and data update (employees, orders).
+ * 
+ * @author 7154
+ *
+ */
 public class ReportsAndUpdatesPanel extends JPanel {
 	
 	private JButton addOrModifyEmployee;
