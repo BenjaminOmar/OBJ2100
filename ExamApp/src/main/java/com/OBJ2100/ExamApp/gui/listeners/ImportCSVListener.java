@@ -1,18 +1,20 @@
 package com.OBJ2100.ExamApp.gui.listeners;
 
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class ImportCSVListener implements ActionListener {
 
+    
 
-    public void importCSV(){
+    public void importCSV() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int result = fileChooser.showOpenDialog(null);
@@ -36,6 +38,15 @@ public class ImportCSVListener implements ActionListener {
                         String status = values[4];
                         String comments = values[5];
                         int customerNumber = Integer.parseInt(values[6]);
+
+                        //DAO.insertData(orderNumber, orderDate, requiredDate, shippedDate, status, comments, customerNumber);
+                        JOptionPane.showMessageDialog(null, "CSV data imported successfully");
+                    }
+                } catch (IOException e) {
+                	e.printStackTrace();
+                }
+            }
+        }
 
     }
 
