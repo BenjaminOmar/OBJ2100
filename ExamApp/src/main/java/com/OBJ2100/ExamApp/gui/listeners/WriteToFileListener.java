@@ -77,9 +77,9 @@ public class WriteToFileListener implements ActionListener {
     private String generateFilename() {
     	String chosenCityOrState = null;
     	if (panel.getByCityRadioButton().isSelected())
-    		chosenCityOrState = "city";
+    		chosenCityOrState = (String) panel.getDropdownCity().getSelectedItem();
     	else if (panel.getByStateRadioButton().isSelected())
-    		chosenCityOrState = "state";
+    		chosenCityOrState = (String) panel.getDropdownState().getSelectedItem();
     	
     	String timestamp = LocalDateTime.now()
 				.format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
