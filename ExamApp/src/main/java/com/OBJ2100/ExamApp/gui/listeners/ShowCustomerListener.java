@@ -17,6 +17,7 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.CustomerDao;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
+import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcCustomerDao;
 import com.OBJ2100.ExamApp.entities.Customer;
 import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
 
@@ -52,9 +53,9 @@ public class ShowCustomerListener implements ActionListener {
     	// Get the selected city and state from the GUI
         String selectedCity = (String) panel.getDropdownCity().getSelectedItem();
         String selectedState = (String) panel.getDropdownState().getSelectedItem();
-        
+        JdbcCustomerDao customerDao = new JdbcCustomerDao(null);
         // Retrieve the matching customers from the database
-        List<Customer> matchingCustomers = getMatchingCustomers(selectedCity, selectedState);
+        List<Customer> matchingCustomers = customerDao.getMatchingCustomers(selectedCity, selectedState);
 
         if (matchingCustomers == null) {
             JOptionPane.showMessageDialog(null, "Error retrieving customers from the database", "Error", JOptionPane.ERROR_MESSAGE);
@@ -97,41 +98,6 @@ public class ShowCustomerListener implements ActionListener {
             scrollPane.setPreferredSize(new Dimension(1500, 600));
             // Show the table in a JOptionPane message dialog
             JOptionPane.showMessageDialog(null, scrollPane, "Matching Customers", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-    
-    /**
-     * Retrieves customers from the database based on the specified city and state.
-     * 
-     * @param city The selected city.
-     * @param state The selected state.
-     * @return A list of Customer objects representing the matching customers.
-     *         Returns null if there is an error retrieving the customers from the database.
-     */
-
-    private List<Customer> getMatchingCustomers(String city, String state) {
-    	  // Get the data source for the database
-    	DataSource source = DataSourceFactory.getMySqlDataSource();
-
-        try (Connection connection = source.getConnection()) {
-        	// Create a DAO factory using the database connection
-            DaoFactory daoFactory = new JdbcDaoFactory(connection);
-            // Get the CustomerDao from the factory
-            CustomerDao customerDao = daoFactory.getCustomerDao();
-
-            if (city != null && !city.equals("Select City")) {
-            	// If a city is selected, fetch customers by city
-                return customerDao.getByCity(city);
-            } else if (state != null && !state.equals("Select State")) {
-            	// If a state is selected, fetch customers by state
-                return customerDao.getByState(state);
-            } else {
-            	// If no city or state is selected, fetch all customers
-                return customerDao.getAll();
-            }
-        } catch (SQLException err) {
-            err.printStackTrace();
-            return null;
         }
     }
 }
