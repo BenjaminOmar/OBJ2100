@@ -19,6 +19,7 @@ import com.OBJ2100.ExamApp.db.dao.CustomerDao;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.entities.Customer;
 import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
 
@@ -61,7 +62,7 @@ public class WriteToFileListener implements ActionListener {
             }
         	String customersData = sb.toString();
         	
-            File file = new File(DocumentsManager.getFolderPath(), generateFilename());
+            File file = new File(FolderManager.getFolderPath(), generateFilename());
             
             try {
             	DocumentsManager manager = new DocumentsManager();

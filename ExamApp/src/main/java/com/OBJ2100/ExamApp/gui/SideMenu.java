@@ -15,10 +15,9 @@ import com.OBJ2100.ExamApp.gui.listeners.ExitListener;
 import com.OBJ2100.ExamApp.gui.listeners.TestDbConnectionListener;
 
 /**
- * This class holds the side menu for different operations for
- * the program.
+ * This class holds the side menu buttons and methods
+ * for different operations of the program.
  * @author 7132
- *
  */
 public class SideMenu extends JPanel{
 	
@@ -35,8 +34,9 @@ public class SideMenu extends JPanel{
 	}
 		
 	/**
-	 * This method adds the different buttons, and creates custom actionListeners
-	 * for each.
+	 * This constructor adds the different buttons, 
+	 * and creates uses ActionListeners and Dialog boxes
+	 * to do the different operations
 	 */
 	private void displaySideMenu() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

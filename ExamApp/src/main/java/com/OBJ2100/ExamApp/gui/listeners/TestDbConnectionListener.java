@@ -12,9 +12,8 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
- * Created an ActionListener. This will be used in the sidemenu
- * and the application menu.
- * The actionPerformed method Overrides the method in the ActionListener Interface.
+ * This ActionListener tests if there is a connection to the database.
+ * It is used by buttons in the sideMenu and ApplicationMenu.
  * @author 7132
  */
 public class TestDbConnectionListener implements ActionListener{
