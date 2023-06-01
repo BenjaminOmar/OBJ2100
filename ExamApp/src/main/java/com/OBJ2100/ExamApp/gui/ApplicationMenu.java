@@ -126,12 +126,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		menuFile.add(ListCustomers);
 		menuFile.add(bulkImportOrders);
 		menuFile.add(exit);
-		
-		menuDatabase.add(testDbCon);
-		menuDatabase.add(ExecSqlQuery);
-		menuDatabase.add(addOrModifyEmployee);
-		menuDatabase.add(listAllProducts);
-		menuDatabase.add(ListOffices);
+
 		ListOffices.addActionListener(new ActionListener() {
 
 		    public void actionPerformed(ActionEvent e)
@@ -139,12 +134,18 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		    	panelOffices.add(FilterAndPresentOfficesPanel);
 				dialogOffices.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialogOffices.setSize(400, 200);
-				dialogOffices.setContentPane(panel);
+				dialogOffices.setContentPane(panelOffices);
 				dialogOffices.setLocationRelativeTo(null);
 				dialogOffices.setVisible(true);
 				dialogOffices.setAlwaysOnTop(false);
 		    }
 		});
+		
+		menuDatabase.add(testDbCon);
+		menuDatabase.add(ExecSqlQuery);
+		menuDatabase.add(addOrModifyEmployee);
+		menuDatabase.add(listAllProducts);
+		menuDatabase.add(ListOffices);
 		
 		menuOptions.add(darkMode);
 		menuHelp.add(about);
