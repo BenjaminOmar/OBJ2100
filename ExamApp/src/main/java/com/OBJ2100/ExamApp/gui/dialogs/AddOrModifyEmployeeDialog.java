@@ -267,8 +267,6 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 					
 					DaoFactory daoFactory = new JdbcDaoFactory(connection);
 					daoFactory.getEmployeeDao().create(savedEmployee);
-					
-					// TODO fetchEmployees();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
