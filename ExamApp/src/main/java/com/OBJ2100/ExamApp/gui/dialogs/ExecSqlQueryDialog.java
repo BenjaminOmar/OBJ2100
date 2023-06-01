@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
@@ -130,7 +131,7 @@ public class ExecSqlQueryDialog extends JDialog {
 	 */
 	private void exportResultsToCsvFile(String text) {
 		try {
-			File csvFile = new File(DocumentsManager.getFolderPath(), generateFilename());		
+			File csvFile = new File(FolderManager.getFolderPath(), generateFilename());		
 			new DocumentsManager().writeToFile(text, csvFile);
 		} catch (IOException e) {
 			e.printStackTrace();

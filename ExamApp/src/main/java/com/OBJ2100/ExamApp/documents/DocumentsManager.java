@@ -13,37 +13,6 @@ public class DocumentsManager implements IDocumentsManager {
 	
 	public static final DateTimeFormatter DEFAULT_TIMESTAMP_FORMATTER = 
 			DateTimeFormatter.ofPattern("d_MMM_uuuu-HH_mm_ss");
-
-	private static String folderPath = getDefaultFolderPath();
-	
-	/**
-	 * Returns the folder path.
-	 * @return returns "folderPath".
-	 * @author 7132
-	 */
-	public static String getFolderPath() {
-		return folderPath;
-	}
-	
-	/**
-	 * Sets a new folderPath
-	 * @param path The folderPath as a string
-	 * @author 7132
-	 */
-	public static void setFolderPath(String path) {
-		folderPath = path;
-	}
-	
-	/**
-	 * This method sets the default folder path of the "folderPath"
-	 * value.
-	 * @return The default folder path as a String
-	 * @author 7132
-	 */
-	private static String getDefaultFolderPath() {
-		String userHome = System.getProperty("user.home");
-		return userHome + File.separator;
-	}
 	
 	  /**
      * Writes text to a file on local disk.
