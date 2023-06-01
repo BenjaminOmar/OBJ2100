@@ -58,6 +58,7 @@ public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 	public void create(Employee employee) {
 		String query = "INSERT INTO employees (employeeNumber, lastName, firstName, extension, email, officeCode, reportsTo, jobTitle)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		
 		try (PreparedStatement ps = connection.prepareStatement(query)){
 			ps.setInt(1, employee.getEmployeeNumber());
 			ps.setString(2, employee.getLastName());
@@ -65,8 +66,9 @@ public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 			ps.setString(4, employee.getExtension());
 			ps.setString(5, employee.getEmail());
 			ps.setString(6, employee.getOfficeCode());
-			ps.setInt(7, employee.getReportsTo());
+			ps.setObject(7, employee.getReportsTo());
 			ps.setString(8, employee.getJobTitle());
+			
 			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
@@ -76,23 +78,23 @@ public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 
 	@Override
 	public void updateByEmployeeNumber(int employeeNumber, Employee employee) {
-		String query = "UPDATE employees"
-				+ "SET employeeNumber = ?, " 
-					+ "lastName = ?, "
+		String query = "UPDATE employees " 
+					+ "SET lastName = ?, "
 					+ "firstName = ?, " 
 					+ "extension = ?, " 
 					+ "email = ?, " 
 					+ "officeCode = ?, "
 					+ "reportsTo = ?, "
-					+ "jobTitle = ?"
+					+ "jobTitle = ? "
 				+ "WHERE employeeNumber = ?";
+		
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			ps.setString(1, employee.getLastName());
 			ps.setString(2, employee.getFirstName());
 			ps.setString(3, employee.getExtension());
 			ps.setString(4, employee.getEmail());
 			ps.setString(5, employee.getOfficeCode());
-			ps.setInt(6, employee.getReportsTo());
+			ps.setObject(6, employee.getReportsTo());
 			ps.setString(7, employee.getJobTitle());
 			ps.setInt(8, employeeNumber);
 			ps.executeUpdate();
