@@ -3,7 +3,7 @@ package com.OBJ2100.ExamApp.entities;
 import java.util.StringJoiner;
 
 public class Employee implements Entity {
-	private int employeeNumber;
+	private Integer employeeNumber;
 	private String lastName;
 	private String firstName;
 	private String extension;
@@ -23,7 +23,7 @@ public class Employee implements Entity {
 		this.jobTitle = builder.jobTitle;
 	}
 
-	public int getEmployeeNumber() {
+	public Integer getEmployeeNumber() {
 		return employeeNumber;
 	}
 	
@@ -56,7 +56,7 @@ public class Employee implements Entity {
 	}
 	
 	public static class Builder implements EntityBuilder<Employee> {
-		private int employeeNumber;
+		private Integer employeeNumber;
 		private String lastName;
 		private String firstName;
 		private String extension;
@@ -69,7 +69,7 @@ public class Employee implements Entity {
 			
 		}
 		
-		public Builder(int employeeNumber) {
+		public Builder(Integer employeeNumber) {
 			this.employeeNumber = employeeNumber;
 		}
 		
@@ -79,7 +79,7 @@ public class Employee implements Entity {
 			return new Employee(this);
 		}
 		
-		public Builder employeeNumber(int employeeNumber) {
+		public Builder employeeNumber(Integer employeeNumber) {
 			this.employeeNumber = employeeNumber;
 			return this;
 		}
@@ -121,6 +121,10 @@ public class Employee implements Entity {
 		
 		public void validate() throws IllegalStateException {
 			StringJoiner sj = new StringJoiner(System.getProperty("line.separator"));
+			
+			if (employeeNumber == null) {
+				sj.add("Employee number cannot be null.");
+			}
 			
 			if (employeeNumber < 0) {
 				sj.add("Employee number cannot be negative.");
