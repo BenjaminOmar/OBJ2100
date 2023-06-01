@@ -1,6 +1,7 @@
 package com.OBJ2100.ExamApp.gui;
 
 import java.awt.Font;
+import javax.swing.JComboBox;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +12,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
 import com.OBJ2100.ExamApp.gui.Listeners.ExecSqlQueryListener;
 import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
 import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener;
+import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -52,15 +55,12 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	 */
 	protected void displayMenuBar() {
 				
-		selectfolderItem.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		    }
-		});
-		
-		writecustomerItem.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		    }
-		});
+	    add(selectfolderItem);
+		FileAccessSettingsPanel folderPanel = new FileAccessSettingsPanel();
+		selectfolderItem.addActionListener(new ChangeFolderListener(folderPanel));
+
+		add(writecustomerItem);
+	    
 		
 		bulkimportItem.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -155,11 +155,3 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
 	
 }
-
-
-
-
-
-
-
-
