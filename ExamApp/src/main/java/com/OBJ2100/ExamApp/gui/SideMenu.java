@@ -7,10 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.OBJ2100.ExamApp.gui.dialogs.ExecSqlQueryDialog;
 import com.OBJ2100.ExamApp.gui.listeners.AboutAppListener;
-import com.OBJ2100.ExamApp.gui.listeners.ExecSqlQueryListener;
 import com.OBJ2100.ExamApp.gui.listeners.ExitListener;
-import com.OBJ2100.ExamApp.gui.listeners.TestDbConnectionListener; 
+import com.OBJ2100.ExamApp.gui.listeners.TestDbConnectionListener;
 
 /**
  * This class holds the side menu for different operations for
@@ -46,7 +46,7 @@ public class SideMenu extends JPanel{
 		add(Box.createVerticalStrut(15));
 		
 		add(ExecSqlQuery);
-		ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
+		ExecSqlQuery.addActionListener(l -> new ExecSqlQueryDialog());
 		add(Box.createVerticalStrut(15));
 
 		add(about);

@@ -1,4 +1,4 @@
-package com.OBJ2100.ExamApp.gui.listeners;
+package com.OBJ2100.ExamApp.gui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -33,7 +33,7 @@ import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
  * The actionPerformed method Overrides the method in the ActionListener Interface.
  * @author 7132
  */
-public class ExecSqlQueryListener implements ActionListener{
+public class ExecSqlQueryDialog extends JDialog {
 	JLabel headerLabel = new JLabel("Write your SQL statement:");
     JPanel panel = new JPanel(new BorderLayout());
     JTextArea textArea = new JTextArea();
@@ -41,15 +41,7 @@ public class ExecSqlQueryListener implements ActionListener{
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     JButton button = new JButton("Execute");
 	
-    @Override
-	public void actionPerformed(ActionEvent e) {
-		SQLPopup();	
-	}
-	
-    /**
-     * Creates the popup where a user can input their sql query.
-     */
-	private void SQLPopup() {
+	public ExecSqlQueryDialog() {
 		panel.add(headerLabel, BorderLayout.NORTH);
 		headerLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 	    buttonPanel.add(button);

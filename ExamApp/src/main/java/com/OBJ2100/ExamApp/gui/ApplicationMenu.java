@@ -14,10 +14,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.OBJ2100.ExamApp.gui.dialogs.AddOrModifyEmployeeDialog;
+import com.OBJ2100.ExamApp.gui.dialogs.ExecSqlQueryDialog;
 import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
 import com.OBJ2100.ExamApp.gui.listeners.AboutAppListener;
 import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
-import com.OBJ2100.ExamApp.gui.listeners.ExecSqlQueryListener;
 import com.OBJ2100.ExamApp.gui.listeners.ExitListener;
 import com.OBJ2100.ExamApp.gui.listeners.TestDbConnectionListener;
 import com.OBJ2100.ExamApp.gui.listeners.WriteToFileListener;
@@ -82,7 +82,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 			testDbCon.addActionListener(new TestDbConnectionListener());
 		 
 		add(ExecSqlQuery);
-			ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
+			ExecSqlQuery.addActionListener(l -> new ExecSqlQueryDialog());
 		
 		add(addOrModifyEmployee);
 		    addOrModifyEmployee.addActionListener(l -> new AddOrModifyEmployeeDialog());
