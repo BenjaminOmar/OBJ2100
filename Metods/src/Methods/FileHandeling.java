@@ -192,7 +192,7 @@ public class FileHandeling {
 				writer.write(s, 0, s.length());
 				writer.newLine();
 				
-				// her burde det vært en tilbakemelding til brukeren om at data er lagret til fil... 
+				// her burde det vï¿½rt en tilbakemelding til brukeren om at data er lagret til fil... 
 				
 				System.out.println("Enter next ID number or " + QUIT + " to quit: ");
 				id = input.nextInt(); 				
@@ -208,7 +208,7 @@ public class FileHandeling {
 	
 	public static void readEmployeeFile() {
 		
-		// OBS denne overskrider tidligere lagret data, dersom det finnes noe i filen fra før av. 
+		// OBS denne overskrider tidligere lagret data, dersom det finnes noe i filen fra fï¿½r av. 
 		Path file = Paths.get("C:\\Temp\\Test3.txt");
 		String s = ""; 
 		
@@ -308,9 +308,13 @@ public class FileHandeling {
 			keyBoard.close();
 		}catch (Exception e) {
 			System.out.println("Error message " + e);
-		}
+		}	
+	}
+
+	public void importOrders(){
+
 		
-		
+
 	}
 }
 
