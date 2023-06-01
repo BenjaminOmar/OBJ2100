@@ -15,10 +15,10 @@ import com.OBJ2100.ExamApp.gui.dialogs.ListAllProductsTableDialog;
 
 public class ReportsAndUpdatesPanel extends JPanel {
 	
-	private final JButton addOrModifyEmployee;
-	private final JButton listAllProducts;
-	private final JButton listAllOffices;
-	private final JButton bulkImportOrders;
+	private JButton addOrModifyEmployee;
+	private JButton listAllProducts;
+	private JButton listAllOffices;
+	private JButton bulkImportOrders;
 	
 	public ReportsAndUpdatesPanel() {
 		setLayout(new FlowLayout());

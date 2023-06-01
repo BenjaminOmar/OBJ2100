@@ -47,12 +47,12 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenu menuHelp = new JMenu("Help");
 	private JMenuItem about = new JMenuItem("About");
 	private JMenu menuOptions = new JMenu("Options");
-	private static JMenuItem darkMode = new JMenuItem("Darkmode");
-	private static boolean darkModeOption = false;
+	private JMenuItem darkMode = new JMenuItem("Darkmode");
+	private boolean darkModeOption = false;
 	private JMenuItem ListCustomers = new JMenuItem("Write customers into file");
 	private JDialog dialog = new JDialog();
-	JPanel panel = new JPanel(new BorderLayout());
-	JPanel listCustomersPanel = new ListCustomersPanel();
+	private JPanel panel = new JPanel(new BorderLayout());
+	private JPanel listCustomersPanel = new ListCustomersPanel();
 		
 	protected ApplicationMenu() {
 		displayMenuBar();
@@ -145,7 +145,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	 * this method updates the background of the windows to dark/light mode
 	 * @author 7132
 	 */
-    private static void updateTheme() {
+    private void updateTheme() {
         try {
             if (darkModeOption) {
                 UIManager.setLookAndFeel(new FlatDarkLaf());

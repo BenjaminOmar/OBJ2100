@@ -37,12 +37,12 @@ import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
  * @author 7132
  */
 public class ExecSqlQueryDialog extends JDialog {
-	JLabel headerLabel = new JLabel("Write your SQL statement:");
-    JPanel panel = new JPanel(new BorderLayout());
-    JTextArea textArea = new JTextArea();
-    JDialog dialog = new JDialog();
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    JButton button = new JButton("Execute");
+	private JLabel headerLabel = new JLabel("Write your SQL statement:");
+	private JPanel panel = new JPanel(new BorderLayout());
+	private JTextArea textArea = new JTextArea();
+	private JDialog dialog = new JDialog();
+	private JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	private JButton button = new JButton("Execute");
 	
     /**
      * This constructor creates the dialog window and calls for the

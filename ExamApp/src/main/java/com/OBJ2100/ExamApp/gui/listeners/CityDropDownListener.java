@@ -18,7 +18,6 @@ import java.util.List;
  * ActionListener implementation that handles the event when the city dropdown is selected.
  * It populates the city dropdown with cities fetched from the database.
  * This listener is used to fetch the available states for selection.
- * 
  * @author 7162
  */
 public class CityDropDownListener implements ActionListener {
@@ -39,7 +38,6 @@ public class CityDropDownListener implements ActionListener {
     /**
      * Handles the action event triggered when the city dropdown is selected.
      * It populates the city dropdown with distinvt cities fetched from the database.
-     *
      * @param e The ActionEvent object.
      */
     @Override
