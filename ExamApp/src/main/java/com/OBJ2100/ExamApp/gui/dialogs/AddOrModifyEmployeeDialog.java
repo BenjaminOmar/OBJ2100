@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.sql.DataSource;
 import javax.swing.JButton;
@@ -264,15 +266,21 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 			
 			DaoFactory daoFactory = new JdbcDaoFactory(connection);
 			if (isNewCheckbox.isSelected()) {
+				employeeNumberComboBox.addItem(savedEmployee.getEmployeeNumber());
+				employees.add(savedEmployee);
 				daoFactory.getEmployeeDao().create(savedEmployee);		
 			} else {
+				OptionalInt index = IntStream.range(0, employees.size())
+					.filter(i -> employees.get(i).getEmployeeNumber() == employeeNumber)
+					.findFirst();
+				if (index.isPresent())
+					employees.set(index.getAsInt(), savedEmployee);
+				
 				daoFactory.getEmployeeDao().updateByEmployeeNumber(
 						employeeNumber, savedEmployee);
 			}
 			
 			successful = true;
-			
-			// TODO : update in text field with saved employee
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
