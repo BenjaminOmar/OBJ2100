@@ -112,22 +112,24 @@ public class ExecSqlQueryListener implements ActionListener{
 	 * @throws SQLException Gets handled where it is used
 	 */
 	private String extractWithCsvFormat(ResultSet rs) throws SQLException {
-		ResultSetMetaData metadata = rs.getMetaData();
-		StringJoiner lineJoiner = new StringJoiner(
-				System.getProperty("line.separator"));
-		while (rs.next()) {
-			StringJoiner columnJoiner = new StringJoiner(";");
-			for (int i = 1; i < metadata.getColumnCount() + 1; i++) {
-				Object object = rs.getObject(i);
-				if (object == null) {
-					columnJoiner.add("null");
-				} else {
-					columnJoiner.add(rs.getObject(i).toString());
-				}
-			}
-			lineJoiner.add(columnJoiner.toString());
-		}
-		return lineJoiner.toString();
+	    ResultSetMetaData metadata = rs.getMetaData();
+	    StringJoiner lineJoiner = new StringJoiner(System.getProperty("line.separator"));
+	    while (rs.next()) {
+	        StringJoiner columnJoiner = new StringJoiner(";");
+	        for (int i = 1; i < metadata.getColumnCount() + 1; i++) {
+	            Object object = rs.getObject(i);
+	            if (object != null && object.toString().contains(",")) {
+	                object = object.toString().replace(',', '.');
+	            }
+	            if (object == null) {
+	                columnJoiner.add("null");
+	            } else {
+	                columnJoiner.add(object.toString());
+	            }
+	        }
+	        lineJoiner.add(columnJoiner.toString());
+	    }
+	    return lineJoiner.toString();
 	}
 	
 	/**
