@@ -1,5 +1,11 @@
 package com.OBJ2100.ExamApp.db.dao;
 
-public interface CustomerDao {
+import java.util.List;
 
+import com.OBJ2100.ExamApp.entities.Customer;
+
+public interface CustomerDao {
+	List<Customer> getAll();
+	List<Customer> getByCity(String city);
+	List<Customer> getByState(String state); 
 }

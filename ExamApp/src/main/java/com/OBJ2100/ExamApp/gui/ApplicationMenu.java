@@ -1,112 +1,130 @@
 package com.OBJ2100.ExamApp.gui;
 
 import java.awt.Font;
+import javax.swing.JComboBox;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.OBJ2100.ExamApp.gui.Listeners.AboutAppListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ExecSqlQueryListener;
+import com.OBJ2100.ExamApp.gui.Listeners.ExitListener;
+import com.OBJ2100.ExamApp.gui.Listeners.TestDbConnectionListener;
+import com.OBJ2100.ExamApp.gui.Listeners.WriteToFileListener;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
+/**
+ * The ApplicationMenu class contains the menu bar for a GUI application.
+ * It contains various menus and menu items with their associated actions.
+ * @author 7131
+ */
+
 public class ApplicationMenu extends JMenuBar implements ActionListener {
 	
-	private JMenu menuFile = null;
-	private JMenuItem dBconnectionItem = null;
-	private JMenuItem exitItem = null;
-	private JMenu menuHelp = null;
-	private JMenuItem optionTip = null;
-	private JMenu menuOptions = null;
-	private static JMenuItem darkMode = null;
+	private JMenu menuFile = new JMenu("File");
+	private JMenuItem selectfolderItem = new JMenuItem("Select folder");
+	private JMenuItem writecustomerItem = new JMenuItem("Write customers into file");
+	private JMenuItem bulkimportItem = new JMenuItem("Bulk import of orders");
+	private JMenuItem Exit = new JMenuItem("Exit application");
+	private JMenu menuDatabase = new JMenu("Database");
+	private JMenuItem ExecSqlQuery = new JMenuItem("Execute SQL Query");
+	private JMenuItem employeeItem = new JMenuItem("Add or modify employee");
+	private JMenuItem listallItem = new JMenuItem("List all products");
+	private JMenuItem officeItem = new JMenuItem("Filter and present offices from a country");
+	private JMenuItem testDbCon = new JMenuItem("Test database connection");
+	private JMenu menuHelp = new JMenu("Help");
+	private JMenuItem about = new JMenuItem("About");
+	private JMenu menuOptions = new JMenu("Options");
+	private static JMenuItem darkMode = new JMenuItem("Darkmode");
 	private static boolean darkModeOption = false;
-	
-	private Font bigFont = new Font("Calibri", Font.PLAIN, 28);
-	private Font smallFont = new Font("Calibri", Font.PLAIN, 24);
-	
+		
 	protected ApplicationMenu() {
 		displayMenuBar();
 	}
 	
+	
 	/**
-	 * Added a options menu to the menu bar. Added the dark mode button to the options menu
-	 * @author 7132
+	 * Displays the menu bar with its menus and menu items.
 	 */
 	protected void displayMenuBar() {
-		UIManager.put("Menu.font", bigFont);
-		UIManager.put("MenuItem.font", smallFont);
+				
+	    add(selectfolderItem);
+		FileAccessSettingsPanel folderPanel = new FileAccessSettingsPanel();
+		selectfolderItem.addActionListener(new ChangeFolderListener(folderPanel));
 
-		menuFile = new JMenu("File");
+		add(writecustomerItem);
+	    
 		
-		dBconnectionItem = new JMenuItem("Test database connection");
-		dBconnectionItem.addActionListener(this);
+		bulkimportItem.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    }
+		});
 		
-		exitItem = new JMenuItem("Exit");
-		exitItem.addActionListener(this);
-		
-		menuFile.add(dBconnectionItem);
-		menuFile.add(exitItem);
+		add(Exit);
+		Exit.addActionListener(new ExitListener());
+		 
+		add(testDbCon);
+			testDbCon.addActionListener(new TestDbConnectionListener());
+		 
+		add(ExecSqlQuery);
+			ExecSqlQuery.addActionListener(new ExecSqlQueryListener());
+		 
+		 employeeItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
+		 
+		 listallItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
+		 
+		 officeItem.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    }
+			});
+		 
+		 add(about);
+			about.addActionListener(new AboutAppListener());
+			
+		/**
+		 * Added the action of switching between light/dark mode on click event.
+		 * @author 7132
+		 */
+		 darkMode.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			        darkModeOption = !darkModeOption;
+			        updateTheme();
+			    }
+			});
 
-		menuHelp = new JMenu("Help");
+		menuFile.add(selectfolderItem);
+		menuFile.add(writecustomerItem);
+		menuFile.add(bulkimportItem);
+		menuFile.add(Exit);
 		
-		optionTip = new JMenuItem("About the application");
-		optionTip.addActionListener(this);
-		menuHelp.add(optionTip);
+		menuDatabase.add(testDbCon);
+		menuDatabase.add(ExecSqlQuery);
+		menuDatabase.add(employeeItem);
+		menuDatabase.add(listallItem);
+		menuDatabase.add(officeItem);
 		
-		menuOptions = new JMenu("Options");
-		darkMode = new JMenuItem("Dark mode");
 		menuOptions.add(darkMode);
-        darkMode.addActionListener(this);
-		menuOptions.add(darkMode);
+		menuHelp.add(about);
 
 		this.add(menuFile);
-		this.add(menuHelp);
+		this.add(menuDatabase);
 		this.add(menuOptions);
+		this.add(menuHelp);
 	}
-	
-	/**
-	 * Actions that are performed upon the clicks on the main menu by the user.
-	 * Added the action of switching between light/dark mode on click event.
-	 * @author 7132
-	 */
-	public void actionPerformed(ActionEvent event) {
-		String arg = event.getActionCommand();
-		if (arg.equals("Test database connection")) {
-			try {
-				// FIXME : missing connection test
-				displayMessage("Connection tested succesfully!");
-			} catch (Exception e) {
-				displayMessage("Error with the connection!");
-			}	
-		}else if (arg.equals("Exit")) {
-			System.exit(0);		
-		}else if (arg.equals("About the application")) {
-			JTextArea helptext = new JTextArea("This is the small application example\n\n- it provides the display of basic functionality\n- You are allowed to use its structure\n- and upgrade it for a higher grade");
-			helptext.setEditable(false);
-			helptext.setOpaque(false);
-			helptext.setFont(bigFont);
-			JOptionPane.showMessageDialog(this, helptext, "About the application", JOptionPane.INFORMATION_MESSAGE);
-		} else if (arg.equals("Dark mode")) {
-            darkModeOption = !darkModeOption;
-            updateTheme();
-		} else if (arg.equals("Light mode")) {
-            darkModeOption = !darkModeOption;
-            updateTheme();
-		}
-	}
-
-	// simple method that display option pane with the provided message
-	private void displayMessage(String message) {
-		UIManager.put("OptionPane.messageFont", bigFont);
-		UIManager.put("OptionPane.buttonFont", bigFont);
-		JOptionPane.showMessageDialog(this, message);
-	}
-	
+		
 	/**
 	 * this method updates the background of the windows to dark/light mode
 	 * @author 7132
@@ -128,15 +146,12 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
 	
 	
 	
 }
-
-
-
-
-
-
-
-
