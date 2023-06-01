@@ -36,20 +36,11 @@ public class ChangeFolderListener implements ActionListener {
         if (selectedFolder != null) {
             // Update the folder path label with the selected folder
         	DocumentsManager.setFolderPath(selectedFolder);
-            folderPanel.getFolderPath().setText("  Current folder: " + selectedFolder); //??
+            folderPanel.getFolderPathLabel().setText("  Current folder: " + selectedFolder); //??
             // Check if the text needs to be truncated
             folderPanel.checkTextLength();
         }
 
     }
 
-    /**
-     * Returns the selected folder.
-     *
-     * @return the selected folder as a String
-     */
-
-    public String getSelectedFolder() {
-        return folderPanel.getFolderPath().getText();
-    }
 }

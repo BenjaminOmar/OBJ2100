@@ -55,7 +55,7 @@ public class FileAccessSettingsPanel extends JPanel {
 	 * @return the folder path label
 	 */
 
-	public JLabel getFolderPath() {
+	public JLabel getFolderPathLabel() {
 		return folderPathLabel;
 	}
 
