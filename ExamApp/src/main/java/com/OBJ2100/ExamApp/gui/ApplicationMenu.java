@@ -43,7 +43,6 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JMenuItem ExecSqlQuery = new JMenuItem("Execute SQL Query");
 	private JMenuItem addOrModifyEmployee = new JMenuItem("Add or modify employee");
 	private JMenuItem listAllProducts = new JMenuItem("List all products");
-	private JMenuItem listAllOffices = new JMenuItem("Filter and present offices from a country");
 	private JMenuItem testDbCon = new JMenuItem("Test database connection");
 	private JMenu menuHelp = new JMenu("Help");
 	private JMenuItem about = new JMenuItem("About");
@@ -54,6 +53,11 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JDialog dialog = new JDialog();
 	private JPanel panel = new JPanel(new BorderLayout());
 	private JPanel listCustomersPanel = new ListCustomersPanel();
+	
+	private JMenuItem ListOffices = new JMenuItem("List and present all offices");
+	private JDialog dialogOffices = new JDialog();
+	private JPanel panelOffices = new JPanel(new BorderLayout());
+	private JPanel FilterAndPresentOfficesPanel = new FilterAndPresentOfficesPanel();
 		
 	
 	/**
@@ -92,10 +96,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		    
 		add(listAllProducts);
 		    listAllProducts.addActionListener(l -> new ListAllProductsTableDialog());
-			
-		add(listAllOffices);
-			listAllOffices.addActionListener(l -> new ListAllOfficesTableDialog());
-	
+				
 		add(about);
 			about.addActionListener(new AboutAppListener());
 			
@@ -134,6 +135,20 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		menuFile.add(ListCustomers);
 		menuFile.add(bulkImportOrders);
 		menuFile.add(exit);
+
+		ListOffices.addActionListener(new ActionListener() {
+
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	panelOffices.add(FilterAndPresentOfficesPanel);
+				dialogOffices.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialogOffices.setSize(400, 200);
+				dialogOffices.setContentPane(panelOffices);
+				dialogOffices.setLocationRelativeTo(null);
+				dialogOffices.setVisible(true);
+				dialogOffices.setAlwaysOnTop(false);
+		    }
+		});
 		
 		// Adds test database connection, execute SQL query, add or modify employee
 		// list all products, and filter and present offices from a country to the 
@@ -142,7 +157,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 		menuDatabase.add(ExecSqlQuery);
 		menuDatabase.add(addOrModifyEmployee);
 		menuDatabase.add(listAllProducts);
-		menuDatabase.add(listAllOffices);
+		menuDatabase.add(ListOffices);
 		
 		// Adds darkmode to the options menu
 		menuOptions.add(darkMode);
