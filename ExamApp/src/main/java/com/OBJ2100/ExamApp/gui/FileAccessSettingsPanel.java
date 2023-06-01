@@ -12,7 +12,8 @@ import java.io.File;
 import com.OBJ2100.ExamApp.gui.Listeners.ChangeFolderListener;
 
 /**
- * A panel that displays file access settings.
+ * The FileAccessSettingsPanel class extends JPanel and represents a 
+ * panel that displays file access settings.
  * 
  * @author 7162
  */
@@ -24,6 +25,10 @@ public class FileAccessSettingsPanel extends JPanel {
 
 	/**
 	 * Constructs a FileAccessSettingsPanel.
+	 * 	 
+	 * This constructor initializes the FileAccessSettingsPanel by setting its preferred size, 
+	 * creating a titled border, and setting its layout.
+	 * It also creates and adds the "Change Folder" button and the folderPath label to the panel.
 	 */
 	public FileAccessSettingsPanel() {
 

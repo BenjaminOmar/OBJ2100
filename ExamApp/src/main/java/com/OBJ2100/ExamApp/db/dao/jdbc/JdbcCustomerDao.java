@@ -64,39 +64,69 @@ public class JdbcCustomerDao extends JdbcDao<Customer> implements CustomerDao {
 				.creditLimit(creditLimit)
 				.build();
 	}
+	
+	/**
+	 * Retrieves a list of customers based on their city.
+	 *
+	 * @param city, the city to search for.
+	 * @return A list of customers in the specified city.
+	 * @author 7162
+	 */
 
 	@Override
 	public List<Customer> getByCity(String city){
+		// Create a new ArrayList to store the customers
 		List<Customer> customers = new ArrayList<>();
 
 		try(PreparedStatement s = connection.prepareStatement("SELECT * FROM customers WHERE city = ?")){
+			// Set the value of the first parameter in the prepared statement as the provided city
 			s.setString(1, city);
+			 // Execute the query and get the result set
 			ResultSet rs = s.executeQuery();
+			// Iterate over each row in the result set
 			while (rs.next()){
+				// Extract customer entity from the result set and add it to the list
 				customers.add(extractEntity(rs));
 			}
+			// Close the prepared statement
 			s.close();
 		}catch (SQLException e){
+			// Print the stack trace if a SQLException occurs
 			e.printStackTrace();
 		}
+		// Return the list of customers
 		return customers; 
 	}
+	
+	/**
+	 * Retrieves a list of customers based on their state.
+	 *
+	 * @param state, the state to search for.
+	 * @return A list of customers in the specified state.
+	 * @author 7162
+	 */
 
 	@Override  
 	public List<Customer> getByState(String state) {
+		// Create a new ArrayList to store the customers
         List<Customer> customers = new ArrayList<>();
-
         try (PreparedStatement s = connection.prepareStatement("SELECT * FROM customers WHERE state = ?")) {
+        	// Set the value of the first parameter in the prepared statement as the provided state
         	s.setString(1, state);
+        	// Execute the query and get the result set
             ResultSet rs = s.executeQuery();
+         // Iterate over each row in the result set
             while (rs.next()) {
+            	//Extract customer entity from the result set and add it to the list
                 customers.add(extractEntity(rs));
             }
+         // Close the prepared statement
             s.close();
         } catch (SQLException e) {
+        	// Print the stack trace if a SQLException occurs
             e.printStackTrace();
         }
-
+     // Return the list of customers
         return customers;
     }
 }

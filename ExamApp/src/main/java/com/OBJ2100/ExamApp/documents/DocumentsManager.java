@@ -17,12 +17,16 @@ public class DocumentsManager implements IDocumentsManager {
      */	
 	@Override
 	public void writeToFile(String text, File file) throws IOException {
+		// Declare a variable to hold the BufferedWriter instance
 		BufferedWriter writer = null;
 
 		try {
+			// Create a BufferedWriter and open the specified file for writing
 			writer = new BufferedWriter(new FileWriter(file));
+			// Write the provided text to the file
 			writer.write(text);
 		} finally {
+			// Close the writer to ensure that all data is written and resources are released
 			if (writer != null) {
 				writer.close();
 			}

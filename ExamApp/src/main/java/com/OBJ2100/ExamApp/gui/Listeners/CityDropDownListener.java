@@ -4,8 +4,6 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.CustomerDao;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
-import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcCustomerDao;
-import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcDao;
 import com.OBJ2100.ExamApp.entities.Customer;
 import javax.sql.DataSource;
 import javax.swing.*;
@@ -16,22 +14,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * ActionListener implementation that handles the event when the city dropdown is selected.
+ * It populates the city dropdown with cities fetched from the database.
+ * This listener is used to fetch the available states for selection.
+ * 
+ * @author 7162
+ */
 public class CityDropDownListener implements ActionListener {
     private JComboBox<String> dropdownCity;
     private List<String> cities;
-
+    
+    /**
+     * Constructs a CityDropDownListener with the specified dropdownState.
+     *
+     * @param dropdownCity The JComboBox component for city dropdown.
+     */
     public CityDropDownListener(JComboBox<String> dropdownCity) {
         this.dropdownCity = dropdownCity;
         this.cities = null;
     }
-
+    
+    
+    /**
+     * Handles the action event triggered when the city dropdown is selected.
+     * It populates the city dropdown with distinvt cities fetched from the database.
+     *
+     * @param e The ActionEvent object.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-    	if (cities != null) return;
+    	if (cities != null) return; // Do nothing if cities are already populated
         populateCityDropdown();       
     }
     
+    /**
+     * Populates the city dropdown with cities fetched from the database.
+     */
     private void populateCityDropdown() {
     	DataSource source = DataSourceFactory.getMySqlDataSource();
 		try (Connection connection = source.getConnection()) {
@@ -46,43 +65,17 @@ public class CityDropDownListener implements ActionListener {
                 String city = customer.getCity();
                  if (!cities.contains(city)){
                     cities.add(city); 
-                }
-             }
+            }
+        }
 
-            dropdownCity.removeAllItems();
-            for (String city : cities) {;
+        dropdownCity.removeAllItems();
+        	for (String city : cities) {;
 				dropdownCity.addItem(city);
             }
 
 		} catch (SQLException err) {
 			err.printStackTrace();			
 		}
-    }
-
-     public static void main(String[] args) {
-        // Opprett en JComboBox for testing
-        JComboBox<String> dropdownCity = new JComboBox<>();
-
-        // Opprett en CityDropDownListener og koble den til JComboBox
-        CityDropDownListener listener = new CityDropDownListener(dropdownCity);
-        dropdownCity.addActionListener(listener);
-
-        // Opprett en JFrame og legg til JComboBox i innholdspanelet
-        JFrame frame = new JFrame("City Drop Down Listener Test");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(dropdownCity);
-        frame.pack();
-        frame.setVisible(true);
-
-        DataSource source = DataSourceFactory.getMySqlDataSource();
-    try (Connection connection = source.getConnection()) {
-        List<Customer> customers = new JdbcCustomerDao(connection).getAll();
-        for (Customer customer : customers) {
-            System.out.println(customer);
-        }
-    } catch (SQLException err) {
-        err.printStackTrace();
-    }
     }
 }
 
