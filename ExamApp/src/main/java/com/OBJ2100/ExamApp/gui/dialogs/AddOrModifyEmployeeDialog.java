@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.sql.DataSource;
 import javax.swing.JButton;
@@ -59,7 +61,7 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 	private List<Employee> employees;
 	private Map<EmployeeDetail, JTextField> fieldByEmployeeDetail = new HashMap<>();
 	
-	private JComboBox<String> employeeNumberComboBox;
+	private JComboBox<Integer> employeeNumberComboBox;
 	private JCheckBox isNewCheckbox;
 	private JComboBox<Integer> reportsToComboBox;
 	private JCheckBox notReportingCheckbox;
@@ -95,11 +97,11 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 	private void populateFieldsWithSelected() {
 		if (employeeNumberComboBox == null) return;
 		
-		String employeeNumber = (String) employeeNumberComboBox.getSelectedItem();
-		if (employeeNumber.equals("")) return;
+		Integer employeeNumber = (Integer) employeeNumberComboBox.getSelectedItem();
+		if (employeeNumber == null) return;
 		
 		Employee employee = employees.stream()
-				.filter(emp -> emp.getEmployeeNumber() == Integer.parseInt(employeeNumber))
+				.filter(emp -> employeeNumber.equals(emp.getEmployeeNumber()))
 				.findFirst().orElse(null);
 		if (employee == null) return;
 		
@@ -113,10 +115,10 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		Integer reportsTo = employee.getReportsTo();
 		if (reportsTo == null) {
 			notReportingCheckbox.setSelected(true);
-			reportsToComboBox.setSelectedItem(Integer.valueOf(employeeNumber));
+			reportsToComboBox.setSelectedItem(employeeNumber);
 		} else {
 			if (notReportingCheckbox.isSelected())
-				notReportingCheckbox.setSelected(false); 
+				notReportingCheckbox.setSelected(false);
 			reportsToComboBox.setSelectedItem(employee.getReportsTo());
 		}
 	}
@@ -130,9 +132,9 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 			
 			if (detail.equals(EmployeeDetail.NUMBER)) {
 				JPanel whenUpdatingEmployee = new JPanel();
-				String[] allEmployeeNumbers = employees.stream()
-						.map(e -> String.valueOf(e.getEmployeeNumber()))
-						.toArray(String[]::new);
+				Integer[] allEmployeeNumbers = employees.stream()
+						.map(e -> e.getEmployeeNumber())
+						.toArray(Integer[]::new);
 				employeeNumberComboBox = new JComboBox<>(allEmployeeNumbers);
 				employeeNumberComboBox.addActionListener(l -> populateFieldsWithSelected());
 				whenUpdatingEmployee.add(employeeNumberComboBox);
@@ -236,49 +238,57 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 	}
 	
 	private void saveCurrentEmployee() {
-		new SwingWorker<Void, Void>() {
-			@Override
-			protected Void doInBackground() {
-				saveButton.setEnabled(false);
+		boolean successful = false; 
+		
+		DataSource source = DataSourceFactory.getMySqlDataSource();
+		try (Connection connection = source.getConnection()) {
+			Map<EmployeeDetail, String> byDetail = fieldByEmployeeDetail.entrySet()
+					.stream()
+					.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
+			
+			EmployeeOperation operation = getCurrentOperation();
+			Integer employeeNumber = (operation == EmployeeOperation.UPDATING) ?
+				(Integer) employeeNumberComboBox.getSelectedItem() : Integer.valueOf(byDetail.get(EmployeeDetail.NUMBER));
+			
+			Integer reportsTo = notReportingCheckbox.isSelected() ? 
+					null : (int) reportsToComboBox.getSelectedItem();
+			
+			Employee savedEmployee = new Employee.Builder()
+					.employeeNumber(employeeNumber)
+					.lastName(byDetail.get(EmployeeDetail.LAST_NAME))
+					.firstName(byDetail.get(EmployeeDetail.FIRST_NAME))
+					.extension(byDetail.get(EmployeeDetail.EXTENSION))
+					.email(byDetail.get(EmployeeDetail.EMAIL))
+					.officeCode(byDetail.get(EmployeeDetail.OFFICE_CODE))
+					.reportsTo(reportsTo)
+					.jobTitle(byDetail.get(EmployeeDetail.JOB_TITLE))
+					.build();
+			
+			DaoFactory daoFactory = new JdbcDaoFactory(connection);
+			if (isNewCheckbox.isSelected()) {
+				employeeNumberComboBox.addItem(savedEmployee.getEmployeeNumber());
+				employees.add(savedEmployee);
+				daoFactory.getEmployeeDao().create(savedEmployee);		
+			} else {
+				OptionalInt index = IntStream.range(0, employees.size())
+					.filter(i -> employees.get(i).getEmployeeNumber() == employeeNumber)
+					.findFirst();
+				if (index.isPresent())
+					employees.set(index.getAsInt(), savedEmployee);
 				
-				DataSource source = DataSourceFactory.getMySqlDataSource();
-				try (Connection connection = source.getConnection()) {
-					Map<EmployeeDetail, String> byDetail = fieldByEmployeeDetail.entrySet()
-							.stream()
-							.collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getText()));
-					
-					EmployeeOperation operation = getCurrentOperation();
-					int employeeNumber = (operation.equals(EmployeeOperation.ADDING)) ?
-						(int) employeeNumberComboBox.getSelectedItem() : Integer.valueOf(byDetail.get(EmployeeDetail.NUMBER));
-					
-					Integer reportsTo = notReportingCheckbox.isSelected() ? 
-							null : (int) reportsToComboBox.getSelectedItem();
-					
-					Employee savedEmployee = new Employee.Builder()
-							.employeeNumber(employeeNumber)
-							.lastName(byDetail.get(EmployeeDetail.LAST_NAME))
-							.firstName(byDetail.get(EmployeeDetail.FIRST_NAME))
-							.extension(byDetail.get(EmployeeDetail.EXTENSION))
-							.email(byDetail.get(EmployeeDetail.EMAIL))
-							.officeCode(byDetail.get(EmployeeDetail.OFFICE_CODE))
-							.reportsTo(reportsTo)
-							.jobTitle(byDetail.get(EmployeeDetail.JOB_TITLE))
-							.build();
-					
-					DaoFactory daoFactory = new JdbcDaoFactory(connection);
-					daoFactory.getEmployeeDao().create(savedEmployee);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				
-				return null;
+				daoFactory.getEmployeeDao().updateByEmployeeNumber(
+						employeeNumber, savedEmployee);
 			}
 			
-			@Override
-			protected void done() {
-				saveButton.setEnabled(true);
-				MessageHelper.displayMessage("Update", "Employee updated successfully!");
-			}
-		}.execute();
+			successful = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (successful) {
+			MessageHelper.displayMessage("Employee updated successfully!", "Success");
+		} else {
+			MessageHelper.displayMessage("Could not save employee. Please try again.", "Error");
+		}
 	}
 }
