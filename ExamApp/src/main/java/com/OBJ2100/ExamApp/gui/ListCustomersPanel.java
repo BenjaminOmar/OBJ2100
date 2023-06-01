@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -35,7 +34,7 @@ public class ListCustomersPanel extends JPanel {
     private final JLabel byCityLabel;
     private final JComboBox<String> dropdownCity;
     private final JRadioButton byStateRadioButton;
-    private final JLabel byStateLabel;
+	private final JLabel byStateLabel;
     private final JComboBox<String> dropdownState;
     private final JButton writeToFileButton;
     private final ButtonGroup radioButtonGroup;
@@ -123,7 +122,7 @@ public class ListCustomersPanel extends JPanel {
         byStateRadioButton.addActionListener(stateListener);
         byStateRadioButton.addActionListener(new StateDropdownListener(dropdownState));
         
-        writeToFileListener = new WriteToFileListener(dropdownCity, dropdownState);
+        writeToFileListener = new WriteToFileListener(this);
         writeToFileButton.addActionListener(writeToFileListener);        
        
        
@@ -137,4 +136,12 @@ public class ListCustomersPanel extends JPanel {
         return dropdownState;
     }
 
+    public JRadioButton getByCityRadioButton() {
+    	return byCityRadioButton;
+    }
+
+    public JRadioButton getByStateRadioButton() {
+		return byStateRadioButton;
+	}
+    
 }

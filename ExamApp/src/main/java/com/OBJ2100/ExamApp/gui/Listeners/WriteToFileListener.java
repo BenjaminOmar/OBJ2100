@@ -1,37 +1,39 @@
 package com.OBJ2100.ExamApp.gui.Listeners;
 
-import com.OBJ2100.ExamApp.db.DataSourceFactory;
-import com.OBJ2100.ExamApp.db.dao.CustomerDao;
-import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
-import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
-import com.OBJ2100.ExamApp.documents.DocumentsManager;
-import com.OBJ2100.ExamApp.documents.IDocumentsManager;
-import com.OBJ2100.ExamApp.entities.Customer;
-
-import javax.sql.DataSource;
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.sql.DataSource;
+import javax.swing.JOptionPane;
+
+import com.OBJ2100.ExamApp.db.DataSourceFactory;
+import com.OBJ2100.ExamApp.db.dao.CustomerDao;
+import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
+import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
+import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import com.OBJ2100.ExamApp.entities.Customer;
+import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
 
 public class WriteToFileListener implements ActionListener {
 
-    private JComboBox<String> dropdownCity;
-    private JComboBox<String> dropdownState;
+	private ListCustomersPanel panel;
 
-    public WriteToFileListener(JComboBox<String> dropdownCity, JComboBox<String> dropdownState) {
-        this.dropdownCity = dropdownCity;
-        this.dropdownState = dropdownState;
+    public WriteToFileListener(ListCustomersPanel panel) {
+        this.panel = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String selectedCity = (String) dropdownCity.getSelectedItem();
-        String selectedState = (String) dropdownState.getSelectedItem();
+        String selectedCity = (String) panel.getDropdownCity().getSelectedItem();
+        String selectedState = (String) panel.getDropdownState().getSelectedItem();
 
         List<Customer> matchingCustomers = getMatchingCustomers(selectedCity, selectedState);
 
@@ -59,18 +61,33 @@ public class WriteToFileListener implements ActionListener {
             }
         	String customersData = sb.toString();
         	
-            IDocumentsManager documentsManager = new DocumentsManager();
-            String timestamp = Long.toString(System.currentTimeMillis()); 
-            File file = new File(DocumentsManager.getFolderPath() + timestamp + ".csv");
+            File file = new File(DocumentsManager.getFolderPath(), generateFilename());
             
             try {
-                documentsManager.writeToFile(customersData, file);
+            	DocumentsManager manager = new DocumentsManager();
+                manager.writeToFile(customersData, file);
                 JOptionPane.showMessageDialog(null, "Customer list written to file.");
             } catch (IOException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error writing to file");
             }
         }
+    }
+    
+    private String generateFilename() {
+    	String chosenCityOrState = null;
+    	if (panel.getByCityRadioButton().isSelected())
+    		chosenCityOrState = "city";
+    	else if (panel.getByStateRadioButton().isSelected())
+    		chosenCityOrState = "state";
+    	
+    	String timestamp = LocalDateTime.now()
+				.format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
+    	
+    	String name = Arrays.asList("customers", chosenCityOrState, timestamp).stream()
+    			.filter(s -> s != null && s.length() > 0)
+    			.collect(Collectors.joining("-"));
+    	return String.format("%s.csv", name);
     }
 
     private List<Customer> getMatchingCustomers(String city, String state) {
