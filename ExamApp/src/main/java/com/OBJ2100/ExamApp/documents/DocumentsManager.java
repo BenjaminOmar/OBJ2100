@@ -4,10 +4,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JLabel;
 
 public class DocumentsManager implements IDocumentsManager {
+	
+	public static final DateTimeFormatter DEFAULT_TIMESTAMP_FORMATTER = 
+			DateTimeFormatter.ofPattern("d_MMM_uuuu-HH_mm_ss");
 
 	private static String folderPath = getDefaultFolderPath();
 	
