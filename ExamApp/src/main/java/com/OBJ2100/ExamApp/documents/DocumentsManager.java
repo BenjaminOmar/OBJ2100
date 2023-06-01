@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
+/**
+ * This class handles reading and writing to files
+ * @author 7162
+ */
 public class DocumentsManager implements IDocumentsManager {
 	
 	public static final DateTimeFormatter DEFAULT_TIMESTAMP_FORMATTER = 

@@ -29,9 +29,11 @@ import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
- * Created an ActionListener. This will be used in the sidemenu
- * and the application menu.
- * The actionPerformed method Overrides the method in the ActionListener Interface.
+ * This class creates a dialog box where a user can input SQL queries.
+ * If the user does a SELECT statement, a csv file with the result will be 
+ * created and stored in the application-chosen folder. If the SQL statement
+ * does any other operation, it will be executed and the user will get a
+ * response from a message popup.
  * @author 7132
  */
 public class ExecSqlQueryDialog extends JDialog {
@@ -42,6 +44,10 @@ public class ExecSqlQueryDialog extends JDialog {
     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     JButton button = new JButton("Execute");
 	
+    /**
+     * This constructor creates the dialog window and calls for the
+     * executeSQLQuery method on button click.
+     */
 	public ExecSqlQueryDialog() {
 		panel.add(headerLabel, BorderLayout.NORTH);
 		headerLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -67,6 +73,7 @@ public class ExecSqlQueryDialog extends JDialog {
 	        }
 	    });
 	}
+	
 	/**
 	 * This method executes the sql query based on the users input.
 	 * If the query is a SELECT statement, the infomation gets extraced and
@@ -127,7 +134,7 @@ public class ExecSqlQueryDialog extends JDialog {
 	
 	/**
 	 * Creates a new document with a generated filename.
-	 * @param text Takes the formatted Cvs String.
+	 * @param text Takes in the formatted Csv String.
 	 */
 	private void exportResultsToCsvFile(String text) {
 		try {
@@ -140,10 +147,11 @@ public class ExecSqlQueryDialog extends JDialog {
 	
 	/**
 	 * This method generates a filename.
-	 * @return Generated filename.
+	 * @return Generated filename with a timestamp at the end.
 	 */
 	private static String generateFilename() {
-		String timestamp = LocalDateTime.now().format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
+		String timestamp = LocalDateTime.now()
+				.format(DocumentsManager.DEFAULT_TIMESTAMP_FORMATTER);
 		return String.format("query-%s.csv", timestamp);
 	}
 

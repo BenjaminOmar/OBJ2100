@@ -5,6 +5,11 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+/**
+ * This class handles and holds the folder path configurations used within
+ * the project.
+ * @author 7132
+ */
 public class FolderManager {
     
 	private static String folderPath = getDefaultFolderPath();
