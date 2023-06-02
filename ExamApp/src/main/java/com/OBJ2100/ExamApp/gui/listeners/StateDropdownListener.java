@@ -32,8 +32,8 @@ public class StateDropdownListener implements ActionListener {
      *
      * @param dropdownState The JComboBox representing the state dropdown.
      */
-	public StateDropdownListener(JComboBox<String> dropdownSate) {
-        this.dropdownState = dropdownSate;
+	public StateDropdownListener(JComboBox<String> dropdownState) {
+        this.dropdownState = dropdownState;
         this.states = null;
     };
     
