@@ -54,18 +54,17 @@ public class FilterAndPresentOfficesListener implements ActionListener {
     		   DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     		   // Populate the model with customer data
     		   for (Office office : matchingOffices) {
-                   Object[] rowData = {
-                		   office.getOfficeCode(),
-                		   office.getCity(),
-                		   office.getPhone(),
-                		   office.getAddressLine1(),
-                		   office.getAddressLine2(),
-                		   office.getCity(),
-                           office.getState(),
-                           office.getCountry(), 
-                           office.getPostalCode(), 
-                           office.getTerritory()
-                   };
+    			   Object[] rowData = {
+    					    office.getOfficeCode(),
+    					    office.getCity(),
+    					    office.getPhone(),
+    					    office.getAddressLine1(),
+    					    office.getAddressLine2(),
+    					    office.getState(),
+    					    office.getCountry(),
+    					    office.getPostalCode(),
+    					    office.getTerritory()
+    					};
                    model.addRow(rowData);
                }
     		   //Create a table using the mode and configure it
@@ -74,7 +73,7 @@ public class FilterAndPresentOfficesListener implements ActionListener {
                
             // Create a scroll pane for the table and set its size
                JScrollPane scrollPane = new JScrollPane(table);
-               scrollPane.setPreferredSize(new Dimension(1500, 600));
+               scrollPane.setPreferredSize(new Dimension(1300, 600));
                
                JOptionPane.showMessageDialog(null, scrollPane, "Matching Countries", JOptionPane.INFORMATION_MESSAGE);
     	   }

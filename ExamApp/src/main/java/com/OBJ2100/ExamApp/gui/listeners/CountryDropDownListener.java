@@ -33,31 +33,28 @@ public class CountryDropDownListener implements ActionListener{
 	    }
 	 
 	 private void populateCountryDropdown() {
-	    	DataSource source = DataSourceFactory.getMySqlDataSource();
-			try (Connection connection = source.getConnection()) {
-				DaoFactory daoFactory = new JdbcDaoFactory(connection);
-				OfficeDao officeDao = daoFactory.getOfficeDao();
-				
-				List<Office> offices = officeDao.getAll();
-	            
-	            List<String> countries = new ArrayList<>();
+		    DataSource source = DataSourceFactory.getMySqlDataSource();
+		    try (Connection connection = source.getConnection()) {
+		        DaoFactory daoFactory = new JdbcDaoFactory(connection);
+		        OfficeDao officeDao = daoFactory.getOfficeDao();
 
-	            for (Office office : offices){
-	                String country = office.getCountry();
-	                 if (!offices.contains(office)){
-	                    offices.add(office); 
-	            }
-	        }
+		        List<Office> offices = officeDao.getAll();
 
-	        dropdownCountry.removeAllItems();
-	        	for (String country : countries) {;
-	        	dropdownCountry.addItem(country);
-	            }
+		        List<String> countries = new ArrayList<>();
 
-			} catch (SQLException err) {
-				err.printStackTrace();			
-			}
-	    }
-	    
+		        for (Office office : offices) {
+		            String country = office.getCountry();
+		            if (!countries.contains(country)) {
+		                countries.add(country);
+		            }
+		        }
 
+		        dropdownCountry.removeAllItems();
+		        for (String country : countries) {
+		            dropdownCountry.addItem(country);
+		        }
+		    } catch (SQLException err) {
+		        err.printStackTrace();
+		    }
+		}    
 }
