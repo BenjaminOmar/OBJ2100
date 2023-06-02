@@ -23,6 +23,7 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.entities.Order;
+import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 
 /**
  * A listener for importing orders from a CSV file.
@@ -83,12 +84,20 @@ public class ImportCsvListener implements ActionListener {
 			e.printStackTrace();
 		}
 		
+		boolean success = false;
+		
 		DataSource source = DataSourceFactory.getMySqlDataSource();
 		try (Connection connection = source.getConnection()) {
 			DaoFactory daoFactory = new JdbcDaoFactory(connection);
-			daoFactory.getOrderDao().createMany(orders);
+			success = daoFactory.getOrderDao().createMany(orders);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		
+		if (success) {
+			MessageHelper.displayMessage("Successfully imported from CSV file!", "Success");
+		} else {
+			MessageHelper.displayMessage("Could not import data to the database. Please try again.", "Error");
 		}
 	}    
 }

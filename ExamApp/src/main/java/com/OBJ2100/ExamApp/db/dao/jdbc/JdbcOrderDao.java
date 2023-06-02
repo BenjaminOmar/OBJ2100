@@ -23,9 +23,10 @@ public class JdbcOrderDao extends JdbcDao<Order> implements OrderDao {
 	}
 
 	@Override
-	public void createMany(List<Order> orders) {
+	public boolean createMany(List<Order> orders) {
 		String query = "INSERT INTO orders (orderNumber, orderDate, requiredDate, shippedDate, status, comments, customerNumber)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			int counter = 0;
 			for (Order o : orders) {
@@ -41,9 +42,13 @@ public class JdbcOrderDao extends JdbcDao<Order> implements OrderDao {
 				if (counter % 100 == 0)
 					ps.executeBatch();
 			}
+			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 	
 	@Override
