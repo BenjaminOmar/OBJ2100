@@ -14,6 +14,12 @@ import javax.swing.JRadioButton;
 import com.OBJ2100.ExamApp.gui.listeners.FilterAndPresentOfficesListener;
 import com.OBJ2100.ExamApp.gui.listeners.CountryDropDownListener;
 
+/**
+ * This panel presents a dropown menu with options to choose witch country
+ * to filter the offices. It presents the results in a table popup.
+ * @author 7162, 7132
+ *
+ */
 public class FilterAndPresentOfficesPanel extends JPanel {
 	
 	private JLabel byCountryLabel;
@@ -65,7 +71,10 @@ public class FilterAndPresentOfficesPanel extends JPanel {
          
 	}
 	
-	
+	/**
+	 * This method grabs the value of the picked country in the dropdown menu
+	 * @return dropdownCountry(String) The value of the picked country in the dropdown.
+	 */
     public JComboBox<String> getDropdownCountry() {
         return dropdownCountry;
     }
