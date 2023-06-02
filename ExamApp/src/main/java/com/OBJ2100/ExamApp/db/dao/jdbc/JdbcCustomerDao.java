@@ -16,6 +16,12 @@ import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.entities.Customer;
 
+/**
+ * DAO implementation for customers. 
+ * 
+ * @author 7154, 7138, 7162
+ *
+ */
 public class JdbcCustomerDao extends JdbcDao<Customer> implements CustomerDao {
 	
 	public JdbcCustomerDao(Connection connection) {

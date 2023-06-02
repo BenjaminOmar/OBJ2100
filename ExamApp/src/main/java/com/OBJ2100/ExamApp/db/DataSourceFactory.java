@@ -8,6 +8,16 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
+/**
+ * A pseudo-factory for DataSource implementations.
+ * 
+ *  By abstracting the source data is fetched from,
+ *  we allow for easily switching out sources as needed
+ *  (provided a configuration file exists for that source).
+ * 
+ * @author 7154 
+ *
+ */
 public class DataSourceFactory {
 	private static DataSource source;
 

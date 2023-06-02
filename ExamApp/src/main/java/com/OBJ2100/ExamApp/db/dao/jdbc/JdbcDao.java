@@ -4,6 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DAO implementation for a specific entity.
+ * 
+ * @author 7154
+ *
+ * @param <T>
+ */
 public abstract class JdbcDao<T> {
 	
 	protected Connection connection;

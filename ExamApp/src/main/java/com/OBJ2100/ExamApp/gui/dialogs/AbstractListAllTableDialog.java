@@ -14,11 +14,16 @@ import javax.swing.JTable;
 import javax.swing.SwingWorker;
 
 import com.OBJ2100.ExamApp.db.DataSourceFactory;
-import com.OBJ2100.ExamApp.db.dao.ProductDao;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
-import com.OBJ2100.ExamApp.entities.Product;
 
+/**
+ * Represents a dialog with a table listing all values for a specific entity. 
+ * 
+ * @author 7154
+ *
+ * @param <T> the specific entity
+ */
 public abstract class AbstractListAllTableDialog<T> extends JDialog {
 	protected String[] columns;
 	protected List<T> entities;
@@ -71,14 +76,35 @@ public abstract class AbstractListAllTableDialog<T> extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Returns entities data as a 2D array of objects.
+	 * 
+	 * @return the 2D array of objects
+	 * @author 7154
+	 */
 	protected Object[][] toTableData() {
 		Object[][] data = entities.stream()
 				.map(this::extractOne)
 				.toArray(Object[][]::new);
-		
 		return data;
 	}
 	
+	/**
+	 * Fetches and returns values for a specific entity type.
+	 * 
+	 * @param daoFactory the DAO factory used to fetch entities
+	 * @return the entities fetched
+	 * @throws SQLException
+	 * @author 7154
+	 */
 	abstract protected List<T> fetchEntities(DaoFactory daoFactory) throws SQLException;
+	
+	/**
+	 * Extract values from an instance of one specific entity.
+	 * 
+	 * @param entity the entity to extract values from
+	 * @return the values as an object array
+	 * @author 7154
+	 */
 	abstract protected Object[] extractOne(T entity);
 }

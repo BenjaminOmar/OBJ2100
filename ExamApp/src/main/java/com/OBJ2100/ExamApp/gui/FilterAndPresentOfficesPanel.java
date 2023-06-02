@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import com.OBJ2100.ExamApp.gui.listeners.FilterAndPresentOfficesListener;
 import com.OBJ2100.ExamApp.gui.listeners.CountryDropDownListener;

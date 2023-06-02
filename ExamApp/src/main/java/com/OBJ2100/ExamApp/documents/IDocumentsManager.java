@@ -4,17 +4,12 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * implementation of functionalities required to access the file system
+ * Abstraction for file handling functionalities.
  */
 public interface IDocumentsManager {
     
 	/**
-     *  writes string to file
+     *  Writes text to specific file.
      */
-    void writeToFile(String text, File file) throws IOException ;
-
-    /**
-     * reads content of the file located on the provided path
-     */
-    String readFromFile(File file) throws IOException ;
+    void writeToFile(String text, File file) throws IOException;
 }

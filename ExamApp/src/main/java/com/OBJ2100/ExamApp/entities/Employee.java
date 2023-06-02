@@ -55,6 +55,12 @@ public class Employee implements Entity {
 		return jobTitle;
 	}
 	
+	/**
+	 * Implementation of the Builder Pattern for Employee.
+	 * 
+	 * @author 7138
+	 *
+	 */
 	public static class Builder implements EntityBuilder<Employee> {
 		private Integer employeeNumber;
 		private String lastName;

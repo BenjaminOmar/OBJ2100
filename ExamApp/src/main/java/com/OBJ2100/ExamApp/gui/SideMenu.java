@@ -3,10 +3,8 @@ package com.OBJ2100.ExamApp.gui;
 import java.awt.Dimension;
 
 import javax.swing.Box;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.OBJ2100.ExamApp.gui.dialogs.ExecSqlQueryDialog;

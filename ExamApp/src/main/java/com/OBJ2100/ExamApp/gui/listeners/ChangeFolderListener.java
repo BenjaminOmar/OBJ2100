@@ -3,7 +3,6 @@ package com.OBJ2100.ExamApp.gui.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.OBJ2100.ExamApp.documents.DocumentsManager;
 import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.FileAccessSettingsPanel;
 

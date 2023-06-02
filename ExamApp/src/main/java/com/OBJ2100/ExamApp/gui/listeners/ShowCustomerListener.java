@@ -17,7 +17,6 @@ import com.OBJ2100.ExamApp.db.DataSourceFactory;
 import com.OBJ2100.ExamApp.db.dao.CustomerDao;
 import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
-import com.OBJ2100.ExamApp.db.dao.jdbc.JdbcCustomerDao;
 import com.OBJ2100.ExamApp.entities.Customer;
 import com.OBJ2100.ExamApp.gui.ListCustomersPanel;
 

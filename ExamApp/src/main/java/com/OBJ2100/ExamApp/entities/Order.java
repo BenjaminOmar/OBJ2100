@@ -45,6 +45,12 @@ public class Order implements Entity {
 		return customerNumber;
 	}
 	
+	/**
+	 * Implementation of the Builder Pattern for Customer.
+	 * 
+	 * @author 7154, 7131
+	 *
+	 */
 	public static class Builder implements EntityBuilder<Order> {
 		private Integer orderNumber, customerNumber;
 		private String status, comments;

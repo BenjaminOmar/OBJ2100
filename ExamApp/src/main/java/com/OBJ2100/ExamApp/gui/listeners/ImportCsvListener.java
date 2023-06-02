@@ -24,6 +24,15 @@ import com.OBJ2100.ExamApp.db.dao.factories.DaoFactory;
 import com.OBJ2100.ExamApp.db.dao.factories.JdbcDaoFactory;
 import com.OBJ2100.ExamApp.entities.Order;
 
+/**
+ * A listener for importing orders from a CSV file.
+ * 
+ * Relies on Apache's "commons-csv" package for
+ * reading and parsing CSV files.
+ * 
+ * @author 7162, 7154
+ *
+ */
 public class ImportCsvListener implements ActionListener {
 	
 	@Override

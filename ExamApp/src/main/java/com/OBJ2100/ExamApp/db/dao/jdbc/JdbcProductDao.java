@@ -10,6 +10,12 @@ import java.util.List;
 import com.OBJ2100.ExamApp.db.dao.ProductDao;
 import com.OBJ2100.ExamApp.entities.Product;
 
+/**
+ * DAO implementation for products.
+ * 
+ * @author 7138
+ *
+ */
 public class JdbcProductDao extends JdbcDao<Product> implements ProductDao {
 	
 	public JdbcProductDao(Connection connection) {

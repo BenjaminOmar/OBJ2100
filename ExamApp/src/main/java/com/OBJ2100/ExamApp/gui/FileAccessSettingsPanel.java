@@ -1,16 +1,13 @@
 package com.OBJ2100.ExamApp.gui;
 
-import javax.swing.JFrame;
-
 import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import java.awt.FlowLayout;
-import java.io.File;
 
-import com.OBJ2100.ExamApp.documents.DocumentsManager;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.OBJ2100.ExamApp.documents.FolderManager;
 import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
 
@@ -20,7 +17,6 @@ import com.OBJ2100.ExamApp.gui.listeners.ChangeFolderListener;
  * 
  * @author 7162
  */
-
 public class FileAccessSettingsPanel extends JPanel {
 
 	private JButton changeFolderBtn; // Button to change the folder
@@ -76,12 +72,5 @@ public class FileAccessSettingsPanel extends JPanel {
 			folderPathLabel.setText(truncatedText);
 		}
 	}
-
-	/**
-	 * Returns the default folder path based on the user's home directory.
-	 *
-	 * @return the default folder path
-	 */
-
 
 }

@@ -29,6 +29,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
+/**
+ * This file is not part of our original work for the exam,
+ * and due credit is hereby attributed to Oracle.
+ * 
+ * We therefore consider this file to be a dependency for this project.
+ */
+
 package com.OBJ2100.ExamApp.gui.utilities;
 
 import javax.swing.*;

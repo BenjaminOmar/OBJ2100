@@ -34,6 +34,12 @@ import com.OBJ2100.ExamApp.entities.Employee;
 import com.OBJ2100.ExamApp.gui.Helpers.MessageHelper;
 import com.OBJ2100.ExamApp.gui.utilities.SpringUtilities;
 
+/**
+ * A JDialog for the modification and creation of employees.
+ * 
+ * @author 7154
+ *
+ */
 public class AddOrModifyEmployeeDialog extends JDialog {
 	
 	private enum EmployeeOperation {
@@ -84,6 +90,9 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		}.execute();
 	}
 	
+	/**
+	 * Fetches employees and populates the employees attribute.
+	 */
 	private void fetchEmployees() {
 		DataSource source = DataSourceFactory.getMySqlDataSource();
 		try (Connection connection = source.getConnection()) {
@@ -94,6 +103,9 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		}
 	}
 	
+	/**
+	 * Fills out the form elements with values from the employees attribute.
+	 */
 	private void populateFieldsWithSelected() {
 		if (employeeNumberComboBox == null) return;
 		
@@ -232,11 +244,23 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Deduces which operation is being made.
+	 * 
+	 * Uses the status of the check box.
+	 * 
+	 * @return the deduced employee operation.
+	 */
 	private EmployeeOperation getCurrentOperation() {
 		return isNewCheckbox.isSelected() ?
 				EmployeeOperation.ADDING : EmployeeOperation.UPDATING;
 	}
 	
+	/**
+	 * Saves employee details from the input fields.
+	 * 
+	 * Either adds a new employee or updats an existing one.
+	 */
 	private void saveCurrentEmployee() {
 		boolean successful = false; 
 		

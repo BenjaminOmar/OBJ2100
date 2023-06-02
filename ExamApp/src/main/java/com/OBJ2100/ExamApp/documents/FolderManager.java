@@ -43,6 +43,11 @@ public class FolderManager {
 		return userHome + File.separator;
 	}
 	
+	/**
+	 * Prompts the user for a folder and returns 
+	 * @return the path of the chosen folder
+	 * @author 7138
+	 */
     public static String chooseFolder() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

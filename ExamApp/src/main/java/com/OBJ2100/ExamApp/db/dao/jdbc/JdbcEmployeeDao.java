@@ -12,6 +12,12 @@ import java.util.Optional;
 import com.OBJ2100.ExamApp.db.dao.EmployeeDao;
 import com.OBJ2100.ExamApp.entities.Employee;
 
+/**
+ * DAO implementation for employees.
+ * 
+ * @author 7138
+ *
+ */
 public class JdbcEmployeeDao extends JdbcDao<Employee> implements EmployeeDao {
 
 	public JdbcEmployeeDao(Connection connection) {

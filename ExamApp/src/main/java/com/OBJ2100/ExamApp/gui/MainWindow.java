@@ -10,14 +10,13 @@ import javax.swing.JPanel;
 /**
  * The MainWindow class represents the main window of the GUI application.
  * It extends JFrame and contains the application menu, side menu, and main content.
- * Creates the main panel with the child panels
+ * 
  * @author 7131
  */
 public class MainWindow extends JFrame {
 
     private ApplicationMenu appMenu = new ApplicationMenu();
     private SideMenu sideMenu = new SideMenu();
-    private MainContent content = new MainContent();
     private JPanel fileAccessSettings = new FileAccessSettingsPanel();
     private JPanel listCustomersPanel = new ListCustomersPanel();
     private JPanel reportsAndUpdatesPanel = new ReportsAndUpdatesPanel();
@@ -33,9 +32,6 @@ public class MainWindow extends JFrame {
 
         // Add side menu
         add(sideMenu, BorderLayout.WEST);
-
-        // Add content
-        add(content, BorderLayout.CENTER);
 
         // Create a panel for the file access settings, list customers panel and
         // reports and updates

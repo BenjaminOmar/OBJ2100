@@ -11,6 +11,12 @@ import java.util.List;
 import com.OBJ2100.ExamApp.db.dao.OfficeDao;
 import com.OBJ2100.ExamApp.entities.Office;
 
+/**
+ * DAO implementation for offices.
+ * 
+ * @author 7154, 7162
+ *
+ */
 public class JdbcOfficeDao extends JdbcDao<Office> implements OfficeDao {
 
 	public JdbcOfficeDao(Connection connection) {
