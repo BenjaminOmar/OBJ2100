@@ -54,7 +54,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JPanel panel = new JPanel(new BorderLayout());
 	private JPanel listCustomersPanel = new ListCustomersPanel();
 	
-	private JMenuItem ListOffices = new JMenuItem("List and present all offices");
+	private JMenuItem ListOffices = new JMenuItem("Filter and present offices from a country");
 	private JDialog dialogOffices = new JDialog();
 	private JPanel panelOffices = new JPanel(new BorderLayout());
 	private JPanel FilterAndPresentOfficesPanel = new FilterAndPresentOfficesPanel();
