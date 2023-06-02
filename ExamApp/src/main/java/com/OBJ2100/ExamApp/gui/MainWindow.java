@@ -15,9 +15,9 @@ import javax.swing.JPanel;
  */
 public class MainWindow extends JFrame {
 
-    private ApplicationMenu appMenu = new ApplicationMenu();
     private SideMenu sideMenu = new SideMenu();
-    private JPanel fileAccessSettings = new FileAccessSettingsPanel();
+    private FileAccessSettingsPanel fileAccessSettings = new FileAccessSettingsPanel();
+    private ApplicationMenu appMenu = new ApplicationMenu(fileAccessSettings);
     private JPanel listCustomersPanel = new ListCustomersPanel();
     private JPanel reportsAndUpdatesPanel = new ReportsAndUpdatesPanel();
 

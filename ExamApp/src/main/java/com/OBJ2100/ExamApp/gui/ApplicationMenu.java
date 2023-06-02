@@ -57,12 +57,14 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	private JPanel panelOffices = new JPanel(new BorderLayout());
 	private JPanel FilterAndPresentOfficesPanel = new FilterAndPresentOfficesPanel();
 		
+	private FileAccessSettingsPanel fileAccessSettingsPanel;
 	
 	/**
 	 * Constructor for the ApplicationMenu class.
 	 * It calls the displayMenuBar() method to create and display the menu bar.
 	 */
-	protected ApplicationMenu() {
+	protected ApplicationMenu(FileAccessSettingsPanel fileAccessSettingsPanel) {
+		this.fileAccessSettingsPanel = fileAccessSettingsPanel;
 		displayMenuBar();
 	}
 	
@@ -74,8 +76,7 @@ public class ApplicationMenu extends JMenuBar implements ActionListener {
 	protected void displayMenuBar() {
 				
 	    add(selectFolder);
-		FileAccessSettingsPanel folderPanel = new FileAccessSettingsPanel();
-		selectFolder.addActionListener(new ChangeFolderListener(folderPanel));
+		selectFolder.addActionListener(new ChangeFolderListener(fileAccessSettingsPanel));
 		
 		add(bulkImportOrders);
 		bulkImportOrders.addActionListener(new ImportCsvListener());
