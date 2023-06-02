@@ -22,15 +22,32 @@ import com.OBJ2100.ExamApp.entities.Office;
 import com.OBJ2100.ExamApp.gui.FilterAndPresentOfficesPanel;
 
 
+/**
+ * This class represents a listener for filtering and presenting offices.
+ * It retrieves office data based on the selected country and displays it in a table.
+ * 
+ * @author 7162
+ */
 public class FilterAndPresentOfficesListener implements ActionListener {
 
     private FilterAndPresentOfficesPanel panel;
     
 
+    /**
+     * Constructs a new FilterAndPresentOfficesListener.
+     * 
+     * @param panel the panel containing the filter and presentation components
+     */
     public FilterAndPresentOfficesListener(FilterAndPresentOfficesPanel panel) {
         this.panel = panel;
     }
-
+    
+    /**
+     * Called when an action event occurs.
+     * Retrieves the selected country from the dropdown menu,
+     * retrieves matching offices from the database,
+     * and displays the office data in a table.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
        String selectedCountry = (String) panel.getDropdownCountry().getSelectedItem();
@@ -71,7 +88,7 @@ public class FilterAndPresentOfficesListener implements ActionListener {
     		   JTable table = new JTable(model);
                table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); 
                
-            // Create a scroll pane for the table and set its size
+               // Create a scroll pane for the table and set its size
                JScrollPane scrollPane = new JScrollPane(table);
                scrollPane.setPreferredSize(new Dimension(1300, 600));
                
