@@ -73,6 +73,7 @@ public abstract class AbstractListAllTableDialog<T> extends JDialog {
 		pack();
 		
 		setMinimumSize(dimension);
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	

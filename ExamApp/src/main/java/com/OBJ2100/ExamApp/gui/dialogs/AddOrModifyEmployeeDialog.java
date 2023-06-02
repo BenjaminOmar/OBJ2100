@@ -240,6 +240,7 @@ public class AddOrModifyEmployeeDialog extends JDialog {
 		setMinimumSize(new Dimension(300, 350));
 		setSize(getPreferredSize());
 		setResizable(false);
+		setLocationRelativeTo(null);
 		
 		setVisible(true);
 	}
