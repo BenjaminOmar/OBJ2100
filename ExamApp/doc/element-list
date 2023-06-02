@@ -1,0 +1,12 @@
+com.OBJ2100.ExamApp
+com.OBJ2100.ExamApp.db
+com.OBJ2100.ExamApp.db.dao
+com.OBJ2100.ExamApp.db.dao.factories
+com.OBJ2100.ExamApp.db.dao.jdbc
+com.OBJ2100.ExamApp.documents
+com.OBJ2100.ExamApp.entities
+com.OBJ2100.ExamApp.gui
+com.OBJ2100.ExamApp.gui.dialogs
+com.OBJ2100.ExamApp.gui.Helpers
+com.OBJ2100.ExamApp.gui.listeners
+com.OBJ2100.ExamApp.gui.utilities
