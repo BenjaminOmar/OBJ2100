@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import com.OBJ2100.ExamApp.gui.listeners.FilterAndPresentOfficesListener;
+import com.OBJ2100.ExamApp.gui.listeners.CountryDropDownListener;
 
 public class FilterAndPresentOfficesPanel extends JPanel {
 	
@@ -52,9 +53,13 @@ public class FilterAndPresentOfficesPanel extends JPanel {
         ReadFromDatabaseButton = new JButton("Execute");
         add(ReadFromDatabaseButton, gbc);
         
+        CountryDropDownListener countryListener = new CountryDropDownListener(dropdownCountry);
+        countryListener.actionPerformed(null);
+        dropdownCountry.addActionListener(countryListener);
+        
         FilterAndPresentOfficesListener officeListener = new FilterAndPresentOfficesListener(this);
         ReadFromDatabaseButton.addActionListener(officeListener);
-        ReadFromDatabaseButton.addActionListener(officeListener);
+        
 
          
 	}
@@ -63,6 +68,8 @@ public class FilterAndPresentOfficesPanel extends JPanel {
     public JComboBox<String> getDropdownCountry() {
         return dropdownCountry;
     }
+    
+  
 
 
     
