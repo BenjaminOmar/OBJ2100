@@ -80,7 +80,7 @@ public class ExecSqlQueryDialog extends JDialog {
 	 * exported to Csv format.
 	 * If the query is any other statement, it gets executed, and the user 
 	 * gets a succsess message with how many rows is affected.
-	 * @param The inputted query string from the user
+	 * @param query The inputted query string from the user
 	 */
 	private void executeSQLQuery(String query) {
   		DataSource source = DataSourceFactory.getMySqlDataSource();		
