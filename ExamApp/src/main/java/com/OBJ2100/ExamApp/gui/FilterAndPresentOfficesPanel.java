@@ -41,9 +41,10 @@ public class FilterAndPresentOfficesPanel extends JPanel {
         
         // Create a dropdown menu for city selection
         dropdownCountry = new JComboBox<>();
+        
         dropdownCountry.addItem("Select country");
-        // Disable the dropdown initially
-        dropdownCountry.setEnabled(true);
+        
+        
         add(dropdownCountry, gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -55,7 +56,7 @@ public class FilterAndPresentOfficesPanel extends JPanel {
         
         CountryDropDownListener countryListener = new CountryDropDownListener(dropdownCountry);
         countryListener.actionPerformed(null);
-        dropdownCountry.addActionListener(countryListener);
+        
         
         FilterAndPresentOfficesListener officeListener = new FilterAndPresentOfficesListener(this);
         ReadFromDatabaseButton.addActionListener(officeListener);
